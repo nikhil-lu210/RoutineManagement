@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,6 +36,30 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $this->redirectTo = route('admin.dashboard.index');
+        } elseif (Auth::check() && Auth::user()->role == 'teacher') {
+            $this->redirectTo = route('teacher.dashboard.index');
+        } elseif (Auth::check() && Auth::user()->role == 'student') {
+            $this->redirectTo = route('student.dashboard.index');
+        }
+
         $this->middleware('guest')->except('logout');
+    }
+
+
+    // After login where to go
+    public function redirectAuth()
+    {
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $redirectTo = route('admin.dashboard.index');
+        } elseif (Auth::check() && Auth::user()->role == 'teacher') {
+            $redirectTo = route('teacher.dashboard.index');
+        } elseif (Auth::check() && Auth::user()->role == 'student') {
+            $redirectTo = route('student.dashboard.index');
+        }
+
+        $this->middleware('guest')->except('logout');
+        return $redirectTo;
     }
 }
