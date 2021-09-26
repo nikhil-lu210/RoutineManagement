@@ -6,7 +6,7 @@
 
         <!-- {{-- Main Content START --}} -->
         <div class="main-content">
-            @yield('main_content')
+           <router-view></router-view>
         </div>
         <!-- {{-- Main Content END --}} -->
 
@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import Topnav from 'resources/js/layouts/admin/partials/Topnav';
-import Sidenav from 'resources/js/layouts/admin/partials/Sidenav';
-import Footer from 'resources/js/layouts/admin/partials/Footer';
+import Topnav from './partials/Topnav.vue';
+import Sidenav from './partials/Sidenav.vue';
+import Footer from './partials/Footer.vue';
 
 export default {
     name: 'Layout',

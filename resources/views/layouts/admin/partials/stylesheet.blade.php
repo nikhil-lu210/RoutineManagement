@@ -1,5 +1,5 @@
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{ asset('frontend/assets/img/favicon.svg') }}" />
+{{-- <link rel="shortcut icon" href="{{ asset('frontend/assets/img/favicon.svg') }}" /> --}}
 
 <link rel="stylesheet" href="{{ asset('backend/assets/css/app.min.css') }}">
 

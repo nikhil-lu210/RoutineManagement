@@ -16,10 +16,10 @@
 
                 <!-- Dashboard Start -->
                 <li class="">
-                    <a class="nav-link" href="#">
+                    <router-link class="nav-link" to="/">
                         <i data-feather="airplay"></i>
                         <span>Dashboard</span>
-                    </a>
+                    </router-link>
                 </li>
                 <!-- Dashboard Ends -->
 
@@ -27,19 +27,12 @@
 
                 <!-- Cases Starts -->
                 <li class="dropdown">
-                    <a href="javascript:void(0);" class="menu-toggle nav-link has-dropdown">
-                        <i data-feather="hash"></i>
-                        <span>Cases</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="">
-                            <a class="nav-link" href="#">All Cases</a>
-                        </li>
-
-                        <li class="">
-                            <a class="nav-link" href="#">Pending</a>
-                        </li>
-                    </ul>
+                    <li class="">
+                        <router-link class="nav-link" to="/teachers">
+                            <i data-feather="airplay"></i>
+                            <span>All Teachers</span>
+                        </router-link>
+                    </li>
                 </li>
                 <!-- Cases Ends -->
             </ul>
