@@ -15,7 +15,14 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name')->nullable();
+            
+            $table->foreignId('class_id');
+            $table->foreign('class_id')->references('id')->on('student_classes');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +34,8 @@ class CreateSubjectsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('subjects');
+        Schema::table("subjects", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

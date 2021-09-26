@@ -15,7 +15,11 @@ class CreateYearsTable extends Migration
     {
         Schema::create('years', function (Blueprint $table) {
             $table->id();
+
+            $table->integer('year')->unique();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +31,8 @@ class CreateYearsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('years');
+        Schema::table("years", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

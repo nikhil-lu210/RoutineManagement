@@ -15,7 +15,11 @@ class CreateDaysTable extends Migration
     {
         Schema::create('days', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name')->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +31,8 @@ class CreateDaysTable extends Migration
     public function down()
     {
         Schema::dropIfExists('days');
+        Schema::table("days", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

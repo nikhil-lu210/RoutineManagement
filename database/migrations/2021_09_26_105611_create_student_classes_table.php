@@ -15,7 +15,12 @@ class CreateStudentClassesTable extends Migration
     {
         Schema::create('student_classes', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title');
+            $table->enum('category', ['boys', 'girls']);
+            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +32,8 @@ class CreateStudentClassesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('student_classes');
+        Schema::table("student_classes", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

@@ -15,7 +15,12 @@ class CreatePeriodsTable extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
+
+            $table->time('start')->unique();
+            $table->time('end')->unique();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +32,8 @@ class CreatePeriodsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('periods');
+        Schema::table("periods", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

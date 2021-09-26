@@ -15,7 +15,18 @@ class CreateClassRoutinesTable extends Migration
     {
         Schema::create('class_routines', function (Blueprint $table) {
             $table->id();
+            
+            $table->foreignId('day_id');
+            $table->foreign('day_id')->references('id')->on('days');
+            
+            $table->foreignId('period_id');
+            $table->foreign('period_id')->references('id')->on('periods');
+            
+            $table->foreignId('routine_group_id');
+            $table->foreign('routine_group_id')->references('id')->on('routine_groups');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +38,8 @@ class CreateClassRoutinesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('class_routines');
+        Schema::table("class_routines", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

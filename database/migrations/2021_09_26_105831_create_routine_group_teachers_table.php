@@ -15,7 +15,18 @@ class CreateRoutineGroupTeachersTable extends Migration
     {
         Schema::create('routine_group_teachers', function (Blueprint $table) {
             $table->id();
+            
+            $table->foreignId('routine_group_id');
+            $table->foreign('routine_group_id')->references('id')->on('routine_groups');
+            
+            $table->foreignId('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('users');
+            
+            $table->foreignId('subject_id');
+            $table->foreign('subject_id')->references('id')->on('subjects');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +38,8 @@ class CreateRoutineGroupTeachersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('routine_group_teachers');
+        Schema::table("routine_group_teachers", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

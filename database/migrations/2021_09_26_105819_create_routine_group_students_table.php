@@ -15,7 +15,15 @@ class CreateRoutineGroupStudentsTable extends Migration
     {
         Schema::create('routine_group_students', function (Blueprint $table) {
             $table->id();
+            
+            $table->foreignId('routine_group_id');
+            $table->foreign('routine_group_id')->references('id')->on('routine_groups');
+            
+            $table->foreignId('student_id');
+            $table->foreign('student_id')->references('id')->on('users');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +35,8 @@ class CreateRoutineGroupStudentsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('routine_group_students');
+        Schema::table("routine_group_students", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

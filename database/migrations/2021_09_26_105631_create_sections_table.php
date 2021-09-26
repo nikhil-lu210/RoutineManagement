@@ -15,7 +15,11 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title');
+            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,5 +31,8 @@ class CreateSectionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('sections');
+        Schema::table("sections", function ($table) {
+            $table->dropSoftDeletes();
+        });
     }
 }
