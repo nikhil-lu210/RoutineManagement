@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Models\StudentClass as StdClass;
-use Illuminate\Http\Request;
 
 class StudentClass extends Controller
 {
@@ -45,24 +46,18 @@ class StudentClass extends Controller
         // dd($request);
         $request->validate([
             'title' => ['required', 'string'],
-            'category' => ['nullable', 'boolean']
+            'category'=>[
+                'nullable',
+                 Rule::in(['boys', 'girls']),
+             ],
         ]);
 
         $class = new StdClass();
 
-        $categories = ['boys', 'girls'];
-        if ($request->category == true) {
-            foreach($categories as $category) {
-                $class->title = $request->title;
-                $class->category = $category;
+        $class->title = $request->title;
+        $class->category = $request->category;
 
-                $class->save();
-            }
-        } else {
-            $class->title = $request->title;
-
-            $class->save();
-        }
+        $class->save();
 
         if ($class->save()) {
             toast('New Class Added Successfully', 'success')->timerProgressBar();

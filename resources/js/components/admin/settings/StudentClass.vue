@@ -59,12 +59,16 @@
                                 <!-- @csrf -->
                                 <div class="form-group">
                                     <label for="title" class="col-form-label">Class <sup class="required">*</sup></label>
-                                    <input type="number" min="1" max="10" minlength="1" maxlength="2" step="1" class="form-control" name="title" placeholder="1" required v-model="formData.title">
+                                    <input type="text" minlength="1" maxlength="20" class="form-control" name="title" placeholder="Ex. Nursery" required v-model="formData.title">
                                 </div>
 
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="category" name="category" class="custom-control-input" v-model="formData.category">
-                                    <label class="custom-control-label text-capitalize" for="category">Separate Boys & Girls?</label>
+                                <div class="form-group">
+                                    <label for="category" class="col-form-label">Category</label>
+                                    <select class="form-control" id="category" v-model="formData.category">
+                                        <option value="">Select Category</option>
+                                        <option value="boys">Boys</option>
+                                        <option value="girls">Girls</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -88,7 +92,7 @@ import axios from 'axios'
                 allData: [],
                 formData: {
                     title: null,
-                    category: false
+                    category: null
                 }
             }
         },
@@ -109,7 +113,7 @@ import axios from 'axios'
                 })
                 .then(() => {
                     this.formData.title = null;
-                    this.formData.category = false;
+                    this.formData.category = null;
                     this.hideModal();
                     this.looadAllData();
                 })
