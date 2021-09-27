@@ -1,0 +1,58 @@
+.no-padding{
+    padding: 0px !important;
+}
+
+.text-ucap-primary{
+    color: var(--primaryColor) !important;
+}
+.text-ucap-secondary{
+    color: var(--secondaryColor) !important;
+}
+
+.bg-ucap-primary{
+    background: var(--primaryColor) !important;
+    background-color: var(--primaryColor) !important;
+    border-color: var(--primaryColor) !important;
+    color: #ffffff !important;
+}
+.bg-ucap-secondary{
+    background: var(--secondaryColor) !important;
+    background-color: var(--secondaryColor) !important;
+    border-color: var(--secondaryColor) !important;
+    color: #ffffff !important;
+}
+
+.font-xxl{
+    font-size: var(--fontXXL) !important;
+}
+.font-xl{
+    font-size: var(--fontXL) !important;
+}
+.font-lg{
+    font-size: var(--fontLG) !important;
+}
+.font-md{
+    font-size: var(--fontMD) !important;
+}
+.font-sm{
+    font-size: var(--fontSM) !important;
+}
+.font-xs{
+    font-size: var(--fontXS) !important;
+}
+
+.fw-300{
+    font-weight: 300 !important;
+}
+.fw-400{
+    font-weight: 400 !important;
+}
+.fw-500{
+    font-weight: 500 !important;
+}
+.fw-600{
+    font-weight: 600 !important;
+}
+.fw-700{
+    font-weight: 700 !important;
+}

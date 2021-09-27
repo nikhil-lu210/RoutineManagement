@@ -1,29 +1,54 @@
 <template>
-    <div class="main-wrapper main-wrapper-1">
-        <Topnav/>
-
+    <!-- Start Containerbar -->
+    <div id="containerbar">
+        <!-- Start Leftbar -->
         <Sidenav/>
+        <!-- End Leftbar -->
 
-        <!-- {{-- Main Content START --}} -->
-        <div class="main-content">
-           <router-view></router-view>
+        <!-- Start Rightbar -->
+        <div class="rightbar">
+            <!-- Start Topbar Mobile -->
+            <TopnavMobile/>
+            <!-- Start Topbar -->
+            <Topnav/>
+            <!-- End Topbar -->
+
+            <!-- Start Breadcrumbbar -->
+            <Breadcrumb/>
+            <!-- End Breadcrumbbar -->
+
+            <!-- Start Contentbar -->
+            <div class="contentbar">
+                <!-- Start Main Content -->
+                    <router-view></router-view>
+                <!-- End Main Content -->
+            </div>
+            <!-- End Contentbar -->
+
+            
+            <!-- Start Footerbar -->
+            <Footer/>
+            <!-- End Footerbar -->
         </div>
-        <!-- {{-- Main Content END --}} -->
-
-        <Footer/>
+        <!-- End Rightbar -->
     </div>
+    <!-- End Containerbar -->
 </template>
 
 <script>
 import Topnav from './partials/Topnav.vue';
+import TopnavMobile from './partials/TopnavMobile.vue';
 import Sidenav from './partials/Sidenav.vue';
+import Breadcrumb from './partials/Breadcrumb.vue';
 import Footer from './partials/Footer.vue';
 
 export default {
     name: 'Layout',
     components: {
         Topnav,
+        TopnavMobile,
         Sidenav,
+        Breadcrumb,
         Footer
     }
 }

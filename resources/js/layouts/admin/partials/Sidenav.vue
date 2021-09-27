@@ -1,44 +1,124 @@
 <template>
-    <!-- Side Nav START -->
-    <div class="main-sidebar sidebar-style-2">
-        <aside id="sidebar-wrapper">
-            <div class="sidebar-brand">
-                <a href="#">SRM</a>
+    <!-- Start Leftbar -->
+    <div class="leftbar">
+        <!-- Start Sidebar -->
+        <div class="sidebar">
+            <!-- Start Logobar -->
+            <div class="logobar" style="margin-bottom: 8px; border-bottom: 0px solid #fff;">
+                <router-link to="/" class="logo logo-large">
+                    <!-- <img src="{{ show_logo('main_logo') }}" class="img-fluid" alt="logo" /> -->
+                    SRM
+                </router-link>
+                <a to="/" class="logo logo-small">
+                    <!-- <img src="{{ show_logo('small_logo') }}" class="img-fluid" alt="logo" /> -->
+                    SRM
+                </a>
             </div>
-            <div class="sidebar-user">
-                <div class="sidebar-user-details">
-                    <div class="user-name">Admin</div>
-                    <div class="user-role">admin</div>
-                </div>
-            </div>
-            <ul class="sidebar-menu">
-                <li class="menu-header">Main</li>
-
-                <!-- Dashboard Start -->
-                <li class="">
-                    <router-link class="nav-link" to="/">
-                        <i data-feather="airplay"></i>
-                        <span>Dashboard</span>
-                    </router-link>
-                </li>
-                <!-- Dashboard Ends -->
-
-                <li class="menu-header">Case</li>
-
-                <!-- Cases Starts -->
-                <li class="dropdown">
-                    <li class="">
-                        <router-link class="nav-link" to="/teachers">
-                            <i data-feather="airplay"></i>
-                            <span>All Teachers</span>
+            <!-- End Logobar -->
+            <!-- Start Navigationbar -->
+            <div class="navigationbar">
+                <ul class="vertical-menu">
+                    <li class="single-menu bg-ucap-secondary">
+                        <router-link to="/" class="text-white text-bold">
+                            <i class="ti-bar-chart-alt"></i>
+                            <span>Dashboard</span>
                         </router-link>
                     </li>
-                </li>
-                <!-- Cases Ends -->
-            </ul>
-        </aside>
+
+                    <div class="mb-3"></div>
+
+                    <hr>
+
+                    <li class="nested-menu">
+                        <a href="javaScript:void(0);">
+                            <i class="sl-icon-graduation"></i>
+                            <span>Teachers</span>
+                            <i class="feather icon-chevron-right pull-right"></i>
+                        </a>
+                        <ul class="vertical-submenu">
+                            <li class="">
+                                <router-link to="/teachers">All Teachers</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/teacher/create">Create Teacher</router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nested-menu">
+                        <a href="javaScript:void(0);">
+                            <i class="sl-icon-graduation"></i>
+                            <span>Students</span>
+                            <i class="feather icon-chevron-right pull-right"></i>
+                        </a>
+                        <ul class="vertical-submenu">
+                            <li class="">
+                                <router-link to="/students">All Students</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/student/create">Create Student</router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nested-menu">
+                        <a href="javaScript:void(0);">
+                            <i class="sl-icon-graduation"></i>
+                            <span>Routines</span>
+                            <i class="feather icon-chevron-right pull-right"></i>
+                        </a>
+                        <ul class="vertical-submenu">
+                            <li class="">
+                                <router-link to="/routine/current">Current Routine</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/routines">All Routines</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/routine/create">Create routine</router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <hr>
+
+                    <li class="nested-menu">
+                        <a href="javaScript:void(0);">
+                            <i class="sl-icon-graduation"></i>
+                            <span>Settings</span>
+                            <i class="feather icon-chevron-right pull-right"></i>
+                        </a>
+                        <ul class="vertical-submenu">
+                            <li class="">
+                                <router-link to="/settings/class">Class</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/settings/subject">Subject</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/settings/year">Year</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/settings/section">Section</router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <hr>
+
+                    <li class="single-menu">
+                        <a href="#" class="">
+                            <i class="ti-power-off text-danger"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Navigationbar -->
+        </div>
+        <!-- End Sidebar -->
     </div>
-    <!-- Side Nav END -->
+    <!-- End Leftbar -->
 </template>
 
 <script>

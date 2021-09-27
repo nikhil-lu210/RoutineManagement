@@ -1,16 +1,14 @@
-<!-- Favicon -->
-{{-- <link rel="shortcut icon" href="{{ asset('frontend/assets/img/favicon.svg') }}" /> --}}
-
-<link rel="stylesheet" href="{{ asset('backend/assets/css/app.min.css') }}">
+<!-- Start css -->
+<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/flag-icon.min.css') }}" rel="stylesheet" type="text/css" />
 
 @yield('css_links')
-<!-- Template CSS -->
-<link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
-{{-- Confirmation Alert --}}
-<link rel="stylesheet" href="{{ asset('backend/assets/css/confirmation_alert/jquery-confirmv3.3.2.min.css') }}">
 
-<!-- Custom style CSS -->
-<link rel="stylesheet" href="{{ asset('backend/assets/css/custom.css') }}">
+<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
+
+{{-- Custom Main CSS --}}
+<link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" type="text/css" />
 
 @yield('custom_css')
+<!-- End css -->

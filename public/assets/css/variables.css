@@ -1,0 +1,18 @@
+:root {
+    --primaryColor: #131f42;
+    --secondaryColor: #aa0b1b;
+
+    --primaryLightColor: #3a506a;
+    
+    --colorOne: #eff5ff;
+
+    --placeholderColor: #16447d;
+
+    /* Font Sizes */
+    --fontXXL: 36px;
+    --fontXL: 30px;
+    --fontLG: 24px;
+    --fontMD: 18px;
+    --fontSM: 14px;
+    --fontXS: 12px;
+}

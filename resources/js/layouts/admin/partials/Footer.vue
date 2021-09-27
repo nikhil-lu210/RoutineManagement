@@ -1,12 +1,11 @@
 <template>
-    <!-- Footer START -->
-    <footer class="main-footer">
-        <div class="footer-left">
-            Copyright &copy; 2021 <div class="bullet"></div> Developed By <a href="#">IT-Lab Solutions</a>
-        </div>
-        <div class="footer-right"></div>
-    </footer>
-    <!-- Footer END -->
+    <!-- Start Footerbar -->
+    <div class="footerbar">
+        <footer class="footer">
+            <p class="mb-0">Copyright &copy; 2021 <b class="text-dark">SRM</b>. All rights reserved || Developed By <b><a href="#" class="text-ucap-secondary">IT-LAB Solutions</a></b></p>
+        </footer>
+    </div>
+    <!-- End Footerbar -->
 </template>
 
 <script>
