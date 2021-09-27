@@ -10,9 +10,10 @@ Auth::routes();
 ==============================================================*/
 Route::group(
     [
-        'middleware' => ['auth', 'admin'],
+        'middleware' => ['web'],
     ],
     function () {
+        Route::view('/', 'layouts.admin.app');
         include_once 'admin/admin.php';
     }
 );

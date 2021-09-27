@@ -8,9 +8,9 @@
             <div class="col-lg-12">
                 <div class="card m-b-30">
                     <div class="card-header">
-                        <h5 class="card-title float-left">All Teachers</h5>
+                        <h5 class="card-title float-left">All Students</h5>
                         <div class="float-right">
-                            <input type="text" class="form-control" name="Teacher Name" placeholder="Ex: John Doe" required>
+                            <input type="text" class="form-control" name="Student Name" placeholder="Ex: John Doe" required>
                         </div>
                     </div>
                     <div class="card-body">
@@ -52,6 +52,6 @@
 
 <script>    
     export default{
-        name:"Teachers"
+        name:"Students"
     }
 </script>

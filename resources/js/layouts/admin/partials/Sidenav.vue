@@ -27,8 +27,6 @@
 
                     <div class="mb-3"></div>
 
-                    <hr>
-
                     <li class="nested-menu">
                         <a href="javaScript:void(0);">
                             <i class="sl-icon-graduation"></i>
@@ -90,16 +88,16 @@
                         </a>
                         <ul class="vertical-submenu">
                             <li class="">
-                                <router-link to="/settings/class">Class</router-link>
+                                <router-link to="/settings/classes">Class</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/subject">Subject</router-link>
+                                <router-link to="/settings/subjects">Subject</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/year">Year</router-link>
+                                <router-link to="/settings/years">Year</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/section">Section</router-link>
+                                <router-link to="/settings/sections">Section</router-link>
                             </li>
                         </ul>
                     </li>

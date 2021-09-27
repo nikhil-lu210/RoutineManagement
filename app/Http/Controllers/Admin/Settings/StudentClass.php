@@ -1,0 +1,119 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Settings;
+
+use App\Http\Controllers\Controller;
+use App\Models\StudentClass as StdClass;
+use Illuminate\Http\Request;
+
+class StudentClass extends Controller
+{
+    public function __construct()
+    {
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $classes = StdClass::all();
+        return response()->json($classes, 200);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // dd($request);
+        $request->validate([
+            'title' => ['required', 'string'],
+            'category' => ['nullable', 'boolean']
+        ]);
+
+        $class = new StdClass();
+
+        $categories = ['boys', 'girls'];
+        if ($request->category == true) {
+            foreach($categories as $category) {
+                $class->title = $request->title;
+                $class->category = $category;
+
+                $class->save();
+            }
+        } else {
+            $class->title = $request->title;
+
+            $class->save();
+        }
+
+        if ($class->save()) {
+            toast('New Class Added Successfully', 'success')->timerProgressBar();
+        } else {
+            toast('Please try again.', 'error')->timerProgressBar();
+        }
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

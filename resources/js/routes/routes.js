@@ -1,6 +1,19 @@
 import Dashboard from '../components/admin/dashboard/Index';
+
 import Teachers from '../components/admin/teacher/Index';
 import CreateTeacher from '../components/admin/teacher/Create';
+
+import Students from '../components/admin/student/Index';
+import CreateStudent from '../components/admin/student/Create';
+
+import CurrentRoutine from '../components/admin/routine/Current';
+import AllRoutines from '../components/admin/routine/Index';
+import CreateRoutine from '../components/admin/routine/Create';
+
+import StudentClass from '../components/admin/settings/StudentClass';
+import Subject from '../components/admin/settings/Subject';
+import Year from '../components/admin/settings/Year';
+import Section from '../components/admin/settings/Section';
 
 export const routes = [
     {
@@ -17,5 +30,50 @@ export const routes = [
         path: '/teacher/create',
         name: 'CreateTeacher',
         component: CreateTeacher
+    },
+    {
+        path: '/students',
+        name: 'Students',
+        component: Students
+    },
+    {
+        path: '/student/create',
+        name: 'CreateStudent',
+        component: CreateStudent
+    },
+    {
+        path: '/routine/current',
+        name: 'CurrentRoutine',
+        component: CurrentRoutine
+    },
+    {
+        path: '/routines',
+        name: 'AllRoutines',
+        component: AllRoutines
+    },
+    {
+        path: '/routine/create',
+        name: 'CreateRoutine',
+        component: CreateRoutine
+    },
+    {
+        path: '/settings/classes',
+        name: 'StudentClass',
+        component: StudentClass
+    },
+    {
+        path: '/settings/subjects',
+        name: 'Subject',
+        component: Subject
+    },
+    {
+        path: '/settings/years',
+        name: 'Year',
+        component: Year
+    },
+    {
+        path: '/settings/sections',
+        name: 'Section',
+        component: Section
     },
 ];

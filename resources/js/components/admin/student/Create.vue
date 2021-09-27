@@ -7,7 +7,7 @@
                 <form action="#" method="post" enctype="multipart/form-data">
                     <!-- @csrf -->
                     <div class="card-header border bottom">
-                        <h5 class="mb-0">Create New Teacher</h5>
+                        <h5 class="mb-0">Create New Student</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-custom float-right mb-2">Create Teacher</button>
+                        <button type="submit" class="btn btn-custom float-right mb-2">Create Student</button>
                         <button type="reset" class="btn btn-danger float-right mb-2 mr-1" onclick="return confirm('Are You Sure Want To Reset?');">Reset</button>
                     </div>
                 </form>
@@ -52,6 +52,6 @@
 
 <script>
     export default{
-        name:"CreateTeacher"
+        name:"CreateStudent"
     }
 </script>

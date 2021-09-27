@@ -17,7 +17,7 @@ class CreateStudentClassesTable extends Migration
             $table->id();
 
             $table->string('title');
-            $table->enum('category', ['boys', 'girls']);
+            $table->enum('category', ['boys', 'girls'])->nullable();
             
             $table->timestamps();
             $table->softDeletes();

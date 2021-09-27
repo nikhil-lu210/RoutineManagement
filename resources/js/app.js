@@ -11,6 +11,7 @@ Vue.component('admin-layout', require('./layouts/admin/Layout.vue').default);
 
 const router = new VueRouter({
     routes,
+    // mode: 'hash'
     mode: 'history'
 });
 

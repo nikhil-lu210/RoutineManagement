@@ -7,7 +7,7 @@
                 <form action="#" method="post" enctype="multipart/form-data">
                     <!-- @csrf -->
                     <div class="card-header border bottom">
-                        <h5 class="mb-0">Create New Teacher</h5>
+                        <h5 class="mb-0">Create New Routine</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -52,6 +52,6 @@
 
 <script>
     export default{
-        name:"CreateTeacher"
+        name:"CreateRoutine"
     }
 </script>
