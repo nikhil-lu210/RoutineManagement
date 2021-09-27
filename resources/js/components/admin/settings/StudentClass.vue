@@ -115,6 +115,7 @@ import axios from 'axios'
                     this.formData.title = null;
                     this.formData.category = null;
                     this.hideModal();
+                    Vue.swal("Success!", "New Class Created Successfully.", "success");
                     this.looadAllData();
                 })
                 .catch((error) => {

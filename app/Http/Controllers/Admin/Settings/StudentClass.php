@@ -21,7 +21,7 @@ class StudentClass extends Controller
      */
     public function index()
     {
-        $classes = StdClass::all();
+        $classes = StdClass::select(['id', 'title', 'category'])->get();
         return response()->json($classes, 200);
     }
 
@@ -48,7 +48,10 @@ class StudentClass extends Controller
             'title' => ['required', 'string'],
             'category'=>[
                 'nullable',
-                 Rule::in(['boys', 'girls']),
+                 Rule::in([
+                    'boys',
+                    'girls'
+                ]),
              ],
         ]);
 
@@ -58,12 +61,7 @@ class StudentClass extends Controller
         $class->category = $request->category;
 
         $class->save();
-
-        if ($class->save()) {
-            toast('New Class Added Successfully', 'success')->timerProgressBar();
-        } else {
-            toast('Please try again.', 'error')->timerProgressBar();
-        }
+        
         return redirect()->back();
     }
 
