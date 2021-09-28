@@ -16,10 +16,7 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name')->nullable();
-            
-            $table->foreignId('class_id');
-            $table->foreign('class_id')->references('id')->on('student_classes');
+            $table->string('name')->unique();
 
             $table->timestamps();
             $table->softDeletes();

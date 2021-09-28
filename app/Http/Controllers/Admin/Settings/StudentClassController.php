@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Models\StudentClass as StdClass;
 
-class StudentClass extends Controller
+class StudentClassController extends Controller
 {
     public function __construct()
     {
@@ -23,16 +23,6 @@ class StudentClass extends Controller
     {
         $classes = StdClass::select(['id', 'title', 'category'])->get();
         return response()->json($classes, 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -62,29 +52,7 @@ class StudentClass extends Controller
 
         $class->save();
         
-        return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response($class);
     }
 
     /**
@@ -96,17 +64,25 @@ class StudentClass extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        // dd($request->all(), $id);
+        $request->validate([
+            'title' => ['required', 'string'],
+            'category'=>[
+                'nullable',
+                 Rule::in([
+                    'boys',
+                    'girls'
+                ]),
+             ],
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $class = StdClass::whereId($id)->firstOrFail();
+
+        $class->title = $request->title;
+        $class->category = $request->category;
+
+        $class->save();
+        
+        return response($class);
     }
 }

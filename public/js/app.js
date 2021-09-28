@@ -2453,6 +2453,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2526,8 +2528,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Section"
+  name: "Section",
+  data: function data() {
+    return {
+      allSections: [],
+      formData: {
+        id: null,
+        title: null
+      },
+      editMode: false
+    };
+  },
+  methods: {
+    loadAllSections: function loadAllSections() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/section').then(function (response) {
+        _this.allSections = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    storeData: function storeData() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/section/store', {
+        title: this.formData.title
+      }).then(function () {
+        _this2.formData.title = null;
+
+        _this2.hideModal();
+
+        Vue.swal("Success!", "New Section Created Successfully.", "success");
+
+        _this2.loadAllSections();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadEditData: function loadEditData(index) {
+      this.editMode = true;
+      this.formData.id = this.allSections[index].id;
+      this.formData.title = this.allSections[index].title;
+    },
+    resetForm: function resetForm() {
+      this.editMode = false;
+      this.formData.id = null;
+      this.formData.title = null;
+    },
+    storeOrUpdate: function storeOrUpdate() {
+      if (this.editMode) {
+        return this.updateData();
+      } else {
+        return this.storeData();
+      }
+    },
+    updateData: function updateData() {
+      var _this3 = this;
+
+      var updateUrl = '/admin/settings/section/update/' + this.formData.id;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
+        title: this.formData.title
+      }).then(function (response) {
+        _this3.hideModal();
+
+        Vue.swal("Success!", "Section Updated Successfully.", "success");
+
+        _this3.loadAllSections();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    hideModal: function hideModal() {
+      var body = $("body");
+      body.removeClass("modal-open");
+      body.removeAttr("style");
+      var modal = $(".modal");
+      modal.removeClass("show");
+      $(".modal-backdrop").hide();
+    }
+  },
+  created: function created() {
+    this.loadAllSections();
+  }
 });
 
 /***/ }),
@@ -2630,24 +2724,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "StudentClass",
   data: function data() {
     return {
-      allData: [],
+      allClasses: [],
       formData: {
+        id: null,
         title: null,
         category: null
-      }
+      },
+      editMode: false
     };
   },
   methods: {
-    looadAllData: function looadAllData() {
+    loadallClasses: function loadallClasses() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/student_class').then(function (response) {
-        _this.allData = response.data;
+        _this.allClasses = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2655,7 +2758,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/student_class', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/student_class/store', {
         title: this.formData.title,
         category: this.formData.category
       }).then(function () {
@@ -2666,7 +2769,43 @@ __webpack_require__.r(__webpack_exports__);
 
         Vue.swal("Success!", "New Class Created Successfully.", "success");
 
-        _this2.looadAllData();
+        _this2.loadallClasses();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadEditData: function loadEditData(index) {
+      this.editMode = true;
+      this.formData.id = this.allClasses[index].id;
+      this.formData.title = this.allClasses[index].title;
+      this.formData.category = this.allClasses[index].category;
+    },
+    resetForm: function resetForm() {
+      this.editMode = false;
+      this.formData.id = null;
+      this.formData.title = null;
+      this.formData.category = null;
+    },
+    storeOrUpdate: function storeOrUpdate() {
+      if (this.editMode) {
+        return this.updateData();
+      } else {
+        return this.storeData();
+      }
+    },
+    updateData: function updateData() {
+      var _this3 = this;
+
+      var updateUrl = '/admin/settings/student_class/update/' + this.formData.id;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
+        title: this.formData.title,
+        category: this.formData.category
+      }).then(function (response) {
+        _this3.hideModal();
+
+        Vue.swal("Success!", "Class Updated Successfully.", "success");
+
+        _this3.loadallClasses();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2681,7 +2820,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.looadAllData();
+    this.loadallClasses();
   }
 });
 
@@ -2698,6 +2837,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2771,8 +2912,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Subject"
+  name: "Subject",
+  data: function data() {
+    return {
+      allSubjects: [],
+      formData: {
+        id: null,
+        name: null
+      },
+      editMode: false
+    };
+  },
+  methods: {
+    loadAllSubjects: function loadAllSubjects() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/subject').then(function (response) {
+        _this.allSubjects = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    storeData: function storeData() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/subject/store', {
+        name: this.formData.name
+      }).then(function () {
+        _this2.formData.name = null;
+
+        _this2.hideModal();
+
+        Vue.swal("Success!", "New Subject Created Successfully.", "success");
+
+        _this2.loadAllSubjects();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadEditData: function loadEditData(index) {
+      this.editMode = true;
+      this.formData.id = this.allSubjects[index].id;
+      this.formData.name = this.allSubjects[index].name;
+    },
+    resetForm: function resetForm() {
+      this.editMode = false;
+      this.formData.id = null;
+      this.formData.name = null;
+    },
+    storeOrUpdate: function storeOrUpdate() {
+      if (this.editMode) {
+        return this.updateData();
+      } else {
+        return this.storeData();
+      }
+    },
+    updateData: function updateData() {
+      var _this3 = this;
+
+      var updateUrl = '/admin/settings/subject/update/' + this.formData.id;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
+        name: this.formData.name
+      }).then(function (response) {
+        _this3.hideModal();
+
+        Vue.swal("Success!", "Subject Updated Successfully.", "success");
+
+        _this3.loadAllSubjects();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    hideModal: function hideModal() {
+      var body = $("body");
+      body.removeClass("modal-open");
+      body.removeAttr("style");
+      var modal = $(".modal");
+      modal.removeClass("show");
+      $(".modal-backdrop").hide();
+    }
+  },
+  created: function created() {
+    this.loadAllSubjects();
+  }
 });
 
 /***/ }),
@@ -2788,6 +3021,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.es.js");
 //
 //
 //
@@ -2861,8 +3097,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Year"
+  name: "Year",
+  data: function data() {
+    return {
+      allYears: [],
+      formData: new vform__WEBPACK_IMPORTED_MODULE_1__["default"]({
+        id: null,
+        year: new Date().getFullYear()
+      }),
+      editMode: false,
+      currentYear: new Date().getFullYear()
+    };
+  },
+  methods: {
+    loadAllYears: function loadAllYears() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/year').then(function (response) {
+        _this.allYears = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    storeData: function storeData() {
+      var _this2 = this;
+
+      this.formData.post('/admin/settings/year/store', {
+        year: this.formData.year
+      }).then(function () {
+        _this2.formData.year = null;
+
+        _this2.hideModal();
+
+        Vue.swal("Success!", "New Year Created Successfully.", "success");
+
+        _this2.loadAllYears();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadEditData: function loadEditData(index) {
+      this.editMode = true;
+      this.formData.id = this.allYears[index].id;
+      this.formData.year = this.allYears[index].year;
+    },
+    resetForm: function resetForm() {
+      this.editMode = false;
+      this.formData.id = null;
+      this.formData.year = new Date().getFullYear();
+    },
+    storeOrUpdate: function storeOrUpdate() {
+      if (this.editMode) {
+        return this.updateData();
+      } else {
+        return this.storeData();
+      }
+    },
+    updateData: function updateData() {
+      var _this3 = this;
+
+      var updateUrl = '/admin/settings/year/update/' + this.formData.id;
+      this.formData.post(updateUrl, {
+        year: this.formData.year
+      }).then(function (response) {
+        _this3.hideModal();
+
+        Vue.swal("Success!", "Year Updated Successfully.", "success");
+
+        _this3.loadAllYears();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    hideModal: function hideModal() {
+      var body = $("body");
+      body.removeClass("modal-open");
+      body.removeAttr("style");
+      var modal = $(".modal");
+      modal.removeClass("show");
+      $(".modal-backdrop").hide();
+    }
+  },
+  created: function created() {
+    this.loadAllYears();
+  }
 });
 
 /***/ }),
@@ -8199,6 +8536,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-37bab813]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-37bab813]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-37bab813]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-37bab813]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-37bab813] {\n  padding: 5px;\n  background-color: #131f42 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-37bab813] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-37bab813] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-37bab813] {\n  font-weight: 700;\n}\n.class-details .category[data-v-37bab813] {\n  font-weight: 700;\n}\n.routine[data-v-37bab813] {\n  padding: 5px;\n  border: 1px solid #131f42;\n}\n.routine-schedule[data-v-37bab813] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.routine-schedule .subject[data-v-37bab813] {\n  color: #111;\n  font-weight: 700;\n}\n.routine-schedule .time[data-v-37bab813] {\n  color: #444;\n  font-weight: 600;\n}\n.routine-schedule .teacher[data-v-37bab813] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".btn-dark:disabled:disabled {\n  cursor: no-drop;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39307,6 +39668,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Year_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Year.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Year_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Year_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/sweetalert2/dist/sweetalert2.min.css":
 /*!***********************************************************!*\
   !*** ./node_modules/sweetalert2/dist/sweetalert2.min.css ***!
@@ -39616,6 +40007,26 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./node_modules/vform/dist/vform.es.js":
+/*!*********************************************!*\
+  !*** ./node_modules/vform/dist/vform.es.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "Errors": () => (/* binding */ y),
+/* harmony export */   "Form": () => (/* binding */ g)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+var e=Object.defineProperty,t=Object.prototype.hasOwnProperty,s=Object.getOwnPropertySymbols,r=Object.prototype.propertyIsEnumerable,o=(t,s,r)=>s in t?e(t,s,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[s]=r,i=(e,i)=>{for(var a in i||(i={}))t.call(i,a)&&o(e,a,i[a]);if(s)for(var a of s(i))r.call(i,a)&&o(e,a,i[a]);return e};const n=e=>void 0===e,c=e=>Array.isArray(e),l=e=>e&&"number"==typeof e.size&&"string"==typeof e.type&&"function"==typeof e.slice,u=(e,t,s,r)=>((t=t||{}).indices=!n(t.indices)&&t.indices,t.nullsAsUndefineds=!n(t.nullsAsUndefineds)&&t.nullsAsUndefineds,t.booleansAsIntegers=!n(t.booleansAsIntegers)&&t.booleansAsIntegers,t.allowEmptyArrays=!n(t.allowEmptyArrays)&&t.allowEmptyArrays,s=s||new FormData,n(e)||(null===e?t.nullsAsUndefineds||s.append(r,""):(e=>"boolean"==typeof e)(e)?t.booleansAsIntegers?s.append(r,e?1:0):s.append(r,e):c(e)?e.length?e.forEach(((e,o)=>{const i=r+"["+(t.indices?o:"")+"]";u(e,t,s,i)})):t.allowEmptyArrays&&s.append(r+"[]",""):(e=>e instanceof Date)(e)?s.append(r,e.toISOString()):!(e=>e===Object(e))(e)||(e=>l(e)&&"string"==typeof e.name&&("object"==typeof e.lastModifiedDate||"number"==typeof e.lastModified))(e)||l(e)?s.append(r,e):Object.keys(e).forEach((o=>{const i=e[o];if(c(i))for(;o.length>2&&o.lastIndexOf("[]")===o.length-2;)o=o.substring(0,o.length-2);u(i,t,s,r?r+"["+o+"]":o)}))),s);var h={serialize:u};function d(e){if(null===e||"object"!=typeof e)return e;const t=Array.isArray(e)?[]:{};return Object.keys(e).forEach((s=>{t[s]=d(e[s])})),t}function f(e){return Array.isArray(e)?e:[e]}function p(e){return e instanceof File||e instanceof Blob||e instanceof FileList||"object"==typeof e&&null!==e&&void 0!==Object.values(e).find((e=>p(e)))}class y{constructor(){this.errors={},this.errors={}}set(e,t){"object"==typeof e?this.errors=e:this.set(i(i({},this.errors),{[e]:f(t)}))}all(){return this.errors}has(e){return Object.prototype.hasOwnProperty.call(this.errors,e)}hasAny(...e){return e.some((e=>this.has(e)))}any(){return Object.keys(this.errors).length>0}get(e){if(this.has(e))return this.getAll(e)[0]}getAll(e){return f(this.errors[e]||[])}only(...e){const t=[];return e.forEach((e=>{const s=this.get(e);s&&t.push(s)})),t}flatten(){return Object.values(this.errors).reduce(((e,t)=>e.concat(t)),[])}clear(e){const t={};e&&Object.keys(this.errors).forEach((s=>{s!==e&&(t[s]=this.errors[s])})),this.set(t)}}class g{constructor(e={}){this.originalData={},this.busy=!1,this.successful=!1,this.recentlySuccessful=!1,this.recentlySuccessfulTimeoutId=void 0,this.errors=new y,this.progress=void 0,this.update(e)}static make(e){return new this(e)}update(e){this.originalData=Object.assign({},this.originalData,d(e)),Object.assign(this,e)}fill(e={}){this.keys().forEach((t=>{this[t]=e[t]}))}data(){return this.keys().reduce(((e,t)=>i(i({},e),{[t]:this[t]})),{})}keys(){return Object.keys(this).filter((e=>!g.ignore.includes(e)))}startProcessing(){this.errors.clear(),this.busy=!0,this.successful=!1,this.progress=void 0,this.recentlySuccessful=!1,clearTimeout(this.recentlySuccessfulTimeoutId)}finishProcessing(){this.busy=!1,this.successful=!0,this.progress=void 0,this.recentlySuccessful=!0,this.recentlySuccessfulTimeoutId=setTimeout((()=>{this.recentlySuccessful=!1}),g.recentlySuccessfulTimeout)}clear(){this.errors.clear(),this.successful=!1,this.recentlySuccessful=!1,this.progress=void 0,clearTimeout(this.recentlySuccessfulTimeoutId)}reset(){Object.keys(this).filter((e=>!g.ignore.includes(e))).forEach((e=>{this[e]=d(this.originalData[e])}))}get(e,t={}){return this.submit("get",e,t)}post(e,t={}){return this.submit("post",e,t)}patch(e,t={}){return this.submit("patch",e,t)}put(e,t={}){return this.submit("put",e,t)}delete(e,t={}){return this.submit("delete",e,t)}submit(e,t,s={}){return this.startProcessing(),s=i({data:{},params:{},url:this.route(t),method:e,onUploadProgress:this.handleUploadProgress.bind(this)},s),"get"===e.toLowerCase()?s.params=i(i({},this.data()),s.params):(s.data=i(i({},this.data()),s.data),p(s.data)&&(s.transformRequest=[e=>h.serialize(e)])),new Promise(((e,t)=>{(g.axios||(axios__WEBPACK_IMPORTED_MODULE_0___default())).request(s).then((t=>{this.finishProcessing(),e(t)})).catch((e=>{this.handleErrors(e),t(e)}))}))}handleErrors(e){this.busy=!1,this.progress=void 0,e.response&&this.errors.set(this.extractErrors(e.response))}extractErrors(e){return e.data&&"object"==typeof e.data?e.data.errors?i({},e.data.errors):e.data.message?{error:e.data.message}:i({},e.data):{error:g.errorMessage}}handleUploadProgress(e){this.progress={total:e.total,loaded:e.loaded,percentage:Math.round(100*e.loaded/e.total)}}route(e,t={}){let s=e;return Object.prototype.hasOwnProperty.call(g.routes,e)&&(s=decodeURI(g.routes[e])),"object"!=typeof t&&(t={id:t}),Object.keys(t).forEach((e=>{s=s.replace(`{${e}}`,t[e])})),s}onKeydown(e){const t=e.target;t.name&&this.errors.clear(t.name)}}g.routes={},g.errorMessage="Something went wrong. Please try again.",g.recentlySuccessfulTimeout=2e3,g.ignore=["busy","successful","errors","progress","originalData","recentlySuccessful","recentlySuccessfulTimeoutId"];/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (g);
+
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/dashboard/Index.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/admin/dashboard/Index.vue ***!
@@ -39906,15 +40317,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Year_vue_vue_type_template_id_0ca1998e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Year.vue?vue&type=template&id=0ca1998e& */ "./resources/js/components/admin/settings/Year.vue?vue&type=template&id=0ca1998e&");
 /* harmony import */ var _Year_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Year.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/settings/Year.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Year_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Year.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Year_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Year_vue_vue_type_template_id_0ca1998e___WEBPACK_IMPORTED_MODULE_0__.render,
   _Year_vue_vue_type_template_id_0ca1998e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -40632,6 +41045,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Current_vue_vue_type_style_index_0_id_37bab813_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Current.vue?vue&type=style&index=0&id=37bab813&lang=scss&scoped=true& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/routine/Current.vue?vue&type=style&index=0&id=37bab813&lang=scss&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Year_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Year.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/settings/Year.vue?vue&type=style&index=0&lang=scss&");
 
 
 /***/ }),
@@ -41587,7 +42013,31 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-12" }, [
       _c("div", { staticClass: "card m-b-30" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", { staticClass: "card-title float-left" }, [
+            _vm._v("All Sections")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "float-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-dark btn-sm",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#sectionCreateEditModal"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.resetForm.apply(null, arguments)
+                  }
+                }
+              },
+              [_vm._v("Assign New Section")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -41598,35 +42048,53 @@ var render = function() {
                 attrs: { id: "datatable-buttons" }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", { staticClass: "text-center" }, [_vm._v("001")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v("Section")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _c(
-                        "div",
-                        { staticClass: "btn-group mr-2" },
-                        [
+                _c(
+                  "tbody",
+                  _vm._l(_vm.allSections, function(data, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(data.title) +
+                            "\n                                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c("div", { staticClass: "btn-group mr-2" }, [
                           _c(
-                            "router-link",
+                            "button",
                             {
-                              staticClass: "btn btn-info btn-xs",
-                              attrs: { to: "#" }
+                              staticClass: "btn btn-dark btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#sectionCreateEditModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.loadEditData(index)
+                                }
+                              }
                             },
-                            [_vm._v("Edit")]
+                            [
+                              _vm._v(
+                                "\n                                                Edit\n                                            "
+                              )
+                            ]
                           )
-                        ],
-                        1
-                      )
+                        ])
+                      ])
                     ])
-                  ])
-                ])
+                  }),
+                  0
+                )
               ]
             )
           ])
@@ -41634,53 +42102,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title float-left" }, [
-        _vm._v("All Sections")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "float-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-dark btn-sm",
-            attrs: {
-              "data-toggle": "modal",
-              "data-target": "#sectionCreateEditModal"
-            }
-          },
-          [_vm._v("Assign New Section")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Section")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "div",
       {
         staticClass: "modal fade",
@@ -41705,51 +42127,47 @@ var staticRenderFns = [
                     staticClass: "modal-title",
                     attrs: { id: "sectionCreateEditModal-label" }
                   },
-                  [_vm._v("Add New Section")]
+                  [
+                    _vm._v(
+                      _vm._s(_vm.editMode ? "Edit Section" : "Add New Section")
+                    )
+                  ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
+                _vm._m(1)
               ]),
               _vm._v(" "),
-              _c("form", { attrs: { action: "#", method: "POST" } }, [
+              _c("form", [
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-form-label",
-                        attrs: { for: "title" }
-                      },
-                      [
-                        _vm._v("Section Title "),
-                        _c("sup", { staticClass: "required" }, [_vm._v("*")])
-                      ]
-                    ),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.title,
+                          expression: "formData.title"
+                        }
+                      ],
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
                         minlength: "1",
-                        maxlength: "10",
+                        maxlength: "50",
                         name: "title",
-                        placeholder: "Ex: A",
+                        placeholder: "Ex. Lili",
                         required: ""
+                      },
+                      domProps: { value: _vm.formData.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.formData, "title", $event.target.value)
+                        }
                       }
                     })
                   ])
@@ -41760,15 +42178,71 @@ var staticRenderFns = [
                     "button",
                     {
                       staticClass: "btn btn-custom",
-                      attrs: { type: "submit" }
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.storeOrUpdate.apply(null, arguments)
+                        }
+                      }
                     },
-                    [_vm._v("Add Section")]
+                    [
+                      _vm._v(
+                        _vm._s(_vm.editMode ? "Update Section" : "Add Section")
+                      )
+                    ]
                   )
                 ])
               ])
             ])
           ]
         )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Section")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-form-label", attrs: { for: "title" } },
+      [
+        _vm._v("Section Title "),
+        _c("sup", { staticClass: "required" }, [_vm._v("*")])
       ]
     )
   }
@@ -41798,7 +42272,31 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-12" }, [
       _c("div", { staticClass: "card m-b-30" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", { staticClass: "card-title float-left" }, [
+            _vm._v("All Classes")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "float-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-dark btn-sm",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#classCreateEditModal"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.resetForm.apply(null, arguments)
+                  }
+                }
+              },
+              [_vm._v("Assign New Class")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -41809,11 +42307,11 @@ var render = function() {
                 attrs: { id: "datatable-buttons" }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.allData, function(data, index) {
+                  _vm._l(_vm.allClasses, function(data, index) {
                     return _c("tr", { key: index }, [
                       _c("td", { staticClass: "text-center" }, [
                         _vm._v(_vm._s(index + 1))
@@ -41833,21 +42331,29 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "div",
-                          { staticClass: "btn-group mr-2" },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "btn btn-info btn-xs",
-                                attrs: { to: "#" }
+                        _c("div", { staticClass: "btn-group mr-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-dark btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#classCreateEditModal"
                               },
-                              [_vm._v("Edit")]
-                            )
-                          ],
-                          1
-                        )
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.loadEditData(index)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                                Edit\n                                            "
+                              )
+                            ]
+                          )
+                        ])
                       ])
                     ])
                   }),
@@ -41878,12 +42384,27 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "classCreateEditModal-label" }
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(_vm.editMode ? "Edit Class" : "Add New Class")
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1)
+              ]),
               _vm._v(" "),
               _c("form", [
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -41984,11 +42505,15 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.storeData.apply(null, arguments)
+                          return _vm.storeOrUpdate.apply(null, arguments)
                         }
                       }
                     },
-                    [_vm._v("Add Class")]
+                    [
+                      _vm._v(
+                        _vm._s(_vm.editMode ? "Update Class" : "Add Class")
+                      )
+                    ]
                   )
                 ])
               ])
@@ -42000,30 +42525,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title float-left" }, [
-        _vm._v("All Classes")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "float-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-dark btn-sm",
-            attrs: {
-              "data-toggle": "modal",
-              "data-target": "#classCreateEditModal"
-            }
-          },
-          [_vm._v("Assign New Class")]
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -42042,29 +42543,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        {
-          staticClass: "modal-title",
-          attrs: { id: "classCreateEditModal-label" }
-        },
-        [_vm._v("Add New Class")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   },
   function() {
     var _vm = this
@@ -42102,7 +42592,31 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-12" }, [
       _c("div", { staticClass: "card m-b-30" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", { staticClass: "card-title float-left" }, [
+            _vm._v("All Subjects")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "float-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-dark btn-sm",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#subjectCreateEditModal"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.resetForm.apply(null, arguments)
+                  }
+                }
+              },
+              [_vm._v("Assign New Subject")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -42113,35 +42627,53 @@ var render = function() {
                 attrs: { id: "datatable-buttons" }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", { staticClass: "text-center" }, [_vm._v("001")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v("Subject Name")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _c(
-                        "div",
-                        { staticClass: "btn-group mr-2" },
-                        [
+                _c(
+                  "tbody",
+                  _vm._l(_vm.allSubjects, function(data, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(data.name) +
+                            "\n                                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c("div", { staticClass: "btn-group mr-2" }, [
                           _c(
-                            "router-link",
+                            "button",
                             {
-                              staticClass: "btn btn-info btn-xs",
-                              attrs: { to: "#" }
+                              staticClass: "btn btn-dark btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#subjectCreateEditModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.loadEditData(index)
+                                }
+                              }
                             },
-                            [_vm._v("Edit")]
+                            [
+                              _vm._v(
+                                "\n                                                Edit\n                                            "
+                              )
+                            ]
                           )
-                        ],
-                        1
-                      )
+                        ])
+                      ])
                     ])
-                  ])
-                ])
+                  }),
+                  0
+                )
               ]
             )
           ])
@@ -42149,53 +42681,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title float-left" }, [
-        _vm._v("All Subjects")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "float-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-dark btn-sm",
-            attrs: {
-              "data-toggle": "modal",
-              "data-target": "#subjectCreateEditModal"
-            }
-          },
-          [_vm._v("Assign New Subject")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "div",
       {
         staticClass: "modal fade",
@@ -42220,48 +42706,47 @@ var staticRenderFns = [
                     staticClass: "modal-title",
                     attrs: { id: "subjectCreateEditModal-label" }
                   },
-                  [_vm._v("Add New Subject")]
+                  [
+                    _vm._v(
+                      _vm._s(_vm.editMode ? "Edit Subject" : "Add New Subject")
+                    )
+                  ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
+                _vm._m(1)
               ]),
               _vm._v(" "),
-              _c("form", { attrs: { action: "#", method: "POST" } }, [
+              _c("form", [
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "col-form-label", attrs: { for: "name" } },
-                      [
-                        _vm._v("Subject Name "),
-                        _c("sup", { staticClass: "required" }, [_vm._v("*")])
-                      ]
-                    ),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.name,
+                          expression: "formData.name"
+                        }
+                      ],
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
                         minlength: "1",
-                        maxlength: "2",
+                        maxlength: "100",
                         name: "name",
-                        placeholder: "Ex: Mathematics",
+                        placeholder: "Ex. Mathematics",
                         required: ""
+                      },
+                      domProps: { value: _vm.formData.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.formData, "name", $event.target.value)
+                        }
                       }
                     })
                   ])
@@ -42272,9 +42757,19 @@ var staticRenderFns = [
                     "button",
                     {
                       staticClass: "btn btn-custom",
-                      attrs: { type: "submit" }
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.storeOrUpdate.apply(null, arguments)
+                        }
+                      }
                     },
-                    [_vm._v("Add Subject")]
+                    [
+                      _vm._v(
+                        _vm._s(_vm.editMode ? "Update Subject" : "Add Subject")
+                      )
+                    ]
                   )
                 ])
               ])
@@ -42282,6 +42777,49 @@ var staticRenderFns = [
           ]
         )
       ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Subject")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-form-label", attrs: { for: "name" } },
+      [_vm._v("Class "), _c("sup", { staticClass: "required" }, [_vm._v("*")])]
     )
   }
 ]
@@ -42310,7 +42848,31 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-12" }, [
       _c("div", { staticClass: "card m-b-30" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", { staticClass: "card-title float-left" }, [
+            _vm._v("All Years")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "float-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-dark btn-sm",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#yearCreateEditModal"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.resetForm.apply(null, arguments)
+                  }
+                }
+              },
+              [_vm._v("Assign New Year")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -42321,33 +42883,54 @@ var render = function() {
                 attrs: { id: "datatable-buttons" }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", { staticClass: "text-center" }, [_vm._v("001")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [_vm._v("Year")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _c(
-                        "div",
-                        { staticClass: "btn-group mr-2" },
-                        [
+                _c(
+                  "tbody",
+                  _vm._l(_vm.allYears, function(data, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(data.year) +
+                            "\n                                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c("div", { staticClass: "btn-group mr-2" }, [
                           _c(
-                            "router-link",
+                            "button",
                             {
-                              staticClass: "btn btn-info btn-xs",
-                              attrs: { to: "#" }
+                              staticClass: "btn btn-dark btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#yearCreateEditModal",
+                                disabled: data.year <= _vm.currentYear
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.loadEditData(index)
+                                }
+                              }
                             },
-                            [_vm._v("Edit")]
+                            [
+                              _vm._v(
+                                "\n                                                Edit\n                                            "
+                              )
+                            ]
                           )
-                        ],
-                        1
-                      )
+                        ])
+                      ])
                     ])
-                  ])
-                ])
+                  }),
+                  0
+                )
               ]
             )
           ])
@@ -42355,51 +42938,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title float-left" }, [_vm._v("All Years")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "float-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-dark btn-sm",
-            attrs: {
-              "data-toggle": "modal",
-              "data-target": "#yearCreateEditModal"
-            }
-          },
-          [_vm._v("Assign New Year")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Year")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "div",
       {
         staticClass: "modal fade",
@@ -42424,53 +42963,55 @@ var staticRenderFns = [
                     staticClass: "modal-title",
                     attrs: { id: "yearCreateEditModal-label" }
                   },
-                  [_vm._v("Add New Year")]
+                  [_vm._v(_vm._s(_vm.editMode ? "Edit Year" : "Add New Year"))]
                 ),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
+                _vm._m(1)
               ]),
               _vm._v(" "),
-              _c("form", { attrs: { action: "#", method: "POST" } }, [
+              _c("form", [
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "col-form-label", attrs: { for: "year" } },
-                      [
-                        _vm._v("Year "),
-                        _c("sup", { staticClass: "required" }, [_vm._v("*")])
-                      ]
-                    ),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.year,
+                          expression: "formData.year"
+                        }
+                      ],
                       staticClass: "form-control",
                       attrs: {
                         type: "number",
-                        min: "2021",
-                        max: "2050",
                         minlength: "4",
                         maxlength: "4",
-                        step: "1",
+                        min: _vm.currentYear,
                         name: "year",
-                        placeholder: "2021",
+                        placeholder: _vm.currentYear,
                         required: ""
+                      },
+                      domProps: { value: _vm.formData.year },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.formData, "year", $event.target.value)
+                        }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.formData.errors.has("year")
+                      ? _c("div", {
+                          staticClass: "text-danger text-bold",
+                          domProps: {
+                            innerHTML: _vm._s(_vm.formData.errors.get("year"))
+                          }
+                        })
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -42479,9 +43020,15 @@ var staticRenderFns = [
                     "button",
                     {
                       staticClass: "btn btn-custom",
-                      attrs: { type: "submit" }
+                      attrs: { disabled: _vm.formData.busy, type: "submit" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.storeOrUpdate.apply(null, arguments)
+                        }
+                      }
                     },
-                    [_vm._v("Add Year")]
+                    [_vm._v(_vm._s(_vm.editMode ? "Update Year" : "Add Year"))]
                   )
                 ])
               ])
@@ -42489,6 +43036,49 @@ var staticRenderFns = [
           ]
         )
       ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Year")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-form-label", attrs: { for: "year" } },
+      [_vm._v("Class "), _c("sup", { staticClass: "required" }, [_vm._v("*")])]
     )
   }
 ]

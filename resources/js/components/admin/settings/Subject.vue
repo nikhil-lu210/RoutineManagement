@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <h5 class="card-title float-left">All Subjects</h5>
                         <div class="float-right">
-                            <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#subjectCreateEditModal">Assign New Subject</button>
+                            <button @click.prevent="resetForm" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#subjectCreateEditModal">Assign New Subject</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -19,17 +19,26 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
-                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Subject</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center">001</td>
-                                        <td class="text-center">Subject Name</td>
+                                    <tr v-for="(data,index) in allSubjects" :key="index">
+                                        <td class="text-center">{{ index+1 }}</td>
+                                        <td class="text-center">
+                                            {{ data.name }}
+                                        </td>
                                         <td class="text-center">
                                             <div class="btn-group mr-2">
-                                                <router-link to="#" class="btn btn-info btn-xs">Edit</router-link>
+                                                <button 
+                                                    class="btn btn-dark btn-sm"
+                                                    data-toggle="modal" 
+                                                    data-target="#subjectCreateEditModal"
+                                                    @click.prevent="loadEditData(index)"
+                                                 >
+                                                    Edit
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -46,21 +55,21 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="subjectCreateEditModal-label">Add New Subject</h5>
+                            <h5 class="modal-title" id="subjectCreateEditModal-label">{{ editMode ? 'Edit Subject' : 'Add New Subject' }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="#" method="POST">
+                        <form>
                             <div class="modal-body">
                                 <!-- @csrf -->
                                 <div class="form-group">
-                                    <label for="name" class="col-form-label">Subject Name <sup class="required">*</sup></label>
-                                    <input type="text" minlength="1" maxlength="2" class="form-control" name="name" placeholder="Ex: Mathematics" required>
+                                    <label for="name" class="col-form-label">Class <sup class="required">*</sup></label>
+                                    <input type="text" minlength="1" maxlength="100" class="form-control" name="name" placeholder="Ex. Mathematics" required v-model="formData.name">
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-custom">Add Subject</button>
+                                <button @click.prevent="storeOrUpdate" type="submit" class="btn btn-custom">{{ editMode ? 'Update Subject' : 'Add Subject' }}</button>
                             </div>
                         </form>
                     </div>
@@ -72,7 +81,94 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default{
-        name:"Subject"
+        name:"Subject",
+        data(){
+            return {
+                allSubjects: [],
+                formData: {
+                    id:null,
+                    name: null,
+                },
+                editMode:false
+            }
+        },
+        methods:{
+            loadAllSubjects() {
+                axios.get('/admin/settings/subject')
+                .then((response) => {
+                    this.allSubjects = response.data
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+            
+            storeData() {
+                axios.post('/admin/settings/subject/store', {
+                    name: this.formData.name,
+                })
+                .then(() => {
+                    this.formData.name = null;
+                    this.hideModal();
+                    Vue.swal("Success!", "New Subject Created Successfully.", "success");
+                    this.loadAllSubjects();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+
+            loadEditData(index) {
+                this.editMode = true;
+
+                this.formData.id = this.allSubjects[index].id;
+                this.formData.name = this.allSubjects[index].name;
+            },
+
+            resetForm() {
+                this.editMode = false;
+
+                this.formData.id = null;
+                this.formData.name = null;
+            },
+
+            storeOrUpdate() {
+                if(this.editMode){
+                    return this.updateData();
+                }else{
+                     return this.storeData();
+                }
+            },
+
+            updateData() {
+                let updateUrl = '/admin/settings/subject/update/' + this.formData.id;
+                axios.post(updateUrl, {
+                    name: this.formData.name,
+                })
+                .then((response) => {
+                    this.hideModal();
+                    Vue.swal("Success!", "Subject Updated Successfully.", "success");
+                    this.loadAllSubjects();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+
+            hideModal() {
+                let body = $("body");
+                body.removeClass("modal-open");
+                body.removeAttr("style");
+                let modal = $(".modal");
+                modal.removeClass("show");
+
+                $(".modal-backdrop").hide();
+            },
+        },
+        created() {
+            this.loadAllSubjects();
+        }
     }
 </script>

@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <h5 class="card-title float-left">All Classes</h5>
                         <div class="float-right">
-                            <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#classCreateEditModal">Assign New Class</button>
+                            <button @click.prevent="resetForm" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#classCreateEditModal">Assign New Class</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -24,7 +24,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(data,index) in allData" :key="index">
+                                    <tr v-for="(data,index) in allClasses" :key="index">
                                         <td class="text-center">{{ index+1 }}</td>
                                         <td class="text-center">
                                             {{ data.title }} 
@@ -32,7 +32,14 @@
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group mr-2">
-                                                <router-link to="#" class="btn btn-info btn-xs">Edit</router-link>
+                                                <button 
+                                                    class="btn btn-dark btn-sm"
+                                                    data-toggle="modal" 
+                                                    data-target="#classCreateEditModal"
+                                                    @click.prevent="loadEditData(index)"
+                                                 >
+                                                    Edit
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -49,7 +56,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="classCreateEditModal-label">Add New Class</h5>
+                            <h5 class="modal-title" id="classCreateEditModal-label">{{ editMode ? 'Edit Class' : 'Add New Class' }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -72,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button @click.prevent="storeData" type="submit" class="btn btn-custom">Add Class</button>
+                                <button @click.prevent="storeOrUpdate" type="submit" class="btn btn-custom">{{ editMode ? 'Update Class' : 'Add Class' }}</button>
                             </div>
                         </form>
                     </div>
@@ -84,30 +91,33 @@
 </template>
 
 <script>
-import axios from 'axios'
+    import axios from 'axios';
     export default{
         name:"StudentClass",
         data(){
             return {
-                allData: [],
+                allClasses: [],
                 formData: {
+                    id:null,
                     title: null,
                     category: null
-                }
+                },
+                editMode:false
             }
         },
         methods:{
-            looadAllData() {
+            loadallClasses() {
                 axios.get('/admin/settings/student_class')
                 .then((response) => {
-                    this.allData = response.data
+                    this.allClasses = response.data
                 })
                 .catch((error) => {
                     console.log(error);
                 })
             },
+            
             storeData() {
-                axios.post('/admin/settings/student_class', {
+                axios.post('/admin/settings/student_class/store', {
                     title: this.formData.title,
                     category: this.formData.category
                 })
@@ -116,12 +126,53 @@ import axios from 'axios'
                     this.formData.category = null;
                     this.hideModal();
                     Vue.swal("Success!", "New Class Created Successfully.", "success");
-                    this.looadAllData();
+                    this.loadallClasses();
                 })
                 .catch((error) => {
                     console.log(error);
                 })
             },
+
+            loadEditData(index) {
+                this.editMode = true;
+
+                this.formData.id = this.allClasses[index].id;
+                this.formData.title = this.allClasses[index].title;
+                this.formData.category = this.allClasses[index].category;
+            },
+
+            resetForm() {
+                this.editMode = false;
+
+                this.formData.id = null;
+                this.formData.title = null;
+                this.formData.category = null;
+            },
+
+            storeOrUpdate() {
+                if(this.editMode){
+                    return this.updateData();
+                }else{
+                     return this.storeData();
+                }
+            },
+
+            updateData() {
+                let updateUrl = '/admin/settings/student_class/update/' + this.formData.id;
+                axios.post(updateUrl, {
+                    title: this.formData.title,
+                    category: this.formData.category
+                })
+                .then((response) => {
+                    this.hideModal();
+                    Vue.swal("Success!", "Class Updated Successfully.", "success");
+                    this.loadallClasses();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+
             hideModal() {
                 let body = $("body");
                 body.removeClass("modal-open");
@@ -132,8 +183,8 @@ import axios from 'axios'
                 $(".modal-backdrop").hide();
             },
         },
-        created(){
-            this.looadAllData();
+        created() {
+            this.loadallClasses();
         }
     }
 </script>
