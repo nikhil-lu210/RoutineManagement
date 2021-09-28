@@ -16,4 +16,16 @@ class RoutineGroupStudent extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // get routine_group
+    public function routineGroup()
+    {
+        return $this->belongsTo(RoutineGroup::class, 'routine_group_id', 'id');
+    }
+
+    // get student
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id', 'id');
+    }
 }

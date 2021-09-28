@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Section extends Model
+class StudentClassSubject extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -16,10 +16,4 @@ class Section extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    // get routine_groups
-    public function routineGroups()
-    {
-        return $this->hasMany(RoutineGroup::class, 'section_id', 'id');
-    }
 }

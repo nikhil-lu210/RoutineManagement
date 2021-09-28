@@ -16,4 +16,16 @@ class Subject extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // get routine_group_Teachers
+    public function routineGroupTeachers()
+    {
+        return $this->hasMany(RoutineGroupTeacher::class, 'subject_id', 'id');
+    }
+
+    // get classes
+    public function classes()
+    {
+        return $this->belongsToMany(StudentClass::class, 'class_id', 'id');
+    }
 }

@@ -16,4 +16,40 @@ class RoutineGroup extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // get class
+    public function studentClass()
+    {
+        return $this->belongsTo(StudentClass::class, 'class_id', 'id');
+    }
+
+    // get section
+    public function section()
+    {
+        return $this->belongsTo(Section::class, 'section_id', 'id');
+    }
+
+    // get year
+    public function year()
+    {
+        return $this->belongsTo(Year::class, 'year_id', 'id');
+    }
+
+    // get routine_group_students
+    public function routineGroupStudents()
+    {
+        return $this->hasMany(RoutineGroupStudent::class, 'routine_group_id', 'id');
+    }
+
+    // get routine_group_Teachers
+    public function routineGroupTeachers()
+    {
+        return $this->hasMany(RoutineGroupTeacher::class, 'routine_group_id', 'id');
+    }
+
+    // get classRoutines
+    public function classRoutines()
+    {
+        return $this->hasMany(ClassRoutine::class, 'routine_group_id', 'id');
+    }
 }

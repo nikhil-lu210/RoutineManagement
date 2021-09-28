@@ -16,4 +16,10 @@ class Period extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // get classRoutines
+    public function classRoutines()
+    {
+        return $this->hasMany(ClassRoutine::class, 'period_id', 'id');
+    }
 }

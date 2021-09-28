@@ -16,4 +16,16 @@ class StudentClass extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // get routine_groups
+    public function routineGroups()
+    {
+        return $this->hasMany(RoutineGroup::class, 'class_id', 'id');
+    }
+
+    // get subjects
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'subject_id', 'id');
+    }
 }

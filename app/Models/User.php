@@ -66,4 +66,15 @@ class User extends Authenticatable
         return $this->hasOne(Teacher::class, 'teacher_id', 'id');
     }
 
+    // get routine_group_students
+    public function routineGroupStudents()
+    {
+        return $this->hasMany(RoutineGroupStudent::class, 'student_id', 'id');
+    }
+
+    // get routine_group_Teachers
+    public function routineGroupTeachers()
+    {
+        return $this->hasMany(RoutineGroupTeacher::class, 'teacher_id', 'id');
+    }
 }

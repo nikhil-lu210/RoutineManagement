@@ -16,4 +16,10 @@ class Year extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // get routine_groups
+    public function routineGroups()
+    {
+        return $this->hasMany(RoutineGroup::class, 'year_id', 'id');
+    }
 }
