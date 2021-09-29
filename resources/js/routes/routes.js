@@ -15,6 +15,7 @@ import CreateRoutine from '../components/admin/routine/Create';
 import StudentClass from '../components/admin/settings/StudentClass';
 import Subject from '../components/admin/settings/Subject';
 import Year from '../components/admin/settings/Year';
+import Day from '../components/admin/settings/Day';
 import Section from '../components/admin/settings/Section';
 
 export const routes = [
@@ -82,6 +83,11 @@ export const routes = [
         path: '/settings/years',
         name: 'Year',
         component: Year
+    },
+    {
+        path: '/settings/days',
+        name: 'Day',
+        component: Day
     },
     {
         path: '/settings/sections',

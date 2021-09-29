@@ -37,6 +37,15 @@ tr:nth-child(odd) td:nth-child(odd) {
 .routine {
     padding: 5px;
     border: 1px solid #131f42;
+    position: relative;
+    &-edit-btn {
+        position: absolute;
+        padding: 1px 4px;
+        color: #fff;
+        right: 2px;
+        top: 2px;
+        font-size: 10px;
+    }
     &-schedule {
         list-style: none;
         padding-left: 0;
@@ -68,7 +77,7 @@ tr:nth-child(odd) td:nth-child(odd) {
                     <div class="card-header">
                         <h5 class="card-title float-left">Routine of 2021</h5>
                         <div class="float-right">
-                            <input type="text" class="form-control" name="Teacher Name" placeholder="Ex: John Doe" required>
+                            <button class="btn btn-custom btn-sm">Edit Routine</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -97,6 +106,9 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
                                             <ul class="routine-schedule">
                                                 <li class="subject">Mathematics</li>
                                                 <li class="time">10:00 - 10:55</li>
@@ -104,6 +116,9 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
                                             <ul class="routine-schedule">
                                                 <li class="subject">Mathematics</li>
                                                 <li class="time">10:00 - 10:55</li>
@@ -111,9 +126,15 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
                                             
                                         </td>
                                         <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
                                             <ul class="routine-schedule">
                                                 <li class="subject">Mathematics</li>
                                                 <li class="time">10:00 - 10:55</li>
@@ -121,6 +142,9 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
                                             <ul class="routine-schedule">
                                                 <li class="subject">Mathematics</li>
                                                 <li class="time">10:00 - 10:55</li>
@@ -128,58 +152,9 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
-                                            <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
-                                            <h6 class="text-dark font-sm">Holiday</h6>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="text-center class">
-                                            <ul class="class-details">
-                                                <li class="name">
-                                                    6 <span class="section">(A)</span>
-                                                </li>
-                                                <li class="category">Boys</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
-                                            <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
-                                            <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
-                                            <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
-
-                                        </td>
-                                        <td class="routine text-center">
-                                            <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
                                             <ul class="routine-schedule">
                                                 <li class="subject">Mathematics</li>
                                                 <li class="time">10:00 - 10:55</li>

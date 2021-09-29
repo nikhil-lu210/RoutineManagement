@@ -17,6 +17,7 @@ class CreateDaysTable extends Migration
             $table->id();
 
             $table->string('name')->nullable();
+            $table->boolean('holiday')->default(false);
 
             $table->timestamps();
             $table->softDeletes();

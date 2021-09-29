@@ -97,6 +97,9 @@
                                 <router-link to="/settings/years">Year</router-link>
                             </li>
                             <li class="">
+                                <router-link to="/settings/days">Day</router-link>
+                            </li>
+                            <li class="">
                                 <router-link to="/settings/sections">Section</router-link>
                             </li>
                         </ul>

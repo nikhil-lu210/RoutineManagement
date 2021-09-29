@@ -1,46 +1,49 @@
 <template>
     <!-- Start row -->
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- Start col -->
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card m-b-30">
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <!-- @csrf -->
-                    <div class="card-header border bottom">
-                        <h5 class="mb-0">Create New Routine</h5>
-                    </div>
+                <div class="card-header">
+                    <h4 class="card-title text-bold text-center">Create New Routine</h4>
+                </div>
+                <form>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Full Name<sup class="required">*</sup></label>
-                                    <input type="text" class="form-control" name="name" placeholder="Ex: John Doe" required>
+                                    <label for="year">Year<sup class="required">*</sup></label>
+                                    <div class="input-group">
+                                        <select class="form-control" name="year">
+                                            <option selected="">Select Year</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="email">Email<sup class="required">*</sup></label>
-                                    <input type="email" class="form-control" name="email" placeholder="Ex: johndoe@mail.com" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="password">Password<sup class="required">*</sup></label>
-                                    <input type="password" class="form-control" name="password" placeholder="Ex: PassWord@2021" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="password">Confirm Password<sup class="required">*</sup></label>
-                                    <input type="password" class="form-control" name="password_confirmation" placeholder="Ex: PassWord@2021" required>
+                                    <label for="class">Class<sup class="required">*</sup></label>
+                                    <div class="input-group">
+                                        <select class="form-control" name="class">
+                                            <option selected="">Select Class</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-custom float-right mb-2">Create Teacher</button>
-                        <button type="reset" class="btn btn-danger float-right mb-2 mr-1" onclick="return confirm('Are You Sure Want To Reset?');">Reset</button>
+                        <div class="text-right">
+                            <button type="submit" id="updateInfo" class="btn btn-custom bg-ucap text-bold">
+                                Assign Routine
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
