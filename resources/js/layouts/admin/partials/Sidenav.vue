@@ -29,7 +29,7 @@
 
                     <li class="nested-menu">
                         <a href="javaScript:void(0);">
-                            <i class="sl-icon-graduation"></i>
+                            <i class="ti-blackboard"></i>
                             <span>Teachers</span>
                             <i class="feather icon-chevron-right pull-right"></i>
                         </a>
@@ -45,7 +45,7 @@
 
                     <li class="nested-menu">
                         <a href="javaScript:void(0);">
-                            <i class="sl-icon-graduation"></i>
+                            <i class="ti-user"></i>
                             <span>Students</span>
                             <i class="feather icon-chevron-right pull-right"></i>
                         </a>
@@ -61,7 +61,7 @@
 
                     <li class="nested-menu">
                         <a href="javaScript:void(0);">
-                            <i class="sl-icon-graduation"></i>
+                            <i class="ti-layout"></i>
                             <span>Routines</span>
                             <i class="feather icon-chevron-right pull-right"></i>
                         </a>
@@ -82,7 +82,7 @@
 
                     <li class="nested-menu">
                         <a href="javaScript:void(0);">
-                            <i class="sl-icon-graduation"></i>
+                            <i class="ti-settings"></i>
                             <span>Settings</span>
                             <i class="feather icon-chevron-right pull-right"></i>
                         </a>

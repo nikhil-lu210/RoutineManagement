@@ -2,6 +2,7 @@ import Dashboard from '../components/admin/dashboard/Index';
 
 import Teachers from '../components/admin/teacher/Index';
 import CreateTeacher from '../components/admin/teacher/Create';
+import ShowTeacher from '../components/admin/teacher/Show';
 
 import Students from '../components/admin/student/Index';
 import CreateStudent from '../components/admin/student/Create';
@@ -30,6 +31,11 @@ export const routes = [
         path: '/teacher/create',
         name: 'CreateTeacher',
         component: CreateTeacher
+    },
+    {
+        path: '/teacher/show/:teacher_id',
+        name: 'ShowTeacher',
+        component: ShowTeacher
     },
     {
         path: '/students',

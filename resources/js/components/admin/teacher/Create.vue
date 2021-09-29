@@ -4,42 +4,42 @@
         <!-- Start col -->
         <div class="col-md-12">
             <div class="card m-b-30">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form>
                     <!-- @csrf -->
                     <div class="card-header border bottom">
                         <h5 class="mb-0">Create New Teacher</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Full Name<sup class="required">*</sup></label>
-                                    <input type="text" class="form-control" name="name" placeholder="Ex: John Doe" required>
+                                    <input type="text" class="form-control" name="name" placeholder="Ex: John Doe" required v-model="formData.name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="mobile">Mobile Number<sup class="required">*</sup></label>
+                                    <input type="text" class="form-control" name="mobile" placeholder="Ex: 01712345678" required v-model="formData.mobile">
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email<sup class="required">*</sup></label>
-                                    <input type="email" class="form-control" name="email" placeholder="Ex: johndoe@mail.com" required>
+                                    <input type="email" class="form-control" name="email" placeholder="Ex: johndoe@mail.com" required v-model="formData.email">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="password">Password<sup class="required">*</sup></label>
-                                    <input type="password" class="form-control" name="password" placeholder="Ex: PassWord@2021" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="password">Confirm Password<sup class="required">*</sup></label>
-                                    <input type="password" class="form-control" name="password_confirmation" placeholder="Ex: PassWord@2021" required>
+                                    <input type="password" class="form-control" name="password" placeholder="Ex: PassWord@2021" required v-model="formData.password">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-custom float-right mb-2">Create Teacher</button>
+                        <button type="submit" @click.prevent="storeData" class="btn btn-custom float-right mb-2">Create Teacher</button>
                         <button type="reset" class="btn btn-danger float-right mb-2 mr-1" onclick="return confirm('Are You Sure Want To Reset?');">Reset</button>
                     </div>
                 </form>
@@ -51,7 +51,55 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default{
-        name:"CreateTeacher"
+        name:"CreateTeacher",
+        data(){
+            return {
+                allTeachers: [],
+                formData: {
+                    id: null,
+                    name: null,
+                    mobile: null,
+                    email: null,
+                    password: null,
+                },
+            }
+        },
+        methods: {
+            loadAllTeachers() {
+                axios.get('/admin/teacher')
+                .then((response) => {
+                    this.allTeachers = response.data
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+            
+            storeData() {
+                axios.post('/admin/teacher/store', {
+                    name: this.formData.name,
+                    mobile: this.formData.mobile,
+                    email: this.formData.email,
+                    password: this.formData.password,
+                })
+                .then(() => {
+                    this.formData.name = null;
+                    this.formData.mobile = null;
+                    this.formData.email = null;
+                    this.formData.password = null;
+                    Vue.swal("Success!", "New Teacher Assigned Successfully.", "success");
+                    this.$router.push("/teachers");
+                    this.loadAllTeachers();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+        },
+        created() {
+            this.loadAllTeachers();
+        }
     }
 </script>
