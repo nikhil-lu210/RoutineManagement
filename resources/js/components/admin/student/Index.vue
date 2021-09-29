@@ -20,22 +20,22 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>Name</th>
-                                        <th>Class</th>
-                                        <th>Assigned At</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center">001</td>
-                                        <td>Student_Name</td>
-                                        <td>Student_Class</td>
-                                        <td>12-12-2021</td>
+                                    <tr v-for="(data,index) in allStudents" :key="index">
+                                        <td class="text-center">{{ index+1 }}</td>
+                                        <td>{{ data.student.name }}</td>
+                                        <td>{{ data.student.email }}</td>
+                                        <td>{{ data.mobile }}</td>
                                         <td class="text-center">
                                             <div class="btn-group mr-2">
-                                                <router-link to="#" class="btn btn-danger btn-xs">Delete</router-link>
-                                                <router-link to="#" class="btn btn-info btn-xs">Edit</router-link>
-                                                <router-link to="#" class="btn btn-dark btn-xs">Details</router-link>
+                                                <!-- <router-link to="#" class="btn btn-danger btn-xs">Delete</router-link> -->
+                                                <!-- <router-link to="#" class="btn btn-info btn-xs">Edit</router-link> -->
+                                                <router-link :to="`/student/show/${ data.id }`" class="btn btn-dark btn-xs">Details</router-link>
                                             </div>
                                         </td>
                                     </tr>
@@ -52,6 +52,26 @@
 
 <script>    
     export default{
-        name:"Students"
+        name:"Students",
+        data(){
+            return {
+                allStudents: []
+            }
+        },
+        methods: {
+            loadAllStudents() {
+                axios.get('/admin/student')
+                .then((response) => {
+                    // console.log(response.data);
+                    this.allStudents = response.data
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            }
+        },
+        created() {
+            this.loadAllStudents();
+        }
     }
 </script>

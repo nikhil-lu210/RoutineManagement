@@ -6,6 +6,7 @@ import ShowTeacher from '../components/admin/teacher/Show';
 
 import Students from '../components/admin/student/Index';
 import CreateStudent from '../components/admin/student/Create';
+import ShowStudent from '../components/admin/student/Show';
 
 import CurrentRoutine from '../components/admin/routine/Current';
 import AllRoutines from '../components/admin/routine/Index';
@@ -46,6 +47,11 @@ export const routes = [
         path: '/student/create',
         name: 'CreateStudent',
         component: CreateStudent
+    },
+    {
+        path: '/student/show/:student_id',
+        name: 'ShowStudent',
+        component: ShowStudent
     },
     {
         path: '/routine/current',
