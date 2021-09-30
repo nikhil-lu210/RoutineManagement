@@ -76,6 +76,9 @@
                                 <router-link to="/routine/group">Routine Groups</router-link>
                             </li>
                             <li class="">
+                                <router-link to="/routine/group_teacher">Group Teacher</router-link>
+                            </li>
+                            <li class="">
                                 <router-link to="/routine/create">Create routine</router-link>
                             </li>
                         </ul>

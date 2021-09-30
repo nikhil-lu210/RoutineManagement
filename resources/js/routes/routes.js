@@ -11,6 +11,7 @@ import ShowStudent from '../components/admin/student/Show';
 import LatestRoutine from '../components/admin/routine/Latest';
 import AllRoutines from '../components/admin/routine/Index';
 import RoutineGroup from '../components/admin/routine/Group';
+import GroupTeacher from '../components/admin/routine/GroupTeacher';
 import CreateRoutine from '../components/admin/routine/Create';
 
 import StudentClass from '../components/admin/settings/StudentClass';
@@ -70,6 +71,11 @@ export const routes = [
         path: '/routine/group',
         name: 'RoutineGroup',
         component: RoutineGroup
+    },
+    {
+        path: '/routine/group_teacher',
+        name: 'GroupTeacher',
+        component: GroupTeacher
     },
     {
         path: '/routine/create',

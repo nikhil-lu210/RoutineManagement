@@ -8,9 +8,9 @@
             <div class="col-lg-12">
                 <div class="card m-b-30">
                     <div class="card-header">
-                        <h5 class="card-title float-left">Routine Groups</h5>
+                        <h5 class="card-title float-left">Routine Group Teachers</h5>
                         <div class="float-right">
-                            <button @click.prevent="resetForm" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#groupCreateEditModal">Assign New Group</button>
+                            <button @click.prevent="resetForm" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#groupTeacherCreateEditModal">Assign Teacher Group</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -19,33 +19,30 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
-                                        <th class="text-center">Year</th>
-                                        <th>Class</th>
+                                        <th class="text-center">Teacher</th>
+                                        <th class="text-center">Group</th>
+                                        <th class="text-center">Subject</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(data,index) in allDatas.groups" :key="index">
+                                    <tr v-for="(data,index) in allDatas.teacher_groups" :key="index">
                                         <td class="text-center">{{ index+1 }}</td>
                                         <td class="text-center">
-                                            {{ data.year.year }}
+                                            {{ data.teacher.name }}
                                         </td>
-                                        <td>
-                                            <ol>
-                                                <li>
-                                                    {{ data.student_class.title }} <span class="text-capitalize">({{ data.student_class.category }})</span>
-                                                    <ul>
-                                                        <li>{{ data.section.title }}</li>
-                                                    </ul>
-                                                </li>
-                                            </ol>
+                                        <td class="text-center text-capitalize">
+                                            Year: {{ data.routine_group.year.year }} - Class: {{ data.routine_group.student_class.title }} <span v-if="data.routine_group.student_class.category">({{ data.routine_group.student_class.category }})</span> - <span v-if="data.routine_group.section.title">Sec: {{ data.routine_group.section.title }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            {{ data.subject.name }}
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group mr-2">
                                                 <button 
                                                     class="btn btn-dark btn-sm"
                                                     data-toggle="modal" 
-                                                    data-target="#groupCreateEditModal"
+                                                    data-target="#groupTeacherCreateEditModal"
                                                     @click.prevent="loadEditData(index)"
                                                  >
                                                     Edit
@@ -62,11 +59,11 @@
             <!-- End col -->
 
             <!-- Modal Starts Here -->
-            <div class="modal fade" id="groupCreateEditModal" tabindex="-1" role="dialog" aria-labelledby="groupCreateEditModal-label" aria-hidden="true">
+            <div class="modal fade" id="groupTeacherCreateEditModal" tabindex="-1" role="dialog" aria-labelledby="groupTeacherCreateEditModal-label" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="groupCreateEditModal-label">{{ editMode ? 'Edit Group' : 'Add New Group' }}</h5>
+                            <h5 class="modal-title" id="groupTeacherCreateEditModal-label">{{ editMode ? 'Edit Group' : 'Add New Group' }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -75,29 +72,31 @@
                             <div class="modal-body">
                                 <!-- @csrf -->
                                 <div class="form-group">
-                                    <label for="year" class="col-form-label">Year <sup class="required">*</sup></label>
-                                    <select class="form-control" id="year" name="year" v-model="formData.year" required>
-                                        <option>Select Year</option>
-                                        <option v-for="year in allDatas.years" :key="year.id" :value="year.id">{{ year.year }}</option>
+                                    <label for="routine_group" class="col-form-label">Routine Group <sup class="required">*</sup></label>
+                                    <select class="form-control text-capitalize" id="routine_group" name="routine_group" v-model="formData.routine_group" required>
+                                        <option value="">Select Group</option>
+                                        <option v-for="group in allDatas.groups" :key="group.id" :value="group.id">
+                                            Year: {{ group.year.year }} - Class: {{ group.student_class.title }} <span v-if="group.student_class.category">({{ group.student_class.category }})</span> <span v-if="group.section.title">Sec: {{ group.section.title }}</span>
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="class" class="col-form-label">Class <sup class="required">*</sup></label>
-                                    <select class="form-control text-capitalize" id="class" name="class" v-model="formData.class" required>
-                                        <option selected>Select Class</option>
-                                        <option v-for="stdclass in allDatas.classes" :key="stdclass.id" :value="stdclass.id">{{ stdclass.title }} ({{ stdclass.category }})</option>
+                                    <label for="subject" class="col-form-label">Subject <sup class="required">*</sup></label>
+                                    <select class="form-control text-capitalize" id="subject" name="subject" v-model="formData.subject" required>
+                                        <option selected>Select Subject</option>
+                                        <option v-for="subject in allDatas.subjects" :key="subject.id" :value="subject.id">{{ subject.name }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="section" class="col-form-label">Section</label>
-                                    <select class="form-control" id="section" name="section" v-model="formData.section">
-                                        <option selected>Select Section</option>
-                                        <option v-for="section in allDatas.sections" :key="section.id" :value="section.id">{{ section.title }}</option>
+                                    <label for="teacher" class="col-form-label">Teacher <sup class="required">*</sup></label>
+                                    <select class="form-control text-capitalize" id="teacher" name="teacher" v-model="formData.teacher" required>
+                                        <option selected>Select Teacher</option>
+                                        <option v-for="teacher in allDatas.teachers" :key="teacher.id" :value="teacher.id">{{ teacher.name }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button @click.prevent="storeOrUpdate" type="submit" class="btn btn-custom">{{ editMode ? 'Update Group' : 'Add Group' }}</button>
+                                <button @click.prevent="storeOrUpdate" type="submit" class="btn btn-custom">{{ editMode ? 'Update Teacher Group' : 'Add Teacher Group' }}</button>
                             </div>
                         </form>
                     </div>
@@ -111,25 +110,25 @@
 <script>
     import axios from 'axios';
     export default{
-        name:"RoutineGroup",
+        name:"GroupTeacher",
         data(){
             return {
                 allDatas: [],
                 formData: {
                     id: null,
-                    year: null,
-                    class: null,
-                    section: null
+                    routine_group: null,
+                    teacher: null,
+                    subject: null
                 },
                 editMode: false
             }
         },
         methods:{
             loadAllDatas() {
-                axios.get('/admin/routine/group')
+                axios.get('/admin/routine/teacher')
                 .then((response) => {
                     this.allDatas = response.data
-                    // console.log(this.allDatas.groups[0].student_class.title);
+                    // console.log(this.allDatas.groups[0]);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -137,17 +136,17 @@
             },
             
             storeData() {
-                axios.post('/admin/routine/group/store', {
-                    year: this.formData.year,
-                    class: this.formData.class,
-                    section: this.formData.section
+                axios.post('/admin/routine/teacher/store', {
+                    routine_group: this.formData.routine_group,
+                    teacher: this.formData.teacher,
+                    subject: this.formData.subject
                 })
                 .then(() => {
-                    this.formData.year = null;
-                    this.formData.class = null;
-                    this.formData.section = null;
+                    this.formData.routine_group = null;
+                    this.formData.teacher = null;
+                    this.formData.subject = null;
                     this.hideModal();
-                    Vue.swal("Success!", "New Group Created Successfully.", "success");
+                    Vue.swal("Success!", "Group Teacher Assigned Successfully.", "success");
                     this.loadAllDatas();
                 })
                 .catch((error) => {
@@ -159,10 +158,10 @@
                 this.editMode = true;
 
 
-                this.formData.id = this.allDatas.groups[index].id;
-                this.formData.year = this.allDatas.groups[index].year.id;
-                this.formData.class = this.allDatas.groups[index].student_class.id;
-                this.formData.section = this.allDatas.groups[index].section.id;
+                this.formData.id = this.allDatas.teacher_groups[index].id;
+                this.formData.routine_group = this.allDatas.teacher_groups[index].id;
+                this.formData.teacher = this.allDatas.teacher_groups[index].teacher.id;
+                this.formData.subject = this.allDatas.teacher_groups[index].subject.id;
                 console.log(this.formData.year);
             },
 
@@ -170,9 +169,9 @@
                 this.editMode = false;
 
                 this.formData.id = null;
-                this.formData.year = null;
-                this.formData.class = null;
-                this.formData.section = null;
+                this.formData.routine_group = null;
+                this.formData.teacher = null;
+                this.formData.subject = null;
             },
 
             storeOrUpdate() {
@@ -184,11 +183,11 @@
             },
 
             updateData() {
-                let updateUrl = '/admin/routine/group/update/' + this.formData.id;
+                let updateUrl = '/admin/routine/teacher/update/' + this.formData.id;
                 axios.post(updateUrl, {
-                    year: this.formData.year,
-                    class: this.formData.class,
-                    section: this.formData.section
+                    routine_group: this.formData.routine_group,
+                    teacher: this.formData.teacher,
+                    subject: this.formData.subject
                 })
                 .then((response) => {
                     this.hideModal();
