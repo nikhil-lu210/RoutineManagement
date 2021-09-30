@@ -103,6 +103,9 @@
                                 <router-link to="/settings/days">Day</router-link>
                             </li>
                             <li class="">
+                                <router-link to="/settings/periods">Period</router-link>
+                            </li>
+                            <li class="">
                                 <router-link to="/settings/sections">Section</router-link>
                             </li>
                         </ul>

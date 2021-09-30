@@ -8,5 +8,6 @@ Route::prefix('settings')->name('settings.')->group(function () {
     include_once 'subject/subject.php';
     include_once 'year/year.php';
     include_once 'day/day.php';
+    include_once 'period/period.php';
     include_once 'section/section.php';
 });
