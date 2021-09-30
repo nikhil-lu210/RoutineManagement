@@ -67,10 +67,13 @@
                         </a>
                         <ul class="vertical-submenu">
                             <li class="">
-                                <router-link to="/routine/current">Current Routine</router-link>
+                                <router-link to="/routine/latest">Latest Routine</router-link>
                             </li>
                             <li class="">
                                 <router-link to="/routines">All Routines</router-link>
+                            </li>
+                            <li class="">
+                                <router-link to="/routine/group">Routine Groups</router-link>
                             </li>
                             <li class="">
                                 <router-link to="/routine/create">Create routine</router-link>

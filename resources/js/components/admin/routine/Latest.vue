@@ -178,6 +178,6 @@ tr:nth-child(odd) td:nth-child(odd) {
 
 <script>    
     export default{
-        name:"CurrentRoutine"
+        name:"LatestRoutine"
     }
 </script>

@@ -8,8 +8,9 @@ import Students from '../components/admin/student/Index';
 import CreateStudent from '../components/admin/student/Create';
 import ShowStudent from '../components/admin/student/Show';
 
-import CurrentRoutine from '../components/admin/routine/Current';
+import LatestRoutine from '../components/admin/routine/Latest';
 import AllRoutines from '../components/admin/routine/Index';
+import RoutineGroup from '../components/admin/routine/Group';
 import CreateRoutine from '../components/admin/routine/Create';
 
 import StudentClass from '../components/admin/settings/StudentClass';
@@ -55,14 +56,19 @@ export const routes = [
         component: ShowStudent
     },
     {
-        path: '/routine/current',
-        name: 'CurrentRoutine',
-        component: CurrentRoutine
+        path: '/routine/latest',
+        name: 'LatestRoutine',
+        component: LatestRoutine
     },
     {
         path: '/routines',
         name: 'AllRoutines',
         component: AllRoutines
+    },
+    {
+        path: '/routine/group',
+        name: 'RoutineGroup',
+        component: RoutineGroup
     },
     {
         path: '/routine/create',
