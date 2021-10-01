@@ -2155,8 +2155,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "CreateRoutine"
+  name: "CreateRoutine",
+  data: function data() {
+    return {
+      allDatas: [],
+      formData: {
+        routine_group: null,
+        day: null,
+        period: null
+      }
+    };
+  },
+  methods: {
+    loadAllDatas: function loadAllDatas() {
+      var _this = this;
+
+      axios.get('/admin/routine/routine/create').then(function (response) {
+        _this.allDatas = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    storeData: function storeData() {
+      var _this2 = this;
+
+      axios.post('/admin/routine/routine/store', {
+        routine_group: this.formData.routine_group,
+        day: this.formData.day,
+        period: this.formData.period
+      }).then(function () {
+        _this2.formData.routine_group = null;
+        _this2.formData.day = null;
+        _this2.formData.period = null;
+        Vue.swal("Success!", "New Routine Assigned Successfully.", "success");
+
+        _this2.$router.push("/routines");
+
+        _this2.loadAllDatas();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  created: function created() {
+    this.loadAllDatas();
+  }
 });
 
 /***/ }),
@@ -43268,118 +43323,278 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "card m-b-30" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("form", [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.routine_group,
+                            expression: "formData.routine_group"
+                          }
+                        ],
+                        staticClass: "form-control text-capitalize",
+                        attrs: { name: "routine_group" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.formData,
+                              "routine_group",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Select Routine Group")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.allDatas.groups, function(group) {
+                          return _c(
+                            "option",
+                            { key: group.id, domProps: { value: group.id } },
+                            [
+                              _vm._v(
+                                "\n                                            Year: " +
+                                  _vm._s(group.year.year) +
+                                  " || Class: " +
+                                  _vm._s(group.student_class.title) +
+                                  " " +
+                                  _vm._s(group.student_class.category) +
+                                  " (" +
+                                  _vm._s(group.section.title) +
+                                  ") || Subject: " +
+                                  _vm._s(
+                                    group.routine_group_teacher.subject.name
+                                  ) +
+                                  " || Teacher: " +
+                                  _vm._s(
+                                    group.routine_group_teacher.teacher.name
+                                  ) +
+                                  "\n                                        "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.day,
+                            expression: "formData.day"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "day" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.formData,
+                              "day",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Select Routine Group")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.allDatas.days, function(day) {
+                          return _c(
+                            "option",
+                            { key: day.id, domProps: { value: day.id } },
+                            [_vm._v(_vm._s(day.name))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.period,
+                            expression: "formData.period"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "period" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.formData,
+                              "period",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Select Routine Group")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.allDatas.periods, function(period) {
+                          return _c(
+                            "option",
+                            { key: period.id, domProps: { value: period.id } },
+                            [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(period.start) +
+                                  " - " +
+                                  _vm._s(period.end) +
+                                  "\n                                        "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer" }, [
+            _c("div", { staticClass: "text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-custom bg-ucap text-bold",
+                  attrs: { type: "submit", id: "createRoutine" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.storeData.apply(null, arguments)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                            Assign Routine\n                        "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card m-b-30" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h4", { staticClass: "card-title text-bold text-center" }, [
-              _vm._v("Create New Routine")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("form", [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "year" } }, [
-                      _vm._v("Year"),
-                      _c("sup", { staticClass: "required" }, [_vm._v("*")])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          attrs: { name: "year" }
-                        },
-                        [
-                          _c("option", { attrs: { selected: "" } }, [
-                            _vm._v("Select Year")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("One")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2" } }, [
-                            _vm._v("Two")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "3" } }, [
-                            _vm._v("Three")
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "class" } }, [
-                      _vm._v("Class"),
-                      _c("sup", { staticClass: "required" }, [_vm._v("*")])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          attrs: { name: "class" }
-                        },
-                        [
-                          _c("option", { attrs: { selected: "" } }, [
-                            _vm._v("Select Class")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("One")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2" } }, [
-                            _vm._v("Two")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "3" } }, [
-                            _vm._v("Three")
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-footer" }, [
-              _c("div", { staticClass: "text-right" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-custom bg-ucap text-bold",
-                    attrs: { type: "submit", id: "updateInfo" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Assign Routine\n                        "
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "card-title text-bold text-center" }, [
+        _vm._v("Create New Routine")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "routine_group" } }, [
+      _vm._v("Routine Group"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "day" } }, [
+      _vm._v("Day"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "period" } }, [
+      _vm._v("Class Period"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
     ])
   }
 ]

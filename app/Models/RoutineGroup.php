@@ -41,10 +41,10 @@ class RoutineGroup extends Model
         return $this->hasMany(RoutineGroupStudent::class, 'routine_group_id', 'id');
     }
 
-    // get routine_group_Teachers
-    public function routineGroupTeachers()
+    // get routine_group_Teacher
+    public function routineGroupTeacher()
     {
-        return $this->hasMany(RoutineGroupTeacher::class, 'routine_group_id', 'id');
+        return $this->hasOne(RoutineGroupTeacher::class, 'routine_group_id', 'id');
     }
 
     // get classRoutines

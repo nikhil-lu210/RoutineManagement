@@ -17,6 +17,12 @@ class ClassRoutine extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $fillable = [
+        'routine_group_id',
+        'day_id',
+        'period_id'
+    ];
+
     // get day
     public function day()
     {
