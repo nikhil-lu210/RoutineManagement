@@ -50,19 +50,39 @@ tr:nth-child(odd) td:nth-child(odd) {
         list-style: none;
         padding-left: 0;
         margin-bottom: 0;
-        text-align: center;
         font-size: 12px;
-        .subject {
-            color: #111;
-            font-weight: 700;
-        }
-        .time {
-            color: #444;
-            font-weight: 600;
-        }
-        .teacher {
-            color: #333;
-            font-weight: 600;
+        &-slot {
+            text-align: left;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            border-bottom: 1px solid #9f9f9f;
+            &:first-child {
+                padding-top: 0px;
+            }
+            &:last-child {
+                padding-bottom: 0px;
+                border-bottom: 0px solid #9f9f9f;
+            }
+            i {
+                color: #131f42;
+            }
+            .time {
+                color: #444;
+                font-weight: 900;
+            }
+            ul {
+                list-style: none;
+                padding-left: 0px;
+                margin-bottom: 0;
+                .subject {
+                    color: #111;
+                    font-weight: 600;
+                }
+                .teacher {
+                    color: #333;
+                    font-weight: 600;
+                }
+            }
         }
     }
 }
@@ -110,9 +130,27 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
@@ -120,35 +158,27 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
-                                                <i class="ti-pencil"></i>
-                                            </button>
-                                            
-                                        </td>
-                                        <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
-                                                <i class="ti-pencil"></i>
-                                            </button>
-                                            <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
-                                            </ul>
-                                        </td>
-                                        <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
-                                                <i class="ti-pencil"></i>
-                                            </button>
-                                            <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
@@ -156,9 +186,104 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="subject">Mathematics</li>
-                                                <li class="time">10:00 - 10:55</li>
-                                                <li class="teacher">Teacher_Name_Here</li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
+                                            <ul class="routine-schedule">
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
+                                            <ul class="routine-schedule">
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="routine text-center">
+                                            <button class="btn btn-custom routine-edit-btn">
+                                                <i class="ti-pencil"></i>
+                                            </button>
+                                            <ul class="routine-schedule">
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="routine-schedule-slot">
+                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                    <ul>
+                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
+                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
