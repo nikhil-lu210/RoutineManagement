@@ -1,12 +1,12 @@
 :root {
-    --primaryColor: #131f42;
-    --secondaryColor: #aa0b1b;
+    --primaryColor: #055159;
+    --secondaryColor: #0D7F8C;
 
-    --primaryLightColor: #3a506a;
+    --primaryLightColor: #29A6A6;
     
     --colorOne: #eff5ff;
-
-    --placeholderColor: #16447d;
+    
+    --placeholderColor: #735D58;
 
     /* Font Sizes */
     --fontXXL: 36px;

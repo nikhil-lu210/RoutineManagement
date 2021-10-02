@@ -2166,6 +2166,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateRoutine",
   data: function data() {
@@ -2174,7 +2190,8 @@ __webpack_require__.r(__webpack_exports__);
       formData: {
         routine_group: null,
         day: null,
-        period: null
+        period: null,
+        subject: null
       }
     };
   },
@@ -2183,7 +2200,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/admin/routine/routine/create').then(function (response) {
-        _this.allDatas = response.data;
+        _this.allDatas = response.data; // console.log(this.allDatas);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2194,11 +2211,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/admin/routine/routine/store', {
         routine_group: this.formData.routine_group,
         day: this.formData.day,
-        period: this.formData.period
+        period: this.formData.period,
+        subject: this.formData.subject
       }).then(function () {
         _this2.formData.routine_group = null;
         _this2.formData.day = null;
         _this2.formData.period = null;
+        _this2.formData.subject = null;
         Vue.swal("Success!", "New Routine Assigned Successfully.", "success");
 
         _this2.$router.push("/routines");
@@ -2207,6 +2226,25 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    }
+  },
+  computed: {
+    selectedGroup: function selectedGroup() {
+      var _this3 = this;
+
+      if (typeof this.allDatas.groups !== 'undefined') {
+        var subject = this.allDatas.groups.find(function (group) {
+          return group.id === _this3.formData.routine_group;
+        });
+
+        if (typeof subject !== 'undefined') {
+          return subject.routine_group_teachers;
+        }
+
+        return [];
+      }
+
+      return [];
     }
   },
   created: function created() {
@@ -2229,10 +2267,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
 //
 //
 //
@@ -2965,86 +2999,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "LatestRoutine"
+  name: "LatestRoutine",
+  data: function data() {
+    return {
+      routine: []
+    };
+  },
+  methods: {
+    loadAllDatas: function loadAllDatas() {
+      var _this = this;
+
+      axios.get('/admin/routine/routine/latest').then(function (response) {
+        _this.routine = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getDay: function getDay(group, day) {
+      var findDay = group[day];
+
+      if (typeof findDay !== 'undefined') {
+        return findDay;
+      }
+
+      return [];
+    }
+  },
+  created: function created() {
+    this.loadAllDatas();
+  }
 });
 
 /***/ }),
@@ -9939,7 +9923,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #131f42 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #131f42;\n  position: relative;\n}\n.routine-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 4px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 10px;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #131f42;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #055159 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #055159;\n  position: relative;\n}\n.routine-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 4px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 10px;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #055159;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43388,15 +43372,7 @@ var render = function() {
                                   _vm._s(group.student_class.category) +
                                   " (" +
                                   _vm._s(group.section.title) +
-                                  ") || Subject: " +
-                                  _vm._s(
-                                    group.routine_group_teacher.subject.name
-                                  ) +
-                                  " || Teacher: " +
-                                  _vm._s(
-                                    group.routine_group_teacher.teacher.name
-                                  ) +
-                                  "\n                                        "
+                                  ")\n                                        "
                               )
                             ]
                           )
@@ -43528,6 +43504,76 @@ var render = function() {
                     )
                   ])
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.subject,
+                            expression: "formData.subject"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "subject" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.formData,
+                              "subject",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Select Subject")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.selectedGroup, function(subject) {
+                          return _c(
+                            "option",
+                            {
+                              key: subject.id,
+                              domProps: { value: subject.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(
+                                    subject.subject.name +
+                                      " || Teacher: " +
+                                      subject.teacher.name
+                                  ) +
+                                  "\n                                        "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
               ])
             ])
           ]),
@@ -43596,6 +43642,15 @@ var staticRenderFns = [
       _vm._v("Class Period"),
       _c("sup", { staticClass: "required" }, [_vm._v("*")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "subject" } }, [
+      _vm._v("Subject"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
+    ])
   }
 ]
 render._withStripped = true
@@ -43662,39 +43717,45 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.allDatas.groups, function(data, index) {
+                  _vm._l(_vm.allDatas.groups, function(year, index) {
                     return _c("tr", { key: index }, [
                       _c("td", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(index + 1))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(data.year.year) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(index))
                       ]),
                       _vm._v(" "),
                       _c("td", [
-                        _c("ol", [
-                          _c("li", [
-                            _vm._v(
-                              "\n                                                " +
-                                _vm._s(data.student_class.title) +
-                                " "
-                            ),
-                            _c("span", { staticClass: "text-capitalize" }, [
+                        _c(
+                          "ol",
+                          _vm._l(year, function(group, cls) {
+                            return _c("li", { key: cls }, [
                               _vm._v(
-                                "(" + _vm._s(data.student_class.category) + ")"
+                                "\n                                                " +
+                                  _vm._s(cls) +
+                                  "\n                                                "
+                              ),
+                              _c(
+                                "ul",
+                                _vm._l(group, function(data, sec) {
+                                  return _c("li", { key: sec }, [
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(
+                                          data.student_class.title +
+                                            " " +
+                                            data.student_class.category +
+                                            " (" +
+                                            data.section.title +
+                                            ")"
+                                        )
+                                    )
+                                  ])
+                                }),
+                                0
                               )
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", [_vm._v(_vm._s(data.section.title))])
                             ])
-                          ])
-                        ])
+                          }),
+                          0
+                        )
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-center" }, [
@@ -43983,8 +44044,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
-        _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Year")]),
         _vm._v(" "),
         _c("th", [_vm._v("Class")]),
@@ -44663,486 +44722,464 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-lg-12" }, [
+      _c("div", { staticClass: "card m-b-30" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-bordered",
+                attrs: { id: "datatable-buttons" }
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.routine, function(group, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", { staticClass: "text-center class" }, [
+                        _c("ul", { staticClass: "class-details" }, [
+                          _c("li", { staticClass: "name" }, [
+                            _vm._v(
+                              "\n                                                " +
+                                _vm._s(index) +
+                                "\n                                            "
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "routine text-center" }, [
+                        _vm._m(2, true),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "routine-schedule" },
+                          _vm._l(_vm.getDay(group, "Saturday"), function(
+                            slot,
+                            list
+                          ) {
+                            return _c(
+                              "li",
+                              {
+                                key: "Saturday-" + list,
+                                staticClass: "routine-schedule-slot"
+                              },
+                              [
+                                _c("span", { staticClass: "time" }, [
+                                  _c("i", { staticClass: "ti-timer" }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        slot.period.start +
+                                          " - " +
+                                          slot.period.end
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("ul", [
+                                  _c("li", { staticClass: "subject" }, [
+                                    _c("i", { staticClass: "ti-book" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.subject.name)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "teacher" }, [
+                                    _c("i", { staticClass: "ti-user" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.teacher.name)
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "routine text-center" }, [
+                        _vm._m(3, true),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "routine-schedule" },
+                          _vm._l(_vm.getDay(group, "Sunday"), function(
+                            slot,
+                            list
+                          ) {
+                            return _c(
+                              "li",
+                              {
+                                key: "Sunday-" + list,
+                                staticClass: "routine-schedule-slot"
+                              },
+                              [
+                                _c("span", { staticClass: "time" }, [
+                                  _c("i", { staticClass: "ti-timer" }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        slot.period.start +
+                                          " - " +
+                                          slot.period.end
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("ul", [
+                                  _c("li", { staticClass: "subject" }, [
+                                    _c("i", { staticClass: "ti-book" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.subject.name)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "teacher" }, [
+                                    _c("i", { staticClass: "ti-user" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.teacher.name)
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "routine text-center" }, [
+                        _vm._m(4, true),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "routine-schedule" },
+                          _vm._l(_vm.getDay(group, "Monday"), function(
+                            slot,
+                            list
+                          ) {
+                            return _c(
+                              "li",
+                              {
+                                key: "Monday-" + list,
+                                staticClass: "routine-schedule-slot"
+                              },
+                              [
+                                _c("span", { staticClass: "time" }, [
+                                  _c("i", { staticClass: "ti-timer" }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        slot.period.start +
+                                          " - " +
+                                          slot.period.end
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("ul", [
+                                  _c("li", { staticClass: "subject" }, [
+                                    _c("i", { staticClass: "ti-book" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.subject.name)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "teacher" }, [
+                                    _c("i", { staticClass: "ti-user" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.teacher.name)
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "routine text-center" }, [
+                        _vm._m(5, true),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "routine-schedule" },
+                          _vm._l(_vm.getDay(group, "Tuesday"), function(
+                            slot,
+                            list
+                          ) {
+                            return _c(
+                              "li",
+                              {
+                                key: "Tuesday-" + list,
+                                staticClass: "routine-schedule-slot"
+                              },
+                              [
+                                _c("span", { staticClass: "time" }, [
+                                  _c("i", { staticClass: "ti-timer" }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        slot.period.start +
+                                          " - " +
+                                          slot.period.end
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("ul", [
+                                  _c("li", { staticClass: "subject" }, [
+                                    _c("i", { staticClass: "ti-book" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.subject.name)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "teacher" }, [
+                                    _c("i", { staticClass: "ti-user" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.teacher.name)
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "routine text-center" }, [
+                        _vm._m(6, true),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "routine-schedule" },
+                          _vm._l(_vm.getDay(group, "Wednesday"), function(
+                            slot,
+                            list
+                          ) {
+                            return _c(
+                              "li",
+                              {
+                                key: "Wednesday-" + list,
+                                staticClass: "routine-schedule-slot"
+                              },
+                              [
+                                _c("span", { staticClass: "time" }, [
+                                  _c("i", { staticClass: "ti-timer" }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        slot.period.start +
+                                          " - " +
+                                          slot.period.end
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("ul", [
+                                  _c("li", { staticClass: "subject" }, [
+                                    _c("i", { staticClass: "ti-book" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.subject.name)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "teacher" }, [
+                                    _c("i", { staticClass: "ti-user" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.teacher.name)
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "routine text-center" }, [
+                        _vm._m(7, true),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "routine-schedule" },
+                          _vm._l(_vm.getDay(group, "Thrusday"), function(
+                            slot,
+                            list
+                          ) {
+                            return _c(
+                              "li",
+                              {
+                                key: "Thrusday-" + list,
+                                staticClass: "routine-schedule-slot"
+                              },
+                              [
+                                _c("span", { staticClass: "time" }, [
+                                  _c("i", { staticClass: "ti-timer" }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        slot.period.start +
+                                          " - " +
+                                          slot.period.end
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("ul", [
+                                  _c("li", { staticClass: "subject" }, [
+                                    _c("i", { staticClass: "ti-book" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.subject.name)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "teacher" }, [
+                                    _c("i", { staticClass: "ti-user" }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(slot.class_teacher.teacher.name)
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(8, true)
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-12" }, [
-        _c("div", { staticClass: "card m-b-30" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h5", { staticClass: "card-title float-left" }, [
-              _vm._v("Routine of 2021")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "float-right" }, [
-              _c("button", { staticClass: "btn btn-custom btn-sm" }, [
-                _vm._v("Edit Routine")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "table-responsive" }, [
-              _c(
-                "table",
-                {
-                  staticClass: "table table-bordered",
-                  attrs: { id: "datatable-buttons" }
-                },
-                [
-                  _c("thead", [
-                    _c("tr", { staticClass: "bg-primary text-white" }, [
-                      _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Saturday")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Sunday")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Monday")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Tuesday")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Wednesday")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Thrusday")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Friday")
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", { staticClass: "text-center class" }, [
-                        _c("ul", { staticClass: "class-details" }, [
-                          _c("li", { staticClass: "name" }, [
-                            _vm._v(
-                              "\n                                                6 "
-                            ),
-                            _c("span", { staticClass: "section" }, [
-                              _vm._v("(A)")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "category" }, [
-                            _vm._v("Girls")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-custom routine-edit-btn" },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "routine-schedule" }, [
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-custom routine-edit-btn" },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "routine-schedule" }, [
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-custom routine-edit-btn" },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "routine-schedule" }, [
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-custom routine-edit-btn" },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "routine-schedule" }, [
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-custom routine-edit-btn" },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "routine-schedule" }, [
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-custom routine-edit-btn" },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "routine-schedule" }, [
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "routine-schedule-slot" }, [
-                            _c("span", { staticClass: "time" }, [
-                              _c("i", { staticClass: "ti-timer" }),
-                              _vm._v(" 10:00 - 10:55")
-                            ]),
-                            _vm._v(" "),
-                            _c("ul", [
-                              _c("li", { staticClass: "subject" }, [
-                                _c("i", { staticClass: "ti-book" }),
-                                _vm._v(" Mathematics")
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "teacher" }, [
-                                _c("i", { staticClass: "ti-user" }),
-                                _vm._v(" Teacher_Name")
-                              ])
-                            ])
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "routine text-center" }, [
-                        _c("h6", { staticClass: "text-dark font-sm" }, [
-                          _vm._v("Holiday")
-                        ])
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            ])
-          ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title float-left" }, [
+        _vm._v("Routine of 2021")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "float-right" }, [
+        _c("button", { staticClass: "btn btn-custom btn-sm" }, [
+          _vm._v("Edit Routine")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "bg-primary text-white" }, [
+        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Saturday")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Sunday")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Monday")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Tuesday")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Wednesday")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Thrusday")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Friday")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
+      _c("i", { staticClass: "ti-pencil" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
+      _c("i", { staticClass: "ti-pencil" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
+      _c("i", { staticClass: "ti-pencil" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
+      _c("i", { staticClass: "ti-pencil" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
+      _c("i", { staticClass: "ti-pencil" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
+      _c("i", { staticClass: "ti-pencil" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "routine text-center" }, [
+      _c("h6", { staticClass: "text-dark font-sm" }, [_vm._v("Holiday")])
     ])
   }
 ]

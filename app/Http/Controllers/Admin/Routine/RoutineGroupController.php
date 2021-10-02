@@ -18,8 +18,7 @@ class RoutineGroupController extends Controller
 
     public function index()
     {
-        $groups = RoutineGroup::select(['id', 'year_id', 'class_id', 'section_id'])
-                            ->with([
+        $groups = RoutineGroup::with([
                                 'year' => function($year) {
                                     $year->select(['id', 'year']);
                                 },
@@ -30,14 +29,16 @@ class RoutineGroupController extends Controller
                                     $section->select(['id', 'title']);
                                 }
                             ])
-                            // ->groupBy('year')
-                            ->get();
+                            ->get()
+                            ->groupBy([function ($val) {
+                                return $val->year->year;
+                            }, function ($val) {
+                                return $val->studentClass->title;
+                            }]);
 
         $years = Year::select(['id', 'year'])->where('year', '>=', date('Y'))->get();
         $classes = StudentClass::select(['id', 'title', 'category'])->get();
         $sections = Section::select(['id', 'title'])->get();
-
-        // dd($groups[0]->year);
 
         return response()->json([
             'groups' => $groups,

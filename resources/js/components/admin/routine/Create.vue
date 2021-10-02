@@ -17,8 +17,11 @@
                                         <select class="form-control text-capitalize" name="routine_group" v-model="formData.routine_group">
                                             <option selected>Select Routine Group</option>
                                             <option v-for="group in allDatas.groups" :key="group.id" :value="group.id">
-                                                Year: {{ group.year.year }} || Class: {{ group.student_class.title }} {{ group.student_class.category }} ({{ group.section.title }}) || Subject: {{ group.routine_group_teacher.subject.name }} || Teacher: {{ group.routine_group_teacher.teacher.name }}
+                                                Year: {{ group.year.year }} || Class: {{ group.student_class.title }} {{ group.student_class.category }} ({{ group.section.title }})
                                             </option>
+                                            <!-- <option v-for="group in allDatas.groups" :key="group.id" :value="group.id">
+                                                Year: {{ group.year.year }} || Class: {{ group.student_class.title }} {{ group.student_class.category }} ({{ group.section.title }}) || Subject: {{ group.routine_group_teacher.subject.name }} || Teacher: {{ group.routine_group_teacher.teacher.name }}
+                                            </option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -42,6 +45,19 @@
                                             <option selected>Select Routine Group</option>
                                             <option v-for="period in allDatas.periods" :key="period.id" :value="period.id">
                                                 {{ period.start }} - {{ period.end }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="subject">Subject<sup class="required">*</sup></label>
+                                    <div class="input-group">
+                                        <select class="form-control" name="subject" v-model="formData.subject">
+                                            <option selected>Select Subject</option>
+                                            <option v-for="subject in selectedGroup" :key="subject.id" :value="subject.id">
+                                                {{ subject.subject.name + " || Teacher: " + subject.teacher.name }}
                                             </option>
                                         </select>
                                     </div>
@@ -73,7 +89,8 @@
                 formData: {
                     routine_group: null,
                     day: null,
-                    period: null
+                    period: null,
+                    subject: null
                 },
             }
         },
@@ -82,6 +99,7 @@
                 axios.get('/admin/routine/routine/create')
                 .then((response) => {
                     this.allDatas = response.data
+                    // console.log(this.allDatas);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -92,12 +110,14 @@
                 axios.post('/admin/routine/routine/store', {
                     routine_group: this.formData.routine_group,
                     day: this.formData.day,
-                    period: this.formData.period
+                    period: this.formData.period,
+                    subject: this.formData.subject
                 })
                 .then(() => {
                     this.formData.routine_group = null;
                     this.formData.day = null;
                     this.formData.period = null;
+                    this.formData.subject = null;
                     Vue.swal("Success!", "New Routine Assigned Successfully.", "success");
                     this.$router.push("/routines");
                     this.loadAllDatas();
@@ -106,6 +126,18 @@
                     console.log(error);
                 })
             },
+        },
+        computed: {
+            selectedGroup () {
+                if(typeof this.allDatas.groups !== 'undefined') {
+                    const subject =  this.allDatas.groups.find(group => group.id === this.formData.routine_group)
+                    if(typeof subject !== 'undefined') {
+                        return subject.routine_group_teachers;
+                    }
+                    return []
+                }
+                return []
+            }
         },
         created() {
             this.loadAllDatas();

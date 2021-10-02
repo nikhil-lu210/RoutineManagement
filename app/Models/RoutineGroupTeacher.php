@@ -34,4 +34,10 @@ class RoutineGroupTeacher extends Model
     {
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
+
+    // get class_routine
+    public function classRoutines()
+    {
+        return $this->hasMany(ClassRoutine::class, 'routine_group_teacher_id', 'id');
+    }
 }

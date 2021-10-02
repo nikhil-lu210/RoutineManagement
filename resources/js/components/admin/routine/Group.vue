@@ -18,24 +18,20 @@
                             <table id="datatable-buttons" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">#</th>
                                         <th class="text-center">Year</th>
                                         <th>Class</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(data,index) in allDatas.groups" :key="index">
-                                        <td class="text-center">{{ index+1 }}</td>
-                                        <td class="text-center">
-                                            {{ data.year.year }}
-                                        </td>
+                                    <tr v-for="(year, index) in allDatas.groups" :key="index">
+                                        <td class="text-center">{{ index }}</td>
                                         <td>
                                             <ol>
-                                                <li>
-                                                    {{ data.student_class.title }} <span class="text-capitalize">({{ data.student_class.category }})</span>
+                                                <li v-for="(group, cls) in year" :key="cls">
+                                                    {{ cls }}
                                                     <ul>
-                                                        <li>{{ data.section.title }}</li>
+                                                        <li v-for="(data, sec) in group" :key="sec"> {{ data.student_class.title + " " + data.student_class.category +" ("+ data.section.title + ")"}}</li>
                                                     </ul>
                                                 </li>
                                             </ol>

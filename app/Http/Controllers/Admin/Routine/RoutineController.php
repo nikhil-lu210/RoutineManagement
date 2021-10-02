@@ -20,6 +20,38 @@ class RoutineController extends Controller
     {
         //
     }
+    
+
+    public function latestRoutine()
+    {
+        $latestYear = date('Y');
+
+        $routine = ClassRoutine::with([
+                                    'routineGroup' => function ($query) {
+                                        $query->with(['year', 'studentClass', 'section']);
+                                    },
+                                    'day',
+                                    'period',
+                                    'classTeacher' => function($query) {
+                                        $query->with(['subject', 'teacher']);
+                                    }
+                                ])
+                                ->whereHas('routineGroup.year', function ($builder) use ($latestYear) {
+                                    $builder->where('year', $latestYear);
+                                })
+                                ->get()
+                                ->groupBy(function($val) {
+                                    $section = (!is_null($val->routineGroup->section)) ? '('. $val->routineGroup->section->title.')' : null;
+                                    return $val->routineGroup->studentClass->title.' '.$val->routineGroup->studentClass->category.$section;
+                                });
+        $groups = [];
+        foreach($routine as $key => $group) {
+            $groups[$key] = $group->groupBy(function ($val) {
+                return $val->day->name;
+            });
+        }
+        return response()->json($groups);
+    }
 
     public function create()
     {
@@ -34,7 +66,7 @@ class RoutineController extends Controller
                                 'section' => function($section) {
                                     $section->select(['id', 'title']);
                                 },
-                                'routineGroupTeacher' => function($teacher) {
+                                'routineGroupTeachers' => function($teacher) {
                                     $teacher->select(['id', 'routine_group_id', 'subject_id', 'teacher_id'])
                                             ->with([
                                                 'teacher' => function($info) {
@@ -70,15 +102,20 @@ class RoutineController extends Controller
                 'exists:days,id'
             ],
             'period' => [
-                'nullable',
+                'required',
                 'exists:periods,id'
+            ],
+            'subject' => [
+                'required',
+                'exists:routine_group_teachers,id'
             ],
         ]);
 
         $routine = ClassRoutine::create([
             'routine_group_id' => $request->routine_group,
             'day_id' => $request->day,
-            'period_id' => $request->period
+            'period_id' => $request->period,
+            'routine_group_teacher_id' => $request->subject
         ]);
         
         return response($routine);

@@ -24,6 +24,9 @@ class CreateClassRoutinesTable extends Migration
             
             $table->foreignId('routine_group_id');
             $table->foreign('routine_group_id')->references('id')->on('routine_groups');
+            
+            $table->foreignId('routine_group_teacher_id');
+            $table->foreign('routine_group_teacher_id')->references('id')->on('routine_group_teachers');
 
             $table->timestamps();
             $table->softDeletes();

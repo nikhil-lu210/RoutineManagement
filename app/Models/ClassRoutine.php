@@ -20,7 +20,8 @@ class ClassRoutine extends Model
     protected $fillable = [
         'routine_group_id',
         'day_id',
-        'period_id'
+        'period_id',
+        'routine_group_teacher_id'
     ];
 
     // get day
@@ -39,5 +40,11 @@ class ClassRoutine extends Model
     public function routineGroup()
     {
         return $this->belongsTo(RoutineGroup::class, 'routine_group_id', 'id');
+    }
+
+    // get classTeacher
+    public function classTeacher()
+    {
+        return $this->belongsTo(RoutineGroupTeacher::class, 'routine_group_teacher_id', 'id');
     }
 }

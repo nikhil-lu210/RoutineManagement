@@ -14,7 +14,7 @@ tr:nth-child(odd) td:nth-child(odd) {
 
 .class {
     padding: 5px;
-    background-color: #131f42 !important;
+    background-color: #055159 !important;
     color: #fff;
     border: 1px solid #fff;
     &-details {
@@ -36,7 +36,7 @@ tr:nth-child(odd) td:nth-child(odd) {
 }
 .routine {
     padding: 5px;
-    border: 1px solid #131f42;
+    border: 1px solid #055159;
     position: relative;
     &-edit-btn {
         position: absolute;
@@ -64,7 +64,7 @@ tr:nth-child(odd) td:nth-child(odd) {
                 border-bottom: 0px solid #9f9f9f;
             }
             i {
-                color: #131f42;
+                color: #055159;
             }
             .time {
                 color: #444;
@@ -116,13 +116,12 @@ tr:nth-child(odd) td:nth-child(odd) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-for="(group, index) in routine" :key="index">
                                         <td class="text-center class">
                                             <ul class="class-details">
                                                 <li class="name">
-                                                    6 <span class="section">(A)</span>
+                                                    {{ index }}
                                                 </li>
-                                                <li class="category">Girls</li>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
@@ -130,25 +129,11 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Saturday')" :key="'Saturday-'+list">
+                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
                                                     <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -158,25 +143,11 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Sunday')" :key="'Sunday-'+list">
+                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
                                                     <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -186,18 +157,11 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Monday')" :key="'Monday-'+list">
+                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
                                                     <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -207,25 +171,11 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Tuesday')" :key="'Tuesday-'+list">
+                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
                                                     <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -235,25 +185,11 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Wednesday')" :key="'Wednesday-'+list">
+                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
                                                     <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -263,25 +199,11 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
+                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Thrusday')" :key="'Thrusday-'+list">
+                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
                                                     <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
-                                                    </ul>
-                                                </li>
-                                                <li class="routine-schedule-slot">
-                                                    <span class="time"><i class="ti-timer"></i> 10:00 - 10:55</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> Mathematics</li>
-                                                        <li class="teacher"><i class="ti-user"></i> Teacher_Name</li>
+                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -303,6 +225,32 @@ tr:nth-child(odd) td:nth-child(odd) {
 
 <script>    
     export default{
-        name:"LatestRoutine"
+        name:"LatestRoutine",
+        data (){
+            return {
+                routine: []
+            }
+        },
+        methods: {
+            loadAllDatas() {
+                axios.get('/admin/routine/routine/latest')
+                .then((response) => {
+                    this.routine = response.data
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            },
+            getDay (group, day) {
+                const findDay = group[day]
+                if(typeof findDay !== 'undefined') {
+                    return findDay
+                }
+                return []
+            }
+        },
+        created() {
+            this.loadAllDatas()
+        }
     }
 </script>
