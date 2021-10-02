@@ -69,6 +69,7 @@ tr:nth-child(odd) td:nth-child(odd) {
             .time {
                 color: #444;
                 font-weight: 900;
+                font-size: 11px;
             }
             ul {
                 list-style: none;
@@ -95,9 +96,10 @@ tr:nth-child(odd) td:nth-child(odd) {
             <div class="col-lg-12">
                 <div class="card m-b-30">
                     <div class="card-header">
-                        <h5 class="card-title float-left">Routine of 2021</h5>
+                        <h5 class="card-title float-left">Routine of <span class="text-dark text-bold">{{ latestYear }}</span></h5>
                         <div class="float-right">
-                            <button class="btn btn-custom btn-sm">Edit Routine</button>
+                            <button class="btn btn-custom btn-sm" :class="editMode == true ? 'd-none' : ''" @click.prevent="enableEditing">Edit Routine</button>
+                            <button class="btn btn-danger btn-sm" :class="editMode == false ? 'd-none' : ''" @click.prevent="enableEditing">Cancel Editing</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -125,12 +127,12 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
+                                            <button class="btn btn-custom routine-edit-btn" :class="editMode == false ? 'd-none' : ''">
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
                                                 <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Saturday')" :key="'Saturday-'+list">
-                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
+                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
                                                     <ul>
                                                         <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
                                                         <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
@@ -139,12 +141,12 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
+                                            <button class="btn btn-custom routine-edit-btn" :class="editMode == false ? 'd-none' : ''">
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
                                                 <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Sunday')" :key="'Sunday-'+list">
-                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
+                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
                                                     <ul>
                                                         <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
                                                         <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
@@ -153,12 +155,12 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
+                                            <button class="btn btn-custom routine-edit-btn" :class="editMode == false ? 'd-none' : ''">
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
                                                 <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Monday')" :key="'Monday-'+list">
-                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
+                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
                                                     <ul>
                                                         <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
                                                         <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
@@ -167,12 +169,12 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
+                                            <button class="btn btn-custom routine-edit-btn" :class="editMode == false ? 'd-none' : ''">
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
                                                 <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Tuesday')" :key="'Tuesday-'+list">
-                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
+                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
                                                     <ul>
                                                         <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
                                                         <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
@@ -181,12 +183,12 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
+                                            <button class="btn btn-custom routine-edit-btn" :class="editMode == false ? 'd-none' : ''">
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
                                                 <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Wednesday')" :key="'Wednesday-'+list">
-                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
+                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
                                                     <ul>
                                                         <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
                                                         <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
@@ -195,12 +197,12 @@ tr:nth-child(odd) td:nth-child(odd) {
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
-                                            <button class="btn btn-custom routine-edit-btn">
+                                            <button class="btn btn-custom routine-edit-btn" :class="editMode == false ? 'd-none' : ''">
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
                                                 <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Thrusday')" :key="'Thrusday-'+list">
-                                                    <span class="time"><i class="ti-timer"></i> {{ slot.period.start +" - "+ slot.period.end }}</span>
+                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
                                                     <ul>
                                                         <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
                                                         <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
@@ -228,7 +230,9 @@ tr:nth-child(odd) td:nth-child(odd) {
         name:"LatestRoutine",
         data (){
             return {
-                routine: []
+                routine: [],
+                editMode: false,
+                latestYear: new Date().getFullYear()
             }
         },
         methods: {
@@ -247,6 +251,19 @@ tr:nth-child(odd) td:nth-child(odd) {
                     return findDay
                 }
                 return []
+            },
+            enableEditing() {
+                // console.log(this.editMode);
+                this.editMode = !this.editMode;
+            },
+            timeFormat(time) {
+                var ts = time;
+                var H = +ts.substr(0, 2);
+                var h = (H % 12) || 12;
+                h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+                var ampm = H < 12 ? "AM" : "PM";
+                ts = h + ts.substr(2, 3) + ampm;
+                return ts;
             }
         },
         created() {

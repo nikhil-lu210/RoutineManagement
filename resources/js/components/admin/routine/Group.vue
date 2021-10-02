@@ -27,14 +27,18 @@
                                     <tr v-for="(year, index) in allDatas.groups" :key="index">
                                         <td class="text-center">{{ index }}</td>
                                         <td>
-                                            <ol>
+                                            <ul>
                                                 <li v-for="(group, cls) in year" :key="cls">
-                                                    {{ cls }}
+                                                    <span class="text-primary text-bold">Class: {{ cls }}</span>
                                                     <ul>
-                                                        <li v-for="(data, sec) in group" :key="sec"> {{ data.student_class.title + " " + data.student_class.category +" ("+ data.section.title + ")"}}</li>
+                                                        <li v-for="(data, sec) in group" :key="sec" class="text-capitalize">
+                                                            <span class="routine-class">Class: {{ data.student_class.title }}</span>
+                                                            <span class="routine-category" v-if="data.student_class.category">{{ data.student_class.category }}</span>
+                                                            <span class="routine-section" v-if="data.section">(Section: {{ data.section.title }})</span>
+                                                        </li>
                                                     </ul>
                                                 </li>
-                                            </ol>
+                                            </ul>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group mr-2">

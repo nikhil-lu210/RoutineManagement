@@ -17,11 +17,8 @@
                                         <select class="form-control text-capitalize" name="routine_group" v-model="formData.routine_group">
                                             <option selected>Select Routine Group</option>
                                             <option v-for="group in allDatas.groups" :key="group.id" :value="group.id">
-                                                Year: {{ group.year.year }} || Class: {{ group.student_class.title }} {{ group.student_class.category }} ({{ group.section.title }})
+                                                Year: {{ group.year.year }} || Class: {{ group.student_class.title }} {{ group.student_class.category }} <span v-if="group.section_id">({{ group.section.title }})</span>
                                             </option>
-                                            <!-- <option v-for="group in allDatas.groups" :key="group.id" :value="group.id">
-                                                Year: {{ group.year.year }} || Class: {{ group.student_class.title }} {{ group.student_class.category }} ({{ group.section.title }}) || Subject: {{ group.routine_group_teacher.subject.name }} || Teacher: {{ group.routine_group_teacher.teacher.name }}
-                                            </option> -->
                                         </select>
                                     </div>
                                 </div>

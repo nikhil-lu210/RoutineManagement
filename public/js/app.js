@@ -2179,9 +2179,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateRoutine",
   data: function data() {
@@ -2267,6 +2264,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
 //
 //
 //
@@ -2999,11 +3000,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "LatestRoutine",
   data: function data() {
     return {
-      routine: []
+      routine: [],
+      editMode: false,
+      latestYear: new Date().getFullYear()
     };
   },
   methods: {
@@ -3024,6 +3029,20 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return [];
+    },
+    enableEditing: function enableEditing() {
+      // console.log(this.editMode);
+      this.editMode = !this.editMode;
+    },
+    timeFormat: function timeFormat(time) {
+      var ts = time;
+      var H = +ts.substr(0, 2);
+      var h = H % 12 || 12;
+      h = h < 10 ? "0" + h : h; // leading 0 at the left for 1 digit hours
+
+      var ampm = H < 12 ? "AM" : "PM";
+      ts = h + ts.substr(2, 3) + ampm;
+      return ts;
     }
   },
   created: function created() {
@@ -9923,7 +9942,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #055159 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #055159;\n  position: relative;\n}\n.routine-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 4px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 10px;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #055159;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #055159 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #055159;\n  position: relative;\n}\n.routine-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 4px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 10px;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #055159;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n  font-size: 11px;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43370,10 +43389,15 @@ var render = function() {
                                   _vm._s(group.student_class.title) +
                                   " " +
                                   _vm._s(group.student_class.category) +
-                                  " (" +
-                                  _vm._s(group.section.title) +
-                                  ")\n                                        "
-                              )
+                                  " "
+                              ),
+                              group.section_id
+                                ? _c("span", [
+                                    _vm._v(
+                                      "(" + _vm._s(group.section.title) + ")"
+                                    )
+                                  ])
+                                : _vm._e()
                             ]
                           )
                         })
@@ -43725,30 +43749,65 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [
                         _c(
-                          "ol",
+                          "ul",
                           _vm._l(year, function(group, cls) {
                             return _c("li", { key: cls }, [
-                              _vm._v(
-                                "\n                                                " +
-                                  _vm._s(cls) +
-                                  "\n                                                "
+                              _c(
+                                "span",
+                                { staticClass: "text-primary text-bold" },
+                                [_vm._v("Class: " + _vm._s(cls))]
                               ),
+                              _vm._v(" "),
                               _c(
                                 "ul",
                                 _vm._l(group, function(data, sec) {
-                                  return _c("li", { key: sec }, [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(
-                                          data.student_class.title +
-                                            " " +
-                                            data.student_class.category +
-                                            " (" +
-                                            data.section.title +
-                                            ")"
-                                        )
-                                    )
-                                  ])
+                                  return _c(
+                                    "li",
+                                    {
+                                      key: sec,
+                                      staticClass: "text-capitalize"
+                                    },
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "routine-class" },
+                                        [
+                                          _vm._v(
+                                            "Class: " +
+                                              _vm._s(data.student_class.title)
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      data.student_class.category
+                                        ? _c(
+                                            "span",
+                                            { staticClass: "routine-category" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  data.student_class.category
+                                                )
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      data.section
+                                        ? _c(
+                                            "span",
+                                            { staticClass: "routine-section" },
+                                            [
+                                              _vm._v(
+                                                "(Section: " +
+                                                  _vm._s(data.section.title) +
+                                                  ")"
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
                                 }),
                                 0
                               )
@@ -44346,7 +44405,7 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              group.section.title
+                              group.section
                                 ? _c("span", [
                                     _vm._v(
                                       "Sec: " + _vm._s(group.section.title)
@@ -44725,7 +44784,46 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-12" }, [
       _c("div", { staticClass: "card m-b-30" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", { staticClass: "card-title float-left" }, [
+            _vm._v("Routine of "),
+            _c("span", { staticClass: "text-dark text-bold" }, [
+              _vm._v(_vm._s(_vm.latestYear))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "float-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-custom btn-sm",
+                class: _vm.editMode == true ? "d-none" : "",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.enableEditing.apply(null, arguments)
+                  }
+                }
+              },
+              [_vm._v("Edit Routine")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-sm",
+                class: _vm.editMode == false ? "d-none" : "",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.enableEditing.apply(null, arguments)
+                  }
+                }
+              },
+              [_vm._v("Cancel Editing")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -44736,7 +44834,7 @@ var render = function() {
                 attrs: { id: "datatable-buttons" }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -44755,7 +44853,14 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _vm._m(2, true),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-custom routine-edit-btn",
+                            class: _vm.editMode == false ? "d-none" : ""
+                          },
+                          [_c("i", { staticClass: "ti-pencil" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "ul",
@@ -44776,9 +44881,9 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(
-                                        slot.period.start +
+                                        _vm.timeFormat(slot.period.start) +
                                           " - " +
-                                          slot.period.end
+                                          _vm.timeFormat(slot.period.end)
                                       )
                                   )
                                 ]),
@@ -44808,7 +44913,14 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _vm._m(3, true),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-custom routine-edit-btn",
+                            class: _vm.editMode == false ? "d-none" : ""
+                          },
+                          [_c("i", { staticClass: "ti-pencil" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "ul",
@@ -44829,9 +44941,9 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(
-                                        slot.period.start +
+                                        _vm.timeFormat(slot.period.start) +
                                           " - " +
-                                          slot.period.end
+                                          _vm.timeFormat(slot.period.end)
                                       )
                                   )
                                 ]),
@@ -44861,7 +44973,14 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _vm._m(4, true),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-custom routine-edit-btn",
+                            class: _vm.editMode == false ? "d-none" : ""
+                          },
+                          [_c("i", { staticClass: "ti-pencil" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "ul",
@@ -44882,9 +45001,9 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(
-                                        slot.period.start +
+                                        _vm.timeFormat(slot.period.start) +
                                           " - " +
-                                          slot.period.end
+                                          _vm.timeFormat(slot.period.end)
                                       )
                                   )
                                 ]),
@@ -44914,7 +45033,14 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _vm._m(5, true),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-custom routine-edit-btn",
+                            class: _vm.editMode == false ? "d-none" : ""
+                          },
+                          [_c("i", { staticClass: "ti-pencil" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "ul",
@@ -44935,9 +45061,9 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(
-                                        slot.period.start +
+                                        _vm.timeFormat(slot.period.start) +
                                           " - " +
-                                          slot.period.end
+                                          _vm.timeFormat(slot.period.end)
                                       )
                                   )
                                 ]),
@@ -44967,7 +45093,14 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _vm._m(6, true),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-custom routine-edit-btn",
+                            class: _vm.editMode == false ? "d-none" : ""
+                          },
+                          [_c("i", { staticClass: "ti-pencil" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "ul",
@@ -44988,9 +45121,9 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(
-                                        slot.period.start +
+                                        _vm.timeFormat(slot.period.start) +
                                           " - " +
-                                          slot.period.end
+                                          _vm.timeFormat(slot.period.end)
                                       )
                                   )
                                 ]),
@@ -45020,7 +45153,14 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _vm._m(7, true),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-custom routine-edit-btn",
+                            class: _vm.editMode == false ? "d-none" : ""
+                          },
+                          [_c("i", { staticClass: "ti-pencil" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "ul",
@@ -45041,9 +45181,9 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(
-                                        slot.period.start +
+                                        _vm.timeFormat(slot.period.start) +
                                           " - " +
-                                          slot.period.end
+                                          _vm.timeFormat(slot.period.end)
                                       )
                                   )
                                 ]),
@@ -45072,7 +45212,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(8, true)
+                      _vm._m(1, true)
                     ])
                   }),
                   0
@@ -45086,22 +45226,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title float-left" }, [
-        _vm._v("Routine of 2021")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "float-right" }, [
-        _c("button", { staticClass: "btn btn-custom btn-sm" }, [
-          _vm._v("Edit Routine")
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -45124,54 +45248,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Friday")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
-      _c("i", { staticClass: "ti-pencil" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
-      _c("i", { staticClass: "ti-pencil" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
-      _c("i", { staticClass: "ti-pencil" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
-      _c("i", { staticClass: "ti-pencil" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
-      _c("i", { staticClass: "ti-pencil" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-custom routine-edit-btn" }, [
-      _c("i", { staticClass: "ti-pencil" })
     ])
   },
   function() {
