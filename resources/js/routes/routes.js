@@ -23,93 +23,75 @@ import Section from '../components/admin/settings/Section';
 
 export const routes = [
     {
-        path: '/',
-        name: 'Dashboard',
+        path: '/admin/',
         component: Dashboard
     },
     {
-        path: '/teachers',
-        name: 'Teachers',
+        path: '/admin/teachers',
         component: Teachers
     },
     {
-        path: '/teacher/create',
-        name: 'CreateTeacher',
+        path: '/admin/teacher/create',
         component: CreateTeacher
     },
     {
-        path: '/teacher/show/:teacher_id',
-        name: 'ShowTeacher',
+        path: '/admin/teacher/show/:teacher_id',
         component: ShowTeacher
     },
     {
-        path: '/students',
-        name: 'Students',
+        path: '/admin/students',
         component: Students
     },
     {
-        path: '/student/create',
-        name: 'CreateStudent',
+        path: '/admin/student/create',
         component: CreateStudent
     },
     {
-        path: '/student/show/:student_id',
-        name: 'ShowStudent',
+        path: '/admin/student/show/:student_id',
         component: ShowStudent
     },
     {
-        path: '/routine/latest',
-        name: 'LatestRoutine',
+        path: '/admin/routine/latest',
         component: LatestRoutine
     },
     {
-        path: '/routines',
-        name: 'AllRoutines',
+        path: '/admin/routines',
         component: AllRoutines
     },
     {
-        path: '/routine/group',
-        name: 'RoutineGroup',
+        path: '/admin/routine/group',
         component: RoutineGroup
     },
     {
-        path: '/routine/group_teacher',
-        name: 'GroupTeacher',
+        path: '/admin/routine/group_teacher',
         component: GroupTeacher
     },
     {
-        path: '/routine/create',
-        name: 'CreateRoutine',
+        path: '/admin/routine/create',
         component: CreateRoutine
     },
     {
-        path: '/settings/classes',
-        name: 'StudentClass',
+        path: '/admin/settings/classes',
         component: StudentClass
     },
     {
-        path: '/settings/subjects',
-        name: 'Subject',
+        path: '/admin/settings/subjects',
         component: Subject
     },
     {
-        path: '/settings/years',
-        name: 'Year',
+        path: '/admin/settings/years',
         component: Year
     },
     {
-        path: '/settings/days',
-        name: 'Day',
+        path: '/admin/settings/days',
         component: Day
     },
     {
-        path: '/settings/periods',
-        name: 'Period',
+        path: '/admin/settings/periods',
         component: Period
     },
     {
-        path: '/settings/sections',
-        name: 'Section',
+        path: '/admin/settings/sections',
         component: Section
     },
 ];

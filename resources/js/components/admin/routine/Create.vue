@@ -93,7 +93,7 @@
         },
         methods: {
             loadAllDatas() {
-                axios.get('/admin/routine/routine/create')
+                axios.get('/api/admin/routine/routine/create')
                 .then((response) => {
                     this.allDatas = response.data
                     // console.log(this.allDatas);
@@ -104,7 +104,7 @@
             },
             
             storeData() {
-                axios.post('/admin/routine/routine/store', {
+                axios.post('/api/admin/routine/routine/store', {
                     routine_group: this.formData.routine_group,
                     day: this.formData.day,
                     period: this.formData.period,

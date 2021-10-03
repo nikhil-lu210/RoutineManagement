@@ -106,7 +106,7 @@
         },
         methods:{
             loadAllYears() {
-                axios.get('/admin/settings/year')
+                axios.get('/api/admin/settings/year')
                 .then((response) => {
                     this.allYears = response.data
                 })
@@ -116,7 +116,7 @@
             },
             
             storeData() {
-                this.formData.post('/admin/settings/year/store', {
+                this.formData.post('/api/admin/settings/year/store', {
                     year: this.formData.year,
                 })
                 .then(() => {
@@ -153,7 +153,7 @@
             },
 
             updateData() {
-                let updateUrl = '/admin/settings/year/update/' + this.formData.id;
+                let updateUrl = '/api/admin/settings/year/update/' + this.formData.id;
                 this.formData.post(updateUrl, {
                     year: this.formData.year,
                 })

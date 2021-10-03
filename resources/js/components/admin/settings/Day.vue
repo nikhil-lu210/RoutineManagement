@@ -114,7 +114,7 @@
         },
         methods:{
             loadAllDays() {
-                axios.get('/admin/settings/day')
+                axios.get('/api/admin/settings/day')
                 .then((response) => {
                     this.allDays = response.data
                 })
@@ -124,7 +124,7 @@
             },
             
             storeData() {
-                axios.post('/admin/settings/day/store', {
+                axios.post('/api/admin/settings/day/store', {
                     name: this.formData.name,
                     holiday: this.formData.holiday,
                 })
@@ -165,7 +165,7 @@
             },
 
             updateData() {
-                let updateUrl = '/admin/settings/day/update/' + this.formData.id;
+                let updateUrl = '/api/admin/settings/day/update/' + this.formData.id;
                 axios.post(updateUrl, {
                     name: this.formData.name,
                     holiday: this.formData.holiday

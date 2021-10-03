@@ -68,7 +68,7 @@
         },
         methods: {
             loadAllTeachers() {
-                axios.get('/admin/teacher')
+                axios.get('/api/admin/teacher')
                 .then((response) => {
                     this.allTeachers = response.data
                 })
@@ -78,7 +78,7 @@
             },
             
             storeData() {
-                axios.post('/admin/teacher/store', {
+                axios.post('/api/admin/teacher/store', {
                     name: this.formData.name,
                     mobile: this.formData.mobile,
                     email: this.formData.email,
@@ -90,7 +90,7 @@
                     this.formData.email = null;
                     this.formData.password = null;
                     Vue.swal("Success!", "New Teacher Assigned Successfully.", "success");
-                    this.$router.push("/teachers");
+                    this.$router.push("/admin/teachers");
                     this.loadAllTeachers();
                 })
                 .catch((error) => {

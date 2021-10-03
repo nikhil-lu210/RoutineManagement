@@ -5,7 +5,7 @@
         <div class="sidebar">
             <!-- Start Logobar -->
             <div class="logobar" style="margin-bottom: 8px; border-bottom: 0px solid #fff;">
-                <router-link to="/" class="logo logo-large">
+                <router-link to="/admin/" class="logo logo-large">
                     <!-- <img src="{{ show_logo('main_logo') }}" class="img-fluid" alt="logo" /> -->
                     SRM
                 </router-link>
@@ -19,7 +19,7 @@
             <div class="navigationbar">
                 <ul class="vertical-menu">
                     <li class="single-menu bg-ucap-secondary">
-                        <router-link to="/" class="text-white text-bold">
+                        <router-link to="/admin/" class="text-white text-bold">
                             <i class="ti-bar-chart-alt"></i>
                             <span>Dashboard</span>
                         </router-link>
@@ -35,10 +35,10 @@
                         </a>
                         <ul class="vertical-submenu">
                             <li class="">
-                                <router-link to="/teachers">All Teachers</router-link>
+                                <router-link to="/admin/teachers">All Teachers</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/teacher/create">Create Teacher</router-link>
+                                <router-link to="/admin/teacher/create">Create Teacher</router-link>
                             </li>
                         </ul>
                     </li>
@@ -51,10 +51,10 @@
                         </a>
                         <ul class="vertical-submenu">
                             <li class="">
-                                <router-link to="/students">All Students</router-link>
+                                <router-link to="/admin/students">All Students</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/student/create">Create Student</router-link>
+                                <router-link to="/admin/student/create">Create Student</router-link>
                             </li>
                         </ul>
                     </li>
@@ -67,19 +67,19 @@
                         </a>
                         <ul class="vertical-submenu">
                             <li class="">
-                                <router-link to="/routine/latest">Latest Routine</router-link>
+                                <router-link to="/admin/routine/latest">Latest Routine</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/routines">All Routines</router-link>
+                                <router-link to="/admin/routines">All Routines</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/routine/group">Routine Groups</router-link>
+                                <router-link to="/admin/routine/group">Routine Groups</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/routine/group_teacher">Group Teacher</router-link>
+                                <router-link to="/admin/routine/group_teacher">Group Teacher</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/routine/create">Create routine</router-link>
+                                <router-link to="/admin/routine/create">Create routine</router-link>
                             </li>
                         </ul>
                     </li>
@@ -94,22 +94,22 @@
                         </a>
                         <ul class="vertical-submenu">
                             <li class="">
-                                <router-link to="/settings/classes">Class</router-link>
+                                <router-link to="/admin/settings/classes">Class</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/subjects">Subject</router-link>
+                                <router-link to="/admin/settings/subjects">Subject</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/years">Year</router-link>
+                                <router-link to="/admin/settings/years">Year</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/days">Day</router-link>
+                                <router-link to="/admin/settings/days">Day</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/periods">Period</router-link>
+                                <router-link to="/admin/settings/periods">Period</router-link>
                             </li>
                             <li class="">
-                                <router-link to="/settings/sections">Section</router-link>
+                                <router-link to="/admin/settings/sections">Section</router-link>
                             </li>
                         </ul>
                     </li>

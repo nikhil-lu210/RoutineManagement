@@ -237,7 +237,7 @@ tr:nth-child(odd) td:nth-child(odd) {
         },
         methods: {
             loadAllDatas() {
-                axios.get('/admin/routine/routine/latest')
+                axios.get('/api/admin/routine/routine/latest')
                 .then((response) => {
                     this.routine = response.data
                 })

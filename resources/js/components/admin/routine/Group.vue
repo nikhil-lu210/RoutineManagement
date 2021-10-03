@@ -126,7 +126,7 @@
         },
         methods:{
             loadAllDatas() {
-                axios.get('/admin/routine/group')
+                axios.get('/api/admin/routine/group')
                 .then((response) => {
                     this.allDatas = response.data
                     // console.log(this.allDatas.groups[0].student_class.title);
@@ -137,7 +137,7 @@
             },
             
             storeData() {
-                axios.post('/admin/routine/group/store', {
+                axios.post('/api/admin/routine/group/store', {
                     year: this.formData.year,
                     class: this.formData.class,
                     section: this.formData.section
@@ -184,7 +184,7 @@
             },
 
             updateData() {
-                let updateUrl = '/admin/routine/group/update/' + this.formData.id;
+                let updateUrl = '/api/admin/routine/group/update/' + this.formData.id;
                 axios.post(updateUrl, {
                     year: this.formData.year,
                     class: this.formData.class,

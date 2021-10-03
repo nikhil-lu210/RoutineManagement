@@ -109,7 +109,7 @@
         },
         methods:{
             loadAllPeriods() {
-                axios.get('/admin/settings/period')
+                axios.get('/api/admin/settings/period')
                 .then((response) => {
                     this.allPeriods = response.data
                     console.log(this.formatAMPM(this.allPeriods[0].end));
@@ -120,7 +120,7 @@
             },
             
             storeData() {
-                this.formData.post('/admin/settings/period/store', {
+                this.formData.post('/api/admin/settings/period/store', {
                     start: this.formData.start,
                     end: this.formData.end
                 })
@@ -161,7 +161,7 @@
             },
 
             updateData() {
-                let updateUrl = '/admin/settings/period/update/' + this.formData.id;
+                let updateUrl = '/api/admin/settings/period/update/' + this.formData.id;
                 this.formData.post(updateUrl, {
                     start: this.formData.start,
                     end: this.formData.end,

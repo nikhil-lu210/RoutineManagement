@@ -35,7 +35,7 @@
                                             <div class="btn-group mr-2">
                                                 <!-- <router-link to="#" class="btn btn-danger btn-xs">Delete</router-link> -->
                                                 <!-- <router-link to="#" class="btn btn-info btn-xs">Edit</router-link> -->
-                                                <router-link :to="`/teacher/show/${ data.id }`" class="btn btn-dark btn-xs">Details</router-link>
+                                                <router-link :to="`/admin/teacher/show/${ data.id }`" class="btn btn-dark btn-xs">Details</router-link>
                                             </div>
                                         </td>
                                     </tr>
@@ -60,7 +60,7 @@
         },
         methods: {
             loadAllTeachers() {
-                axios.get('/admin/teacher')
+                axios.get('/api/admin/teacher')
                 .then((response) => {
                     // console.log(response.data);
                     this.allTeachers = response.data

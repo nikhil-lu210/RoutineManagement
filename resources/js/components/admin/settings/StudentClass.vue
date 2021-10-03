@@ -107,7 +107,7 @@
         },
         methods:{
             loadallClasses() {
-                axios.get('/admin/settings/student_class')
+                axios.get('/api/admin/settings/student_class')
                 .then((response) => {
                     this.allClasses = response.data
                 })
@@ -117,7 +117,7 @@
             },
             
             storeData() {
-                axios.post('/admin/settings/student_class/store', {
+                axios.post('/api/admin/settings/student_class/store', {
                     title: this.formData.title,
                     category: this.formData.category
                 })
@@ -158,7 +158,7 @@
             },
 
             updateData() {
-                let updateUrl = '/admin/settings/student_class/update/' + this.formData.id;
+                let updateUrl = '/api/admin/settings/student_class/update/' + this.formData.id;
                 axios.post(updateUrl, {
                     title: this.formData.title,
                     category: this.formData.category

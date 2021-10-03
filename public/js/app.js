@@ -2196,7 +2196,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllDatas: function loadAllDatas() {
       var _this = this;
 
-      axios.get('/admin/routine/routine/create').then(function (response) {
+      axios.get('/api/admin/routine/routine/create').then(function (response) {
         _this.allDatas = response.data; // console.log(this.allDatas);
       })["catch"](function (error) {
         console.log(error);
@@ -2205,7 +2205,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios.post('/admin/routine/routine/store', {
+      axios.post('/api/admin/routine/routine/store', {
         routine_group: this.formData.routine_group,
         day: this.formData.day,
         period: this.formData.period,
@@ -2393,7 +2393,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllDatas: function loadAllDatas() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/routine/group').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/routine/group').then(function (response) {
         _this.allDatas = response.data; // console.log(this.allDatas.groups[0].student_class.title);
       })["catch"](function (error) {
         console.log(error);
@@ -2402,7 +2402,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/routine/group/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/routine/group/store', {
         year: this.formData.year,
         "class": this.formData["class"],
         section: this.formData.section
@@ -2445,7 +2445,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/routine/group/update/' + this.formData.id;
+      var updateUrl = '/api/admin/routine/group/update/' + this.formData.id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
         year: this.formData.year,
         "class": this.formData["class"],
@@ -2620,7 +2620,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllDatas: function loadAllDatas() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/routine/teacher').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/routine/teacher').then(function (response) {
         _this.allDatas = response.data; // console.log(this.allDatas.groups[0]);
       })["catch"](function (error) {
         console.log(error);
@@ -2629,7 +2629,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/routine/teacher/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/routine/teacher/store', {
         routine_group: this.formData.routine_group,
         teacher: this.formData.teacher,
         subject: this.formData.subject
@@ -2672,7 +2672,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/routine/teacher/update/' + this.formData.id;
+      var updateUrl = '/api/admin/routine/teacher/update/' + this.formData.id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
         routine_group: this.formData.routine_group,
         teacher: this.formData.teacher,
@@ -3018,7 +3018,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllDatas: function loadAllDatas() {
       var _this = this;
 
-      axios.get('/admin/routine/routine/latest').then(function (response) {
+      axios.get('/api/admin/routine/routine/latest').then(function (response) {
         _this.routine = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -3185,7 +3185,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllDays: function loadAllDays() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/day').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/settings/day').then(function (response) {
         _this.allDays = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -3194,7 +3194,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/day/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/settings/day/store', {
         name: this.formData.name,
         holiday: this.formData.holiday
       }).then(function () {
@@ -3232,7 +3232,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/settings/day/update/' + this.formData.id;
+      var updateUrl = '/api/admin/settings/day/update/' + this.formData.id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
         name: this.formData.name,
         holiday: this.formData.holiday
@@ -3387,7 +3387,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllPeriods: function loadAllPeriods() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/period').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/settings/period').then(function (response) {
         _this.allPeriods = response.data;
         console.log(_this.formatAMPM(_this.allPeriods[0].end));
       })["catch"](function (error) {
@@ -3397,7 +3397,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      this.formData.post('/admin/settings/period/store', {
+      this.formData.post('/api/admin/settings/period/store', {
         start: this.formData.start,
         end: this.formData.end
       }).then(function () {
@@ -3435,7 +3435,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/settings/period/update/' + this.formData.id;
+      var updateUrl = '/api/admin/settings/period/update/' + this.formData.id;
       this.formData.post(updateUrl, {
         start: this.formData.start,
         end: this.formData.end
@@ -3588,7 +3588,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllSections: function loadAllSections() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/section').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/settings/section').then(function (response) {
         _this.allSections = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -3597,7 +3597,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/section/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/settings/section/store', {
         title: this.formData.title
       }).then(function () {
         _this2.formData.title = null;
@@ -3631,7 +3631,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/settings/section/update/' + this.formData.id;
+      var updateUrl = '/api/admin/settings/section/update/' + this.formData.id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
         title: this.formData.title
       }).then(function (response) {
@@ -3783,7 +3783,7 @@ __webpack_require__.r(__webpack_exports__);
     loadallClasses: function loadallClasses() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/student_class').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/settings/student_class').then(function (response) {
         _this.allClasses = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -3792,7 +3792,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/student_class/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/settings/student_class/store', {
         title: this.formData.title,
         category: this.formData.category
       }).then(function () {
@@ -3830,7 +3830,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/settings/student_class/update/' + this.formData.id;
+      var updateUrl = '/api/admin/settings/student_class/update/' + this.formData.id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
         title: this.formData.title,
         category: this.formData.category
@@ -3972,7 +3972,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllSubjects: function loadAllSubjects() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/subject').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/settings/subject').then(function (response) {
         _this.allSubjects = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -3981,7 +3981,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/settings/subject/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/settings/subject/store', {
         name: this.formData.name
       }).then(function () {
         _this2.formData.name = null;
@@ -4015,7 +4015,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/settings/subject/update/' + this.formData.id;
+      var updateUrl = '/api/admin/settings/subject/update/' + this.formData.id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(updateUrl, {
         name: this.formData.name
       }).then(function (response) {
@@ -4166,7 +4166,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllYears: function loadAllYears() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/settings/year').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/settings/year').then(function (response) {
         _this.allYears = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -4175,7 +4175,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      this.formData.post('/admin/settings/year/store', {
+      this.formData.post('/api/admin/settings/year/store', {
         year: this.formData.year
       }).then(function () {
         _this2.formData.year = null;
@@ -4209,7 +4209,7 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this3 = this;
 
-      var updateUrl = '/admin/settings/year/update/' + this.formData.id;
+      var updateUrl = '/api/admin/settings/year/update/' + this.formData.id;
       this.formData.post(updateUrl, {
         year: this.formData.year
       }).then(function (response) {
@@ -4322,7 +4322,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllStudents: function loadAllStudents() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/student').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/student').then(function (response) {
         _this.allStudents = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -4331,7 +4331,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/student/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/student/store', {
         name: this.formData.name,
         mobile: this.formData.mobile,
         email: this.formData.email,
@@ -4343,7 +4343,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.formData.password = null;
         Vue.swal("Success!", "New Student Assigned Successfully.", "success");
 
-        _this2.$router.push("/students");
+        _this2.$router.push("/admin/students");
 
         _this2.loadAllStudents();
       })["catch"](function (error) {
@@ -4432,7 +4432,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllStudents: function loadAllStudents() {
       var _this = this;
 
-      axios.get('/admin/student').then(function (response) {
+      axios.get('/api/admin/student').then(function (response) {
         // console.log(response.data);
         _this.allStudents = response.data;
       })["catch"](function (error) {
@@ -4528,7 +4528,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    var url = "/admin/student/show/".concat(this.$route.params.student_id); // console.log(url);
+    var url = "/api/admin/student/show/".concat(this.$route.params.student_id); // console.log(url);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(url).then(function (response) {
       _this.studentDetails.name = response.data.student.name, _this.studentDetails.email = response.data.student.email, _this.studentDetails.mobile = response.data.mobile;
@@ -4624,7 +4624,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllTeachers: function loadAllTeachers() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/teacher').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/teacher').then(function (response) {
         _this.allTeachers = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -4633,7 +4633,7 @@ __webpack_require__.r(__webpack_exports__);
     storeData: function storeData() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/admin/teacher/store', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/admin/teacher/store', {
         name: this.formData.name,
         mobile: this.formData.mobile,
         email: this.formData.email,
@@ -4645,7 +4645,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.formData.password = null;
         Vue.swal("Success!", "New Teacher Assigned Successfully.", "success");
 
-        _this2.$router.push("/teachers");
+        _this2.$router.push("/admin/teachers");
 
         _this2.loadAllTeachers();
       })["catch"](function (error) {
@@ -4734,7 +4734,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAllTeachers: function loadAllTeachers() {
       var _this = this;
 
-      axios.get('/admin/teacher').then(function (response) {
+      axios.get('/api/admin/teacher').then(function (response) {
         // console.log(response.data);
         _this.allTeachers = response.data;
       })["catch"](function (error) {
@@ -4830,7 +4830,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    var url = "/admin/teacher/show/".concat(this.$route.params.teacher_id); // console.log(url);
+    var url = "/api/admin/teacher/show/".concat(this.$route.params.teacher_id); // console.log(url);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(url).then(function (response) {
       _this.teacherDetails.name = response.data.teacher.name, _this.teacherDetails.email = response.data.teacher.email, _this.teacherDetails.mobile = response.data.mobile;
@@ -5388,76 +5388,58 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [{
-  path: '/',
-  name: 'Dashboard',
+  path: '/admin/',
   component: _components_admin_dashboard_Index__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: '/teachers',
-  name: 'Teachers',
+  path: '/admin/teachers',
   component: _components_admin_teacher_Index__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
-  path: '/teacher/create',
-  name: 'CreateTeacher',
+  path: '/admin/teacher/create',
   component: _components_admin_teacher_Create__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
-  path: '/teacher/show/:teacher_id',
-  name: 'ShowTeacher',
+  path: '/admin/teacher/show/:teacher_id',
   component: _components_admin_teacher_Show__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
-  path: '/students',
-  name: 'Students',
+  path: '/admin/students',
   component: _components_admin_student_Index__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
-  path: '/student/create',
-  name: 'CreateStudent',
+  path: '/admin/student/create',
   component: _components_admin_student_Create__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
-  path: '/student/show/:student_id',
-  name: 'ShowStudent',
+  path: '/admin/student/show/:student_id',
   component: _components_admin_student_Show__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
-  path: '/routine/latest',
-  name: 'LatestRoutine',
+  path: '/admin/routine/latest',
   component: _components_admin_routine_Latest__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
-  path: '/routines',
-  name: 'AllRoutines',
+  path: '/admin/routines',
   component: _components_admin_routine_Index__WEBPACK_IMPORTED_MODULE_8__["default"]
 }, {
-  path: '/routine/group',
-  name: 'RoutineGroup',
+  path: '/admin/routine/group',
   component: _components_admin_routine_Group__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
-  path: '/routine/group_teacher',
-  name: 'GroupTeacher',
+  path: '/admin/routine/group_teacher',
   component: _components_admin_routine_GroupTeacher__WEBPACK_IMPORTED_MODULE_10__["default"]
 }, {
-  path: '/routine/create',
-  name: 'CreateRoutine',
+  path: '/admin/routine/create',
   component: _components_admin_routine_Create__WEBPACK_IMPORTED_MODULE_11__["default"]
 }, {
-  path: '/settings/classes',
-  name: 'StudentClass',
+  path: '/admin/settings/classes',
   component: _components_admin_settings_StudentClass__WEBPACK_IMPORTED_MODULE_12__["default"]
 }, {
-  path: '/settings/subjects',
-  name: 'Subject',
+  path: '/admin/settings/subjects',
   component: _components_admin_settings_Subject__WEBPACK_IMPORTED_MODULE_13__["default"]
 }, {
-  path: '/settings/years',
-  name: 'Year',
+  path: '/admin/settings/years',
   component: _components_admin_settings_Year__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
-  path: '/settings/days',
-  name: 'Day',
+  path: '/admin/settings/days',
   component: _components_admin_settings_Day__WEBPACK_IMPORTED_MODULE_15__["default"]
 }, {
-  path: '/settings/periods',
-  name: 'Period',
+  path: '/admin/settings/periods',
   component: _components_admin_settings_Period__WEBPACK_IMPORTED_MODULE_16__["default"]
 }, {
-  path: '/settings/sections',
-  name: 'Section',
+  path: '/admin/settings/sections',
   component: _components_admin_settings_Section__WEBPACK_IMPORTED_MODULE_17__["default"]
 }];
 
@@ -47355,7 +47337,7 @@ var render = function() {
                               "router-link",
                               {
                                 staticClass: "btn btn-dark btn-xs",
-                                attrs: { to: "/student/show/" + data.id }
+                                attrs: { to: "/admin/student/show/" + data.id }
                               },
                               [_vm._v("Details")]
                             )
@@ -47455,7 +47437,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "btn btn-primary btn-sm",
-                  attrs: { to: "/students" }
+                  attrs: { to: "/admin/students" }
                 },
                 [
                   _c("i", { staticClass: "ti-arrow-left" }),
@@ -47873,7 +47855,7 @@ var render = function() {
                               "router-link",
                               {
                                 staticClass: "btn btn-dark btn-xs",
-                                attrs: { to: "/teacher/show/" + data.id }
+                                attrs: { to: "/admin/teacher/show/" + data.id }
                               },
                               [_vm._v("Details")]
                             )
@@ -47973,7 +47955,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "btn btn-primary btn-sm",
-                  attrs: { to: "/teachers" }
+                  attrs: { to: "/admin/teachers" }
                 },
                 [
                   _c("i", { staticClass: "ti-arrow-left" }),
@@ -48276,7 +48258,7 @@ var render = function() {
         [
           _c(
             "router-link",
-            { staticClass: "logo logo-large", attrs: { to: "/" } },
+            { staticClass: "logo logo-large", attrs: { to: "/admin/" } },
             [_vm._v("\n                SRM\n            ")]
           ),
           _vm._v(" "),
@@ -48295,7 +48277,10 @@ var render = function() {
             [
               _c(
                 "router-link",
-                { staticClass: "text-white text-bold", attrs: { to: "/" } },
+                {
+                  staticClass: "text-white text-bold",
+                  attrs: { to: "/admin/" }
+                },
                 [
                   _c("i", { staticClass: "ti-bar-chart-alt" }),
                   _vm._v(" "),
@@ -48316,7 +48301,7 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/teachers" } }, [
+                  _c("router-link", { attrs: { to: "/admin/teachers" } }, [
                     _vm._v("All Teachers")
                   ])
                 ],
@@ -48327,9 +48312,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/teacher/create" } }, [
-                    _vm._v("Create Teacher")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/teacher/create" } },
+                    [_vm._v("Create Teacher")]
+                  )
                 ],
                 1
               )
@@ -48344,7 +48331,7 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/students" } }, [
+                  _c("router-link", { attrs: { to: "/admin/students" } }, [
                     _vm._v("All Students")
                   ])
                 ],
@@ -48355,9 +48342,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/student/create" } }, [
-                    _vm._v("Create Student")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/student/create" } },
+                    [_vm._v("Create Student")]
+                  )
                 ],
                 1
               )
@@ -48372,9 +48361,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/routine/latest" } }, [
-                    _vm._v("Latest Routine")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/routine/latest" } },
+                    [_vm._v("Latest Routine")]
+                  )
                 ],
                 1
               ),
@@ -48383,7 +48374,7 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/routines" } }, [
+                  _c("router-link", { attrs: { to: "/admin/routines" } }, [
                     _vm._v("All Routines")
                   ])
                 ],
@@ -48394,7 +48385,7 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/routine/group" } }, [
+                  _c("router-link", { attrs: { to: "/admin/routine/group" } }, [
                     _vm._v("Routine Groups")
                   ])
                 ],
@@ -48407,7 +48398,7 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { attrs: { to: "/routine/group_teacher" } },
+                    { attrs: { to: "/admin/routine/group_teacher" } },
                     [_vm._v("Group Teacher")]
                   )
                 ],
@@ -48418,9 +48409,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/routine/create" } }, [
-                    _vm._v("Create routine")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/routine/create" } },
+                    [_vm._v("Create routine")]
+                  )
                 ],
                 1
               )
@@ -48437,9 +48430,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/settings/classes" } }, [
-                    _vm._v("Class")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/settings/classes" } },
+                    [_vm._v("Class")]
+                  )
                 ],
                 1
               ),
@@ -48448,9 +48443,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/settings/subjects" } }, [
-                    _vm._v("Subject")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/settings/subjects" } },
+                    [_vm._v("Subject")]
+                  )
                 ],
                 1
               ),
@@ -48459,9 +48456,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/settings/years" } }, [
-                    _vm._v("Year")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/settings/years" } },
+                    [_vm._v("Year")]
+                  )
                 ],
                 1
               ),
@@ -48470,7 +48469,7 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/settings/days" } }, [
+                  _c("router-link", { attrs: { to: "/admin/settings/days" } }, [
                     _vm._v("Day")
                   ])
                 ],
@@ -48481,9 +48480,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/settings/periods" } }, [
-                    _vm._v("Period")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/settings/periods" } },
+                    [_vm._v("Period")]
+                  )
                 ],
                 1
               ),
@@ -48492,9 +48493,11 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/settings/sections" } }, [
-                    _vm._v("Section")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/admin/settings/sections" } },
+                    [_vm._v("Section")]
+                  )
                 ],
                 1
               )

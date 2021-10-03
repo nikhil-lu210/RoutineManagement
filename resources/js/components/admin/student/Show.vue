@@ -7,7 +7,7 @@
                 <div class="card-header border bottom">
                     <h5 class="mb-0 float-left">{{ studentDetails.name }}</h5>
                     <div class="float-right">
-                        <router-link to="/students" class="btn btn-primary btn-sm">
+                        <router-link to="/admin/students" class="btn btn-primary btn-sm">
                             <i class="ti-arrow-left"></i> Back
                         </router-link>
                     </div>
@@ -65,7 +65,7 @@ import axios from 'axios';
             }
         },
         mounted() {
-            let url = `/admin/student/show/${this.$route.params.student_id}`;
+            let url = `/api/admin/student/show/${this.$route.params.student_id}`;
             // console.log(url);
             axios.get(url).then((response) => {
                 this.studentDetails.name = response.data.student.name,

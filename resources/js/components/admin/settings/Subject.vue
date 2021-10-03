@@ -96,7 +96,7 @@
         },
         methods:{
             loadAllSubjects() {
-                axios.get('/admin/settings/subject')
+                axios.get('/api/admin/settings/subject')
                 .then((response) => {
                     this.allSubjects = response.data
                 })
@@ -106,7 +106,7 @@
             },
             
             storeData() {
-                axios.post('/admin/settings/subject/store', {
+                axios.post('/api/admin/settings/subject/store', {
                     name: this.formData.name,
                 })
                 .then(() => {
@@ -143,7 +143,7 @@
             },
 
             updateData() {
-                let updateUrl = '/admin/settings/subject/update/' + this.formData.id;
+                let updateUrl = '/api/admin/settings/subject/update/' + this.formData.id;
                 axios.post(updateUrl, {
                     name: this.formData.name,
                 })
