@@ -3467,6 +3467,16 @@ __webpack_require__.r(__webpack_exports__);
       minutes = minutes < 10 ? '0' + minutes : minutes;
       var strTime = hours + ':' + minutes + ' ' + ampm;
       return strTime;
+    },
+    timeFormat: function timeFormat(time) {
+      var ts = time;
+      var H = +ts.substr(0, 2);
+      var h = H % 12 || 12;
+      h = h < 10 ? "0" + h : h; // leading 0 at the left for 1 digit hours
+
+      var ampm = H < 12 ? "AM" : "PM";
+      ts = h + ts.substr(2, 3) + ampm;
+      return ts;
     }
   },
   created: function created() {
@@ -43975,12 +43985,14 @@ var render = function() {
                               domProps: { value: stdclass.id }
                             },
                             [
-                              _vm._v(
-                                _vm._s(stdclass.title) +
-                                  " (" +
-                                  _vm._s(stdclass.category) +
-                                  ")"
-                              )
+                              _vm._v(_vm._s(stdclass.title) + " "),
+                              stdclass.category
+                                ? _c("span", [
+                                    _vm._v(
+                                      "(" + _vm._s(stdclass.category) + ")"
+                                    )
+                                  ])
+                                : _vm._e()
                             ]
                           )
                         })
@@ -45691,9 +45703,9 @@ var render = function() {
                       _c("td", { staticClass: "text-center text-bold" }, [
                         _vm._v(
                           "\n                                        " +
-                            _vm._s(data.start) +
+                            _vm._s(_vm.timeFormat(data.start)) +
                             " - " +
-                            _vm._s(data.end) +
+                            _vm._s(_vm.timeFormat(data.end)) +
                             "\n                                    "
                         )
                       ]),

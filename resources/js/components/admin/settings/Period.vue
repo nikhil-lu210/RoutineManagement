@@ -32,7 +32,7 @@
                                     <tr v-for="(data,index) in allPeriods" :key="index">
                                         <td class="text-center">{{ index+1 }}</td>
                                         <td class="text-center text-bold">
-                                            {{ data.start }} - {{ data.end }}
+                                            {{ timeFormat(data.start) }} - {{ timeFormat(data.end) }}
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group mr-2">
@@ -194,6 +194,15 @@
                 minutes = minutes < 10 ? '0'+minutes : minutes;
                 var strTime = hours + ':' + minutes + ' ' + ampm;
                 return strTime;
+            },
+            timeFormat(time) {
+                var ts = time;
+                var H = +ts.substr(0, 2);
+                var h = (H % 12) || 12;
+                h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+                var ampm = H < 12 ? "AM" : "PM";
+                ts = h + ts.substr(2, 3) + ampm;
+                return ts;
             }
         },
         created() {

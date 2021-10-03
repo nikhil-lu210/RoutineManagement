@@ -85,7 +85,7 @@
                                     <label for="class" class="col-form-label">Class <sup class="required">*</sup></label>
                                     <select class="form-control text-capitalize" id="class" name="class" v-model="formData.class" required>
                                         <option selected>Select Class</option>
-                                        <option v-for="stdclass in allDatas.classes" :key="stdclass.id" :value="stdclass.id">{{ stdclass.title }} ({{ stdclass.category }})</option>
+                                        <option v-for="stdclass in allDatas.classes" :key="stdclass.id" :value="stdclass.id">{{ stdclass.title }} <span v-if="stdclass.category">({{ stdclass.category }})</span></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
