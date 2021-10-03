@@ -2598,6 +2598,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "GroupTeacher",
@@ -44228,15 +44231,21 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-center text-capitalize" }, [
-                        _vm._v(
-                          "\n                                        Year: " +
-                            _vm._s(data.routine_group.year.year) +
-                            " - Class: " +
-                            _vm._s(data.routine_group.student_class.title) +
-                            " "
-                        ),
+                        _c("span", { staticClass: "year" }, [
+                          _vm._v(
+                            "Year: " + _vm._s(data.routine_group.year.year)
+                          )
+                        ]),
+                        _vm._v(" - \n                                        "),
+                        _c("span", { staticClass: "class" }, [
+                          _vm._v(
+                            "Class: " +
+                              _vm._s(data.routine_group.student_class.title)
+                          )
+                        ]),
+                        _vm._v(" "),
                         data.routine_group.student_class.category
-                          ? _c("span", [
+                          ? _c("span", { staticClass: "category" }, [
                               _vm._v(
                                 "(" +
                                   _vm._s(
@@ -44246,8 +44255,8 @@ var render = function() {
                               )
                             ])
                           : _vm._e(),
-                        _vm._v(" - "),
-                        data.routine_group.section.title
+                        _vm._v(" - \n                                        "),
+                        data.routine_group.section
                           ? _c("span", [
                               _vm._v(
                                 "Sec: " +

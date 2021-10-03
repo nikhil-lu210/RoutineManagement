@@ -32,7 +32,10 @@
                                             {{ data.teacher.name }}
                                         </td>
                                         <td class="text-center text-capitalize">
-                                            Year: {{ data.routine_group.year.year }} - Class: {{ data.routine_group.student_class.title }} <span v-if="data.routine_group.student_class.category">({{ data.routine_group.student_class.category }})</span> - <span v-if="data.routine_group.section.title">Sec: {{ data.routine_group.section.title }}</span>
+                                            <span class="year">Year: {{ data.routine_group.year.year }}</span> - 
+                                            <span class="class">Class: {{ data.routine_group.student_class.title }}</span>
+                                            <span class="category" v-if="data.routine_group.student_class.category">({{ data.routine_group.student_class.category }})</span> - 
+                                            <span v-if="data.routine_group.section">Sec: {{ data.routine_group.section.title }}</span>
                                         </td>
                                         <td class="text-center">
                                             {{ data.subject.name }}
