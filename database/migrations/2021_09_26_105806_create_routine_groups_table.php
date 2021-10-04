@@ -25,6 +25,8 @@ class CreateRoutineGroupsTable extends Migration
             $table->foreignId('section_id')->nullable();
             $table->foreign('section_id')->references('id')->on('sections');
 
+            $table->unique(['year_id', 'class_id', 'section_id'], 'year_class_section_unique');
+
             $table->timestamps();
             $table->softDeletes();
         });

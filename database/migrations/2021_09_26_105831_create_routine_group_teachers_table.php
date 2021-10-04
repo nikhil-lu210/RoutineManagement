@@ -25,6 +25,8 @@ class CreateRoutineGroupTeachersTable extends Migration
             $table->foreignId('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects');
 
+            $table->unique(['routine_group_id', 'teacher_id', 'subject_id'], 'routine_teacher_subject_unique');
+
             $table->timestamps();
             $table->softDeletes();
         });

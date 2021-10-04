@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Routine;
 
-use App\Http\Controllers\Controller;
-use App\Models\RoutineGroup;
-use App\Models\RoutineGroupTeacher;
-use App\Models\Section;
-use App\Models\StudentClass;
-use App\Models\Subject;
 use App\Models\User;
 use App\Models\Year;
+use App\Models\Section;
+use App\Models\Subject;
+use App\Models\RoutineGroup;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Models\RoutineGroupTeacher;
+use App\Http\Controllers\Controller;
 
 class GroupTeacherController extends Controller
 {
@@ -79,7 +80,7 @@ class GroupTeacherController extends Controller
         $request->validate([
             'routine_group' => [
                 'required',
-                'exists:routine_groups,id'
+                'exists:routine_groups,id',
             ],
             'teacher' => [
                 'required',
@@ -88,7 +89,7 @@ class GroupTeacherController extends Controller
             'subject' => [
                 'nullable',
                 'exists:subjects,id'
-            ],
+            ]
         ]);
         
         $teacher = new RoutineGroupTeacher();
