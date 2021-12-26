@@ -61,7 +61,7 @@ class GroupTeacherController extends Controller
                                                 'subject' => function($query) {
                                                     $query->select(['id', 'name']);
                                                 }
-                                            ])->get();
+                                            ])->orderBy('id', 'desc')->get();
 
         // dd($groups[0]->year);
 
