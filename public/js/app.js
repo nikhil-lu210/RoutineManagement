@@ -3003,6 +3003,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "LatestRoutine",
   data: function data() {
@@ -9935,7 +9938,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #055159 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #055159;\n  position: relative;\n}\n.routine-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 4px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 10px;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #055159;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n  font-size: 11px;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #055159 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #055159;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  position: relative;\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #055159;\n}\n.routine-schedule-slot-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 3px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 8px;\n}\n.routine-schedule-slot-edit-btn i[data-v-6cbfe1dd] {\n  color: #fff;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n  font-size: 11px;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44855,15 +44858,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
                         _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
                           "ul",
                           { staticClass: "routine-schedule" },
                           _vm._l(_vm.getDay(group, "Saturday"), function(
@@ -44877,6 +44871,16 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class: _vm.editMode == false ? "d-none" : ""
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -44914,15 +44918,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -44937,6 +44932,16 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class: _vm.editMode == false ? "d-none" : ""
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -44974,15 +44979,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -44997,6 +44993,16 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class: _vm.editMode == false ? "d-none" : ""
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -45034,15 +45040,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -45057,6 +45054,16 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class: _vm.editMode == false ? "d-none" : ""
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -45094,15 +45101,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -45117,6 +45115,16 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class: _vm.editMode == false ? "d-none" : ""
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -45155,15 +45163,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
                         _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
                           "ul",
                           { staticClass: "routine-schedule" },
                           _vm._l(_vm.getDay(group, "Thursday"), function(
@@ -45177,6 +45176,16 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class: _vm.editMode == false ? "d-none" : ""
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
