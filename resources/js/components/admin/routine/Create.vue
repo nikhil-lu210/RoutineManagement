@@ -116,7 +116,7 @@
                     this.formData.period = null;
                     this.formData.subject = null;
                     Vue.swal("Success!", "New Routine Assigned Successfully.", "success");
-                    this.$router.push("/routines");
+                    // this.$router.push("/routines");
                     this.loadAllDatas();
                 })
                 .catch((error) => {

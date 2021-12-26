@@ -46,7 +46,7 @@ class DayController extends Controller
                     'Monday', 
                     'Tuesday', 
                     'Wednesday', 
-                    'Thrusday', 
+                    'Thursday', 
                     'Friday'
                 ])
             ],
@@ -85,7 +85,7 @@ class DayController extends Controller
                     'Monday', 
                     'Tuesday', 
                     'Wednesday', 
-                    'Thrusday', 
+                    'Thursday', 
                     'Friday'
                 ])
             ],

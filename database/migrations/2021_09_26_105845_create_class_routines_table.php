@@ -28,6 +28,10 @@ class CreateClassRoutinesTable extends Migration
             $table->foreignId('routine_group_teacher_id');
             $table->foreign('routine_group_teacher_id')->references('id')->on('routine_group_teachers');
 
+            $table->unique(['day_id', 'period_id', 'routine_group_id'], 'day_period_routine_group_unique');
+
+            $table->unique(['day_id', 'period_id', 'routine_group_id', 'routine_group_teacher_id'], 'day_period_routine_group_routine_group_teacher_unique');
+
             $table->timestamps();
             $table->softDeletes();
         });

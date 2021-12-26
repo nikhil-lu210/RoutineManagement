@@ -113,7 +113,7 @@ tr:nth-child(odd) td:nth-child(odd) {
                                         <th class="text-center">Monday</th>
                                         <th class="text-center">Tuesday</th>
                                         <th class="text-center">Wednesday</th>
-                                        <th class="text-center">Thrusday</th>
+                                        <th class="text-center">Thursday</th>
                                         <th class="text-center">Friday</th>
                                     </tr>
                                 </thead>
@@ -201,7 +201,7 @@ tr:nth-child(odd) td:nth-child(odd) {
                                                 <i class="ti-pencil"></i>
                                             </button>
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Thrusday')" :key="'Thrusday-'+list">
+                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Thursday')" :key="'Thursday-'+list">
                                                     <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
                                                     <ul>
                                                         <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
