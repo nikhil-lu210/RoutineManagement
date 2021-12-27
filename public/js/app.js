@@ -45679,7 +45679,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
                       _c("div", { staticClass: "form-group" }, [
                         _vm._m(6),
                         _vm._v(" "),
