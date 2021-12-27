@@ -120,4 +120,39 @@ class RoutineController extends Controller
         
         return response($routine);
     }
+
+    public function update(Request $request, $routine_id)
+    {
+        // return response($request, $routine_id);
+        // dd($request->all());
+        $request->validate([
+            'routine_group' => [
+                'required',
+                'exists:routine_groups,id'
+            ],
+            'day' => [
+                'required',
+                'exists:days,id'
+            ],
+            'period' => [
+                'required',
+                'exists:periods,id'
+            ],
+            'subject' => [
+                'required',
+                'exists:routine_group_teachers,id'
+            ],
+        ]);
+
+        $routine = ClassRoutine::whereId($routine_id)->firstOrFail();
+        
+        $routine->routine_group_id = $request->routine_group;
+        $routine->day_id = $request->day;
+        $routine->period_id = $request->period;
+        $routine->routine_group_teacher_id = $request->subject;
+
+        $routine->save();
+        
+        return response($routine);
+    }
 }

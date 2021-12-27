@@ -2776,6 +2776,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.es.js");
 //
 //
 //
@@ -3003,21 +3006,150 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "LatestRoutine",
   data: function data() {
     return {
       routine: [],
       editMode: false,
-      latestYear: new Date().getFullYear()
+      latestYear: new Date().getFullYear(),
+      allDatas: [],
+      formData: new vform__WEBPACK_IMPORTED_MODULE_1__["default"]({
+        id: null,
+        routine_group: null,
+        day: null,
+        period: null,
+        subject: null
+      })
     };
   },
   methods: {
-    loadAllDatas: function loadAllDatas() {
+    allDataForUpdate: function allDataForUpdate() {
       var _this = this;
 
-      axios.get('/api/admin/routine/routine/latest').then(function (response) {
-        _this.routine = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/routine/routine/create').then(function (response) {
+        _this.allDatas = response.data; // console.log(this.allDatas);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadAllDatas: function loadAllDatas() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/admin/routine/routine/latest').then(function (response) {
+        _this2.routine = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadEditData: function loadEditData(data) {
+      console.log(data.id, data.routine_group_id, data.day_id, data.period_id, data.routine_group_teacher_id);
+      this.formData.id = data.id;
+      this.formData.routine_group = data.routine_group_id;
+      this.formData.day = data.day_id;
+      this.formData.period = data.period_id;
+      this.formData.subject = data.routine_group_teacher_id;
+    },
+    updateRoutineData: function updateRoutineData() {
+      var _this3 = this;
+
+      console.log(this.formData.id, this.formData.routine_group, this.formData.day, this.formData.period, this.formData.subject);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/admin/routine/routine/update/".concat(this.formData.id), {
+        routine_group: this.formData.routine_group,
+        day: this.formData.day,
+        period: this.formData.period,
+        subject: this.formData.subject
+      }).then(function (response) {
+        _this3.formData.routine_group = null;
+        _this3.formData.day = null;
+        _this3.formData.period = null;
+        _this3.formData.subject = null;
+        Vue.swal("Success!", "Routine Updated Successfully.", "success"); // this.$router.push("/routines");
+
+        _this3.loadAllDatas();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3046,7 +3178,27 @@ __webpack_require__.r(__webpack_exports__);
       return ts;
     }
   },
+  computed: {
+    selectedGroup: function selectedGroup() {
+      var _this4 = this;
+
+      if (typeof this.allDatas.groups !== 'undefined') {
+        var subject = this.allDatas.groups.find(function (group) {
+          return group.id === _this4.formData.routine_group;
+        });
+
+        if (typeof subject !== 'undefined') {
+          return subject.routine_group_teachers;
+        }
+
+        return [];
+      }
+
+      return [];
+    }
+  },
   created: function created() {
+    this.allDataForUpdate();
     this.loadAllDatas();
   }
 });
@@ -9935,7 +10087,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #055159 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #055159;\n  position: relative;\n}\n.routine-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 4px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 10px;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #055159;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n  font-size: 11px;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "tr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef;\n}\ntr:nth-child(even) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef38;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(even) {\n  background-color: #efefef;\n}\ntr:nth-child(odd) td[data-v-6cbfe1dd]:nth-child(odd) {\n  background-color: #efefef38;\n}\n.class[data-v-6cbfe1dd] {\n  padding: 5px;\n  background-color: #055159 !important;\n  color: #fff;\n  border: 1px solid #fff;\n}\n.class-details[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  text-align: center;\n  font-size: 12px;\n}\n.class-details .name[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .name .section[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.class-details .category[data-v-6cbfe1dd] {\n  font-weight: 700;\n}\n.routine[data-v-6cbfe1dd] {\n  padding: 5px;\n  border: 1px solid #055159;\n}\n.routine-schedule[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0;\n  margin-bottom: 0;\n  font-size: 12px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd] {\n  position: relative;\n  text-align: left;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  border-bottom: 1px solid #9f9f9f;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:first-child {\n  padding-top: 0px;\n}\n.routine-schedule-slot[data-v-6cbfe1dd]:last-child {\n  padding-bottom: 0px;\n  border-bottom: 0px solid #9f9f9f;\n}\n.routine-schedule-slot i[data-v-6cbfe1dd] {\n  color: #055159;\n}\n.routine-schedule-slot-edit-btn[data-v-6cbfe1dd] {\n  position: absolute;\n  padding: 1px 3px;\n  color: #fff;\n  right: 2px;\n  top: 2px;\n  font-size: 8px;\n}\n.routine-schedule-slot-edit-btn i[data-v-6cbfe1dd] {\n  color: #fff;\n}\n.routine-schedule-slot .time[data-v-6cbfe1dd] {\n  color: #444;\n  font-weight: 900;\n  font-size: 11px;\n}\n.routine-schedule-slot ul[data-v-6cbfe1dd] {\n  list-style: none;\n  padding-left: 0px;\n  margin-bottom: 0;\n}\n.routine-schedule-slot ul .subject[data-v-6cbfe1dd] {\n  color: #111;\n  font-weight: 600;\n}\n.routine-schedule-slot ul .teacher[data-v-6cbfe1dd] {\n  color: #333;\n  font-weight: 600;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44855,15 +45007,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
                         _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
                           "ul",
                           { staticClass: "routine-schedule" },
                           _vm._l(_vm.getDay(group, "Saturday"), function(
@@ -44877,6 +45020,27 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class:
+                                      _vm.editMode == false ? "d-none" : "",
+                                    attrs: {
+                                      "data-toggle": "modal",
+                                      "data-target": "#editRoutineModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.loadEditData(slot)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -44914,15 +45078,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -44937,6 +45092,27 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class:
+                                      _vm.editMode == false ? "d-none" : "",
+                                    attrs: {
+                                      "data-toggle": "modal",
+                                      "data-target": "#editRoutineModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.loadEditData(slot)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -44974,15 +45150,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -44997,6 +45164,27 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class:
+                                      _vm.editMode == false ? "d-none" : "",
+                                    attrs: {
+                                      "data-toggle": "modal",
+                                      "data-target": "#editRoutineModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.loadEditData(slot)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -45034,15 +45222,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -45057,6 +45236,27 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class:
+                                      _vm.editMode == false ? "d-none" : "",
+                                    attrs: {
+                                      "data-toggle": "modal",
+                                      "data-target": "#editRoutineModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.loadEditData(slot)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -45094,15 +45294,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
                         _c(
                           "ul",
                           { staticClass: "routine-schedule" },
@@ -45117,6 +45308,27 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class:
+                                      _vm.editMode == false ? "d-none" : "",
+                                    attrs: {
+                                      "data-toggle": "modal",
+                                      "data-target": "#editRoutineModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.loadEditData(slot)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -45155,15 +45367,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", { staticClass: "routine text-center" }, [
                         _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-custom routine-edit-btn",
-                            class: _vm.editMode == false ? "d-none" : ""
-                          },
-                          [_c("i", { staticClass: "ti-pencil" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
                           "ul",
                           { staticClass: "routine-schedule" },
                           _vm._l(_vm.getDay(group, "Thursday"), function(
@@ -45177,6 +45380,27 @@ var render = function() {
                                 staticClass: "routine-schedule-slot"
                               },
                               [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-custom routine-schedule-slot-edit-btn",
+                                    class:
+                                      _vm.editMode == false ? "d-none" : "",
+                                    attrs: {
+                                      "data-toggle": "modal",
+                                      "data-target": "#editRoutineModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.loadEditData(slot)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "ti-pencil" })]
+                                ),
+                                _vm._v(" "),
                                 _c("span", { staticClass: "time" }, [
                                   _c("i", { staticClass: "ti-timer" }),
                                   _vm._v(
@@ -45223,7 +45447,343 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "editRoutineModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "editRoutineModal-label",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("form", [
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.routine_group,
+                                  expression: "formData.routine_group"
+                                }
+                              ],
+                              staticClass: "form-control text-capitalize",
+                              attrs: { name: "routine_group" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData,
+                                    "routine_group",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("Select Routine Group")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.allDatas.groups, function(group) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: group.id,
+                                    domProps: { value: group.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                    Year: " +
+                                        _vm._s(group.year.year) +
+                                        " || Class: " +
+                                        _vm._s(group.student_class.title) +
+                                        " " +
+                                        _vm._s(group.student_class.category) +
+                                        " "
+                                    ),
+                                    group.section_id
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "(" +
+                                              _vm._s(group.section.title) +
+                                              ")"
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.day,
+                                  expression: "formData.day"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "day" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData,
+                                    "day",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("Select Routine Group")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.allDatas.days, function(day) {
+                                return _c(
+                                  "option",
+                                  { key: day.id, domProps: { value: day.id } },
+                                  [_vm._v(_vm._s(day.name))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.period,
+                                  expression: "formData.period"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "period" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData,
+                                    "period",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("Select Routine Group")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.allDatas.periods, function(period) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: period.id,
+                                    domProps: { value: period.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                    " +
+                                        _vm._s(period.start) +
+                                        " - " +
+                                        _vm._s(period.end) +
+                                        "\n                                                "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.subject,
+                                  expression: "formData.subject"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "subject" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData,
+                                    "subject",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("Select Subject")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.selectedGroup, function(subject) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: subject.id,
+                                    domProps: { value: subject.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                    " +
+                                        _vm._s(
+                                          subject.subject.name +
+                                            " || Teacher: " +
+                                            subject.teacher.name
+                                        ) +
+                                        "\n                                                "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c("div", { staticClass: "text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-custom bg-ucap text-bold",
+                        attrs: {
+                          type: "submit",
+                          "data-dismiss": "modal",
+                          id: "createRoutine"
+                        },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.updateRoutineData.apply(null, arguments)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Update Routine\n                                "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -45257,6 +45817,67 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", { staticClass: "routine text-center" }, [
       _c("h6", { staticClass: "text-dark font-sm" }, [_vm._v("Holiday")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "editRoutineModal-label" } },
+        [_vm._v("Edit Routine")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "routine_group" } }, [
+      _vm._v("Routine Group"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "day" } }, [
+      _vm._v("Day"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "period" } }, [
+      _vm._v("Class Period"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "subject" } }, [
+      _vm._v("Subject"),
+      _c("sup", { staticClass: "required" }, [_vm._v("*")])
     ])
   }
 ]
