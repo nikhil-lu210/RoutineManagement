@@ -1,95 +1,110 @@
-<style lang="scss" scoped>
-tr:nth-child(even) td:nth-child(odd) {
-    background-color: #efefef;
-}
-tr:nth-child(even) td:nth-child(even) {
-    background-color: #efefef38;
-}
-tr:nth-child(odd) td:nth-child(even) {
-    background-color: #efefef;
-}
-tr:nth-child(odd) td:nth-child(odd) {
-    background-color: #efefef38;
-}
-
-.class {
-    padding: 5px;
-    background-color: #055159 !important;
-    color: #fff;
-    border: 1px solid #fff;
-    &-details {
+<style lang="css" scoped>
+    .table-bordered td {
+        border: 2px solid rgb(161 161 161 / 50%);
+    }
+    tr:nth-child(even) td:nth-child(odd) {
+        background-color: #efefef;
+    }
+    tr:nth-child(even) td:nth-child(even) {
+        background-color: #efefef;
+    }
+    tr:nth-child(odd) td:nth-child(even) {
+        background-color: #efefef;
+    }
+    tr:nth-child(odd) td:nth-child(odd) {
+        background-color: #efefef;
+    }
+    .class {
+        padding: 5px;
+        background-color: #055159 !important;
+        color: #fff;
+        border: 1px solid #fff;
+    }
+    .class-details {
         list-style: none;
         padding-left: 0;
         margin-bottom: 0;
         text-align: center;
         font-size: 12px;
-        .name {
-            font-weight: 700;
-            .section {
-                font-weight: 700;
-            }
-        }
-        .category {
-            font-weight: 700;
-        }
     }
-}
-.routine {
-    padding: 5px;
-    border: 1px solid #055159;
-    &-schedule {
+    .class-details .name {
+        font-weight: 700;
+        color: #fff;
+    }
+    .class-details .name .section {
+        font-weight: 700;
+    }
+    .class-details .category {
+        font-weight: 700;
+    }
+    .routine {
+        padding: 5px;
+        border: 1px solid #055159;
+    }
+    .routine-schedule {
         list-style: none;
         padding-left: 0;
         margin-bottom: 0;
         font-size: 12px;
-        &-slot {
-            position: relative;
-            text-align: left;
-            padding-bottom: 5px;
-            padding-top: 5px;
-            border-bottom: 1px solid #9f9f9f;
-            &:first-child {
-                padding-top: 0px;
-            }
-            &:last-child {
-                padding-bottom: 0px;
-                border-bottom: 0px solid #9f9f9f;
-            }
-            i {
-                color: #055159;
-            }
-            &-edit-btn {
-                position: absolute;
-                padding: 1px 3px;
-                color: #fff;
-                right: 2px;
-                top: 2px;
-                font-size: 8px;
-                i {
-                    color: #fff;
-                }
-            }
-            .time {
-                color: #444;
-                font-weight: 900;
-                font-size: 11px;
-            }
-            ul {
-                list-style: none;
-                padding-left: 0px;
-                margin-bottom: 0;
-                .subject {
-                    color: #111;
-                    font-weight: 600;
-                }
-                .teacher {
-                    color: #333;
-                    font-weight: 600;
-                }
-            }
-        }
     }
-}
+    .routine-schedule .card-body {
+        background-color: #13515926;
+    }
+    .routine-schedule-slot {
+        position: relative;
+        text-align: left;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        border-bottom: 1px solid #9f9f9f;
+    }
+    .routine-schedule-slot:first-child {
+        padding-top: 0px;
+    }
+    .routine-schedule-slot:last-child {
+        padding-bottom: 0px;
+        border-bottom: 0px solid #9f9f9f;
+    }
+    .routine-schedule-slot i {
+        color: #055159;
+    }
+    .routine-schedule-slot-edit-btn {
+        padding: 1px 3px;
+        font-size: 8px;
+        background-color: #efefef;
+        border-color: #efefef;
+        transition: 0.3s all ease-in-out;
+    }
+    .routine-schedule-slot-edit-btn:hover {
+        background-color: #055159;
+        border-color: #055159;
+        transition: 0.3s all ease-in-out;
+    }
+    .routine-schedule-slot-edit-btn i {
+        color: rgb(0, 0, 0);
+        transition: 0.3s all ease-in-out;
+    }
+    .routine-schedule-slot-edit-btn:hover i{
+        color: #fff;
+        transition: 0.3s all ease-in-out;
+    }
+    .routine-schedule-slot .time {
+        color: #444;
+        font-weight: 900;
+        font-size: 11px;
+    }
+    .routine-schedule-slot ul {
+        list-style: none;
+        padding-left: 0px;
+        margin-bottom: 0;
+    }
+    .routine-schedule-slot ul .subject {
+        color: #111;
+        font-weight: 600;
+    }
+    .routine-schedule-slot ul .teacher {
+        color: #333;
+        font-weight: 600;
+    }
 </style>
 
 <template>
@@ -131,86 +146,134 @@ tr:nth-child(odd) td:nth-child(odd) {
                                         </td>
                                         <td class="routine text-center">
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Saturday')" :key="'Saturday-'+list">
-                                                    <button class="btn btn-custom routine-schedule-slot-edit-btn" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
-                                                        <i class="ti-pencil"></i>
-                                                    </button>
-                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
-                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
-                                                    </ul>
-                                                </li>
+                                                <div class="card mb-2" v-for="(slot, list) in getDay(group, 'Saturday')" :key="'Saturday-'+list">
+                                                    <div class="card-header p-1 bg-danger">
+                                                        <b class="float-left text-white">
+                                                            {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}
+                                                        </b>
+                                                        <button class="btn btn-custom routine-schedule-slot-edit-btn float-right" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
+                                                            <i class="ti-pencil"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-body p-1">
+                                                        <li class="routine-schedule-slot">
+                                                            <ul>
+                                                                <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                                <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
+                                                            </ul>
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Sunday')" :key="'Sunday-'+list">
-                                                    <button class="btn btn-custom routine-schedule-slot-edit-btn" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
-                                                        <i class="ti-pencil"></i>
-                                                    </button>
-                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
-                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
-                                                    </ul>
-                                                </li>
+                                                <div class="card mb-2" v-for="(slot, list) in getDay(group, 'Sunday')" :key="'Sunday-'+list">
+                                                    <div class="card-header p-1 bg-danger">
+                                                        <b class="float-left text-white">
+                                                            {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}
+                                                        </b>
+                                                        <button class="btn btn-custom routine-schedule-slot-edit-btn float-right" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
+                                                            <i class="ti-pencil"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-body p-1">
+                                                        <li class="routine-schedule-slot">
+                                                            <ul>
+                                                                <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                                <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
+                                                            </ul>
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Monday')" :key="'Monday-'+list">
-                                                    <button class="btn btn-custom routine-schedule-slot-edit-btn" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
-                                                        <i class="ti-pencil"></i>
-                                                    </button>
-                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
-                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
-                                                    </ul>
-                                                </li>
+                                                <div class="card mb-2" v-for="(slot, list) in getDay(group, 'Monday')" :key="'Monday-'+list">
+                                                    <div class="card-header p-1 bg-danger">
+                                                        <b class="float-left text-white">
+                                                            {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}
+                                                        </b>
+                                                        <button class="btn btn-custom routine-schedule-slot-edit-btn float-right" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
+                                                            <i class="ti-pencil"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-body p-1">
+                                                        <li class="routine-schedule-slot">
+                                                            <ul>
+                                                                <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                                <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
+                                                            </ul>
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Tuesday')" :key="'Tuesday-'+list">
-                                                    <button class="btn btn-custom routine-schedule-slot-edit-btn" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
-                                                        <i class="ti-pencil"></i>
-                                                    </button>
-                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
-                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
-                                                    </ul>
-                                                </li>
+                                                <div class="card mb-2" v-for="(slot, list) in getDay(group, 'Tuesday')" :key="'Tuesday-'+list">
+                                                    <div class="card-header p-1 bg-danger">
+                                                        <b class="float-left text-white">
+                                                            {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}
+                                                        </b>
+                                                        <button class="btn btn-custom routine-schedule-slot-edit-btn float-right" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
+                                                            <i class="ti-pencil"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-body p-1">
+                                                        <li class="routine-schedule-slot">
+                                                            <ul>
+                                                                <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                                <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
+                                                            </ul>
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Wednesday')" :key="'Wednesday-'+list">
-                                                    <button class="btn btn-custom routine-schedule-slot-edit-btn" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
-                                                        <i class="ti-pencil"></i>
-                                                    </button>
-                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
-                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
-                                                    </ul>
-                                                </li>
+                                                <div class="card mb-2" v-for="(slot, list) in getDay(group, 'Wednesday')" :key="'Wednesday-'+list">
+                                                    <div class="card-header p-1 bg-danger">
+                                                        <b class="float-left text-white">
+                                                            {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}
+                                                        </b>
+                                                        <button class="btn btn-custom routine-schedule-slot-edit-btn float-right" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
+                                                            <i class="ti-pencil"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-body p-1">
+                                                        <li class="routine-schedule-slot">
+                                                            <ul>
+                                                                <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                                <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
+                                                            </ul>
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
                                             <ul class="routine-schedule">
-                                                <li class="routine-schedule-slot" v-for="(slot, list) in getDay(group, 'Thursday')" :key="'Thursday-'+list">
-                                                    <button class="btn btn-custom routine-schedule-slot-edit-btn" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
-                                                        <i class="ti-pencil"></i>
-                                                    </button>
-                                                    <span class="time"><i class="ti-timer"></i> {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}</span>
-                                                    <ul>
-                                                        <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
-                                                        <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
-                                                    </ul>
-                                                </li>
+                                                <div class="card mb-2" v-for="(slot, list) in getDay(group, 'Thursday')" :key="'Thursday-'+list">
+                                                    <div class="card-header p-1 bg-danger">
+                                                        <b class="float-left text-white">
+                                                            {{ timeFormat(slot.period.start) +" - "+ timeFormat(slot.period.end) }}
+                                                        </b>
+                                                        <button class="btn btn-custom routine-schedule-slot-edit-btn float-right" :class="editMode == false ? 'd-none' : ''" data-toggle="modal" data-target="#editRoutineModal" @click.prevent="loadEditData(slot)">
+                                                            <i class="ti-pencil"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-body p-1">
+                                                        <li class="routine-schedule-slot">
+                                                            <ul>
+                                                                <li class="subject"><i class="ti-book"></i> {{ slot.class_teacher.subject.name }}</li>
+                                                                <li class="teacher"><i class="ti-user"></i> {{ slot.class_teacher.teacher.name }}</li>
+                                                            </ul>
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </td>
                                         <td class="routine text-center">
