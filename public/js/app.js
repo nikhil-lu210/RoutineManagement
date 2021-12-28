@@ -49212,17 +49212,6 @@ var render = function() {
                 "li",
                 {},
                 [
-                  _c("router-link", { attrs: { to: "/admin/routines" } }, [
-                    _vm._v("All Routines")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {},
-                [
                   _c("router-link", { attrs: { to: "/admin/routine/group" } }, [
                     _vm._v("Routine Groups")
                   ])

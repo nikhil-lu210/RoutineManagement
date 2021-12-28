@@ -69,9 +69,9 @@
                             <li class="">
                                 <router-link to="/admin/routine/latest">Latest Routine</router-link>
                             </li>
-                            <li class="">
+                            <!-- <li class="">
                                 <router-link to="/admin/routines">All Routines</router-link>
-                            </li>
+                            </li> -->
                             <li class="">
                                 <router-link to="/admin/routine/group">Routine Groups</router-link>
                             </li>
